@@ -42,8 +42,8 @@
         "build-dev": "gulp build-dev",
         "publish": "gulp publish",
         "watch": "gulp watch",
-        "eslint": "gulp eslint",
-        "mocha": "gulp mocha"
+        "lint": "gulp eslint",
+        "test": "gulp mocha"
     },    
     "dependencies": {
         "gulp": "latest",

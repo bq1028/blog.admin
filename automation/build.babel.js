@@ -21,7 +21,6 @@ import plumber from 'gulp-plumber';
 import es from 'event-stream';
 
 import gulptool from './tool.babel';
-import webpackConfig from './webpack.config.babel';
 
 
 import del from 'del';
@@ -96,80 +95,47 @@ gulp.task('compile-scripts', function (cb) {
         var module = modules[i];
 
         if(module.config.scripts && module.config.scripts.state === 'develop') {
-            if(!module.config.scripts.require) {
-                if(module.config.scripts.entry) {
-                    entry = module.config.scripts.entry;
-                } else {
-                    entry = './static/scripts/' + module.name + '/app.js';
-                }
+            var src = './static/scripts/' + module.name + '/**/**/**';
+            var filename = 'app.js';
+            var entryArr = null;
 
-                if(module.config.scripts.output) {
-                    output = module.config.scripts.output;
-                } else {
-                    output = './assets/develop/scripts/' + module.name;
-                }
+            if(module.config.scripts.entry) {
+                entry = module.config.scripts.entry;
 
-                var entryArr = entry.split('/');
-                var filename = entryArr[entryArr.length - 1].split('.');
+                entryArr = entry.split('/');
+                filename = entryArr[entryArr.length - 1].split('.');
+            }              
 
-                filename[1] = 'js';
-                filename = filename.join('.');
-                config = webpackConfig.get(entry, output, filename);
-                
-                var defer = q.defer();
-
-                webpack(config, function (err, stats) {
-                    if(err) {
-                        defer.reject();
-                    } else {
-                        defer.resolve();
-                    }
-                });
-
-                promiseArr.push(defer);
+            if(module.config.scripts.output) {
+                output = module.config.scripts.output;
             } else {
-                var src = './static/scripts/' + module.name + '/**/**/**';
-                var filename = 'app.js';
-                var entryArr = null;
+                output = './assets/develop/scripts/' + module.name;
+            }
 
-                if(module.config.scripts.entry) {
-                    entry = module.config.scripts.entry;
+            
+            var stream = gulp.src(src)
+               .pipe(amdOptimize(filename.replace('.js', ''), {
+                    baseUrl: '',
+                    paths: {
+                        'text': './libs/requirejs/text',
+                        'domReady': './libs/requirejs/domReady',
+                        'angular': './libs/angular/angular.min',
+                        'angular-route': './libs/angular-route/angular-route.min'                                
+                    },
+                    shim: {
+                        'angular': {
+                            exports: 'angular'
+                        }
+                    },
+                    findNestedDependencies: true,
+                    include: false,
+                    wrapShim: false,
+                    exclude: []                                           
+               }))
+               .pipe(concatFile(filename))
+               .pipe(gulp.dest(output));
 
-                    entryArr = entry.split('/');
-                    filename = entryArr[entryArr.length - 1].split('.');
-                }              
-
-                if(module.config.scripts.output) {
-                    output = module.config.scripts.output;
-                } else {
-                    output = './assets/develop/scripts/' + module.name;
-                }
-
-                
-                var stream = gulp.src(src)
-                   .pipe(amdOptimize(filename.replace('.js', ''), {
-                        baseUrl: '',
-                        paths: {
-                            'text': './libs/requirejs/text',
-                            'domReady': './libs/requirejs/domReady',
-                            'angular': './libs/angular/angular.min',
-                            'angular-route': './libs/angular-route/angular-route.min'                                
-                        },
-                        shim: {
-                            'angular': {
-                                exports: 'angular'
-                            }
-                        },
-                        findNestedDependencies: true,
-                        include: false,
-                        wrapShim: false,
-                        exclude: []                                           
-                   }))
-                   .pipe(concatFile(filename))
-                   .pipe(gulp.dest(output));
-
-                streams.push(stream);                       
-            }            
+            streams.push(stream);
         }
     }
 
