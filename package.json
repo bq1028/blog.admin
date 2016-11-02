@@ -117,9 +117,6 @@
         "gulp-watch": "latest",
         "gulp-open": "latest",        
         "eslint": "latest",
-        "babel-eslint": "latest",
-        "eslint-config-vue": "latest",
-        "eslint-plugin-vue": "latest",
-        "vue-hot-reload-api": "latest"
+        "babel-eslint": "latest"
     }
 }

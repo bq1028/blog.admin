@@ -2,7 +2,6 @@ import gulp from 'gulp';
 
 import less from 'gulp-less';
 import watch from 'gulp-watch';
-import webpack from 'webpack';
 
 import gulptool from './tool.babel';
 import plumber from 'gulp-plumber';

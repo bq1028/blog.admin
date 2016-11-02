@@ -13,7 +13,6 @@ const STATIC_FILES_MAP = {};
 const SERVE_OPTIONS = { maxAge: 365 * 24 * 60 * 60 };
 
 module.exports = function(app, config, passport) {
-    
     if (!config.app.keys) {
         throw new Error("Please add session secret key in the config file!");
     }

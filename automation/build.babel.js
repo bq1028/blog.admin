@@ -1,6 +1,4 @@
 import gulp from 'gulp';
-
-import webpack from 'webpack';
 import runSequence from 'run-sequence';
 
 import util from 'gulp-util';                // 脚本格式校验
@@ -40,7 +38,7 @@ const source = 'static',
  */
 gulp.task('compile-styles', function (cb) {
     var entry, output;
-
+    
     if(config.styles && config.styles.state === 'develop') {
         if(config.styles.entry) {
             entry = config.styles.entry;

@@ -1,13 +1,11 @@
 {
-    "config": {
-        "styles": {
-            "state": "develop"
-        },
-        "images": {
-            "state": "develop"
-        },
-        "scripts": {
-            "state": "develop"
-        }
+    "styles": {
+        "state": "develop"
+    },
+    "images": {
+        "state": "develop"
+    },
+    "scripts": {
+        "state": "develop"
     }
 }
