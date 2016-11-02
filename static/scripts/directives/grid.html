@@ -1,0 +1,59 @@
+<div class="ui-grid">
+    <table class="table ui-grid-head" 
+           ng-class="{ 'table-striped': options.striped, 'table-bordered': options.bordered }">
+        <colgroup>
+            <col align="{{ options.sequenceAlign }}" 
+                 width="{{ options.sequenceWidth }}"/>
+            <col ng-repeat="column in columns track by $index" 
+                 align="{{ column.align }}" 
+                 width="{{ column.width }}" />    
+        </colgroup>       
+        <thead>
+            <tr>
+                <th ng-if="options.sequence">
+                    <span>#</span>
+                    <i class="glyphicon"
+                       ng-class="{'glyphicon-menu-down': options.sortState === 'asc', 'glyphicon-menu-up': options.sortState === 'desc'}"
+                       ng-if="options.sortable"
+                       ng-click="sortBy('sequence')"></i>
+                </th>
+                <th ng-repeat="column in columns track by $index">
+                    <span>{{ column.title }}</span>
+                    <i class="glyphicon"
+                       ng-class="{'glyphicon-menu-down': column.sortState === 'asc', 'glyphicon-menu-up': column.sortState === 'desc'}"
+                       ng-click="sortBy(column)"
+                       ng-if="column.sortable">
+                    </i>
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <table class="table ui-grid-body"
+           ng-class="{ 'table-striped': options.striped, 'table-bordered': options.bordered }"
+           ng-if="!isLoading && source.length !== 0">
+        <colgroup>
+            <col align="{{ options.sequenceAlign }}" 
+                 width="{{ options.sequenceWidth }}"/>
+            <col ng-repeat="column in columns track by $index" 
+                 align="{{ column.align }}" 
+                 width="{{ column.width }}" />     
+        </colgroup>           
+        <tbody>
+            <tr ng-repeat="row in source track by $index">
+                <td scope="row"
+                    ng-if="options.sequence">
+                    <span>{{ $index + 1 }}</span>
+                </td>
+                <td ng-repeat="column in columns track by $index">
+                    <span ng-if="!column.editable">{{ row[column.value] }}</span>
+                    <textbox ng-if="column.editable && editableType === 'textbox'" 
+                             value="row[column.value]" 
+                             validate="column.validate"></textbox>
+                    <select ng-if="column.editable && editableType === 'select'" 
+                            value="row[column.value]" 
+                            validate="column.validate"></select>
+                </td>
+            </tr>                  
+        </tbody>
+    </table>
+</div>

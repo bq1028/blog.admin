@@ -1,0 +1,125 @@
+{
+    "name": "blog_web",
+    "version": "0.1.1",
+    "description": "chenxiangyu, blog, npm settings",
+    "main": "server/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CMCXY0321/blog_web.git"
+    },
+    "author": "chenxiangyu",
+    "license": "MIT",
+    "bugs": {
+        "url": "empty"
+    },
+    "homepage": "47.88.9.143",
+    "bugs": { 
+        "url" :"https://github.com/CMCXY0321/blog_web/issues",
+        "email" :"wowcxy2008@126.com"
+    },
+    "private": true,
+    "publishConfig": {
+        "scripts": {
+            "start": "node server.js"
+        }
+    },
+    "engines": {
+        "node": ">= 5.8.0"
+    },
+    "files": [
+        "LICENSE",
+        "README.md",
+        ".istanbul.yml",
+        ".travis.yml",
+        ".eslintrc",
+        ".babelrc",
+        ".bowerrc"
+    ],     
+    "scripts": {
+        "start": "node server/app.js --harmony production",
+        "start-dev": "./node_modules/.bin/nodemon -e js,html --ignore ./assets/ --ignore ./static/ --ignore ./automation/ server/app.js --harmony development",
+        "build": "gulp build",
+        "build-dev": "gulp build-dev",
+        "publish": "gulp publish",
+        "watch": "gulp watch",
+        "eslint": "gulp eslint",
+        "mocha": "gulp mocha"
+    },    
+    "dependencies": {
+        "gulp": "latest",
+        "gulp-babel": "latest",
+        "gulp-util": "latest",
+        "gulp-sprite-generator": "latest",
+        "gulp-imagemin": "latest",
+        "gulp-less": "latest",
+        "gulp-minify-css": "latest",
+        "gulp-uglify": "latest",
+        "gulp-rename": "latest",
+        "gulp-rev": "latest",
+        "gulp-file-include": "latest",
+        "gulp-clean": "latest",
+        "gulp-if": "latest",
+        "gulp-add-src": "latest",
+        "gulp-notify": "latest",
+        "gulp-filter": "latest",
+        "gulp-fash": "latest",
+        "gulp-qniu": "latest",
+        "gulp-plumber": "latest",
+        "gulp-concat": "latest",
+        "amd-optimize": "latest",
+        "run-sequence": "latest",
+        "event-stream": "latest",
+
+        "through2": "latest",
+        "del": "latest",
+
+        "babel-core": "latest",
+        "babel-loader": "latest",
+        "babel-cli": "latest",     
+        "babel-preset-es2015": "latest",
+        "babel-preset-es2015-node-auto": "latest",
+        "babel-preset-stage-0": "latest",
+        "babel-plugin-transform-runtime": "latest",
+
+        "lodash": "latest",
+        "koa": "latest",
+        "koa-logger": "latest",
+        "koa-route": "latest",
+        "koa-static": "latest",    
+        "koa-passport": "latest",
+        "koa-bodyparser": "latest",
+        "koa-compress": "latest",
+        "koa-error": "latest",
+        "koa-generic-session": "latest",
+        "koa-response-time": "latest",
+        "koa-router": "latest",
+        "koa-static-cache": "latest",       
+        "passport-local": "latest", 
+        "swig": "latest",
+        "mysql": "latest",
+        "sequelize": "latest",
+        "co": "latest",
+        "co-views": "latest",
+        "redis": "latest",
+        "co-busboy": "latest",
+        "os": "latest",
+        
+        "request": "latest",
+        "cheerio": "latest",
+        "forever": "latest",
+        "forever-monitor": "latest"
+    },
+    "devDependencies": {
+        "koa-proxy": "latest",
+        "nodemon": "latest",
+        "gulp-mocha": "latest",
+        "gulp-eslint": "latest",
+        "gulp-watch": "latest",
+        "gulp-open": "latest",        
+        "eslint": "latest",
+        "babel-eslint": "latest",
+        "eslint-config-vue": "latest",
+        "eslint-plugin-vue": "latest",
+        "vue-hot-reload-api": "latest"
+    }
+}

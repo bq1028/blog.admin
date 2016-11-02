@@ -1,0 +1,72 @@
+.navigation {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;    
+}
+
+.custom-nav-wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 999;    
+}
+
+.custom-nav  {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 30px;
+    right: 50px;
+    margin: auto;
+    background: #D07817;
+    padding: 2px;
+    color: #fff;
+    border-radius: 15px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.custom-nav.go {
+    right: 105px;
+}
+
+.custom-nav .custom-nav-entry-btn,
+.custom-nav .custom-nav-cancel-btn {
+    height: 100%;
+    width: 100%;
+    line-height: 43px;
+    text-align: center;     
+    font-size: 13px;   
+    font-weight: bold;
+    box-shadow: 0px 0px 12px #542507;
+    background: -webkit-linear-gradient(top, #FF7200, #BE521E);
+    background: -moz-linear-gradient(top, #FF7200, #BE521E);
+    background: -o-linear-gradient(top, #FF7200, #BE521E);
+    background: -ms-linear-gradient(top, #FF7200, #BE521E);
+    background: linear-gradient(top, #FF7200, #BE521E);
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;  
+    -o-transition: all 0.5s;
+    border-radius: 100%; 
+}
+
+.custom-nav .custom-nav-entry-btn:hover,
+.custom-nav .custom-nav-cancel-btn:hover {
+    background: -webkit-linear-gradient(top, #BE521E, #FF7200);
+    background: -moz-linear-gradient(top, #BE521E, #FF7200);
+    background: -o-linear-gradient(top, #BE521E, #FF7200);
+    background: -ms-linear-gradient(top, #BE521E, #FF7200);
+    background: linear-gradient(top, #BE521E, #FF7200);    
+    text-shadow: 0 0 10px #fff;
+}
+
+.custom-nav .custom-nav-entry-btn:active,
+.custom-nav .custom-nav-cancel-btn:active {
+    box-shadow: inset 1px 1px 3px #542507;
+}

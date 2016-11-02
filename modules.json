@@ -1,0 +1,24 @@
+[
+    {
+        "name": "admin",
+        "config": {
+            "styles": {
+                "dependencies": [
+                    "common",
+                    "ui"
+                ],
+                "state": "develop"
+            },
+            "images": {
+                "state": "develop"
+            },
+            "scripts": {
+                "vue": false,
+                "react": false,
+                "ng": true,
+                "require": true,
+                "state": "develop"
+            }
+        }
+    }
+]

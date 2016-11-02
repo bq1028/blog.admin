@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>{{ cn_module }}</title>
+        <link rel="bookmark"  type="image/x-icon"  href="/images/common/icon.png"/>
+        <link rel="shortcut icon" type="image/x-icon" href="/images/common/icon.png" >        
+        <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/styles/admin/app.css">
+        <link rel="stylesheet" 
+              type="text/css"
+              href="{% if env === 'development' %}/styles/admin/app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/admin/app-e05f1d9614.min.css{% endif %}">        
+    </head>
+    <body fireworks ng-controller="root">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand unselectable" href="/admin">后台管理</a>
+                    <button type="button" 
+                            class="navbar-toggle collapsed" 
+                            data-toggle="collapse"
+                            aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>                    
+                </div>
+                <div class="main-menu unselectable" ng-controller="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-class="{'active': curr === 'journal'}">
+                            <a href="/admin/journal">日志</a>
+                        </li>
+                        <li ng-class="{'active': curr === 'user'}">
+                            <a href="/admin/user">用户</a>
+                        </li>
+                        <li ng-class="{'active': curr === 'content'}">
+                            <a href="/admin/content">内容</a>
+                        </li>                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                操作&nbsp;<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">切换</a>
+                                </li>
+                                <li>
+                                    <a href="#">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <ng-view scrollbar></ng-view>
+        <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/libs/sketch/sketch.min.js"></script>
+        <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
+        <script type="text/javascript" 
+                src="/libs/requirejs/require.js" 
+                data-main="{% if env === 'development' %}/scripts/admin/app.js{% else %}http://ocgkyeaew.bkt.clouddn.com/scripts/admin/app-69ae0a42a1.min.js{% endif %}">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+{% include "common/head.html" %}
+<link rel="stylesheet" 
+      type="text/css"
+      href="{% if env === 'development' %}/styles/projects/app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/projects/app-34acf76dcf.min.css{% endif %}">
+<app></app>
+{% include "common/footer.html" %}
+<script type="text/javascript" 
+        src="{% if env === 'development' %}/scripts/projects/app.js{% else %}http://ocgkyeaew.bkt.clouddn.com/scripts/projects/app-3641689efc.min.js{% endif %}">
+</script>
+</body>
+</html>
