@@ -9,7 +9,7 @@ import runSequence from 'run-sequence';
 
 import fs from 'fs';
 
-var modules = JSON.parse(fs.readFileSync('./modules.json'));
+var config = gulptool.readConfig();
 
 const source = 'static',
       assets = 'assets',
@@ -71,23 +71,21 @@ gulp.task('publish-libs', function () {
 /*
  * @description 同步模块
  */
-gulp.task('sync-modules-states', function(cb) { 
+gulp.task('sync-config-states', function(cb) { 
 
-    modules.forEach(function (module) {
-        if(module.config.scripts) {
-            module.config.scripts.state = 'published';
-        }
+    if(config.scripts) {
+        config.scripts.state = 'published';
+    }
 
-        if(module.config.styles) {
-            module.config.styles.state = 'published';
-        }
+    if(config.styles) {
+        config.styles.state = 'published';
+    }
 
-        if(module.config.images) {
-            module.config.images.state = 'published';
-        }                
-    });
+    if(config.images) {
+        config.images.state = 'published';
+    }
 
-    gulptool.writeModulesConfig(modules, function() {
+    gulptool.writeConfig(config, function() {
         cb();
     });
 });
@@ -97,5 +95,5 @@ gulp.task('sync-modules-states', function(cb) {
  * @description 发布静态资源至CDN
  */
 gulp.task('publish', function (cb) {
-    runSequence('build', ['publish-scripts', 'publish-styles', 'publish-font-img', 'publish-libs'], 'sync-modules-states', cb);
+    runSequence('build', ['publish-scripts', 'publish-styles', 'publish-font-img', 'publish-libs'], 'sync-config-states', cb);
 });

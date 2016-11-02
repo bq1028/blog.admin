@@ -30,7 +30,7 @@ module.exports = function(app, config, passport) {
     app.use(serve(path.join(__dirname, '../../resources')));
 
     app.use(session({
-        key: "blog.sid"
+        key: "blog.admin.sid"
     }));
 
     app.use(bodyParser());

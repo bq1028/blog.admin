@@ -28,7 +28,7 @@ import fs from 'fs';
 import q from 'q';
 import path from 'path';
 
-var modules = gulptool.readModulesConfig();
+var config = gulptool.readConfig();
 
 const source = 'static',
       assets = './assets',
@@ -39,43 +39,33 @@ const source = 'static',
  * @description 编译样式
  */
 gulp.task('compile-styles', function (cb) {
-    var entry, 
-        output,
-        stream = [];
+    var entry, output;
 
-    var modulesLen = modules.length;
-
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
-
-        if(module.config.styles && module.config.styles.state === 'develop') {
-            if(module.config.styles.entry) {
-                entry = module.config.styles.entry;
-            } else {
-                entry = './static/styles/modules/' + module.name + '/app.less';
-            }
-
-            if(module.config.styles.output) {
-                output = module.config.styles.output;
-            } else {
-                output = './assets/develop/styles/' + module.name;
-            }
-
-            var entryArr = entry.split('/');
-            var filename = entryArr[entryArr.length - 1].split('.');
-
-            filename[1] = 'css';
-            filename = filename.join('.');
-
-            var _stream = gulp.src(entry) 
-                .pipe(less())
-                .pipe(gulp.dest(output));
-
-            stream.push(_stream);
+    if(config.styles && config.styles.state === 'develop') {
+        if(config.styles.entry) {
+            entry = config.styles.entry;
+        } else {
+            entry = './static/styles/admin-app.less';
         }
-    };
 
-    es.concat(stream).on('end', cb);
+        if(config.styles.output) {
+            output = config.styles.output;
+        } else {
+            output = './assets/develop/styles/';
+        }
+
+        var entryArr = entry.split('/');
+        var filename = entryArr[entryArr.length - 1].split('.');
+
+        filename[1] = 'css';
+        filename = filename.join('.');
+
+        return gulp.src(entry) 
+            .pipe(less())
+            .pipe(gulp.dest(output));
+    } else {
+        cb();
+    }
 });
 
 /*
@@ -83,75 +73,51 @@ gulp.task('compile-styles', function (cb) {
  */
 gulp.task('compile-scripts', function (cb) {
     var entry, 
-        output, 
-        config,
-        promiseArr = [];
+        output;
 
-    var modulesLen = modules.length;
+    if(config.scripts && config.scripts.state === 'develop') {
+        var src = './static/scripts/**/**/**';
+        var filename = 'admin-app.js';
+        var entryArr = null;
 
-    var streams = [];
+        if(config.scripts.entry) {
+            entry = config.scripts.entry;
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
+            entryArr = entry.split('/');
+            filename = entryArr[entryArr.length - 1].split('.');
+        }              
 
-        if(module.config.scripts && module.config.scripts.state === 'develop') {
-            var src = './static/scripts/' + module.name + '/**/**/**';
-            var filename = 'app.js';
-            var entryArr = null;
-
-            if(module.config.scripts.entry) {
-                entry = module.config.scripts.entry;
-
-                entryArr = entry.split('/');
-                filename = entryArr[entryArr.length - 1].split('.');
-            }              
-
-            if(module.config.scripts.output) {
-                output = module.config.scripts.output;
-            } else {
-                output = './assets/develop/scripts/' + module.name;
-            }
-
-            
-            var stream = gulp.src(src)
-               .pipe(amdOptimize(filename.replace('.js', ''), {
-                    baseUrl: '',
-                    paths: {
-                        'text': './libs/requirejs/text',
-                        'domReady': './libs/requirejs/domReady',
-                        'angular': './libs/angular/angular.min',
-                        'angular-route': './libs/angular-route/angular-route.min'                                
-                    },
-                    shim: {
-                        'angular': {
-                            exports: 'angular'
-                        }
-                    },
-                    findNestedDependencies: true,
-                    include: false,
-                    wrapShim: false,
-                    exclude: []                                           
-               }))
-               .pipe(concatFile(filename))
-               .pipe(gulp.dest(output));
-
-            streams.push(stream);
+        if(config.scripts.output) {
+            output = config.scripts.output;
+        } else {
+            output = './assets/develop/scripts/';
         }
-    }
 
-    var streamsDefer = q.defer();
-
-    es.concat(streams).on('end', function () {
-        streamsDefer.resolve();
-    });
-
-    promiseArr.push(streamsDefer);
-
-    q.all(promiseArr).then(function () {
+        
+        return gulp.src(src)
+           .pipe(amdOptimize(filename.replace('.js', ''), {
+                baseUrl: '',
+                paths: {
+                    'text': './libs/requirejs/text',
+                    'domReady': './libs/requirejs/domReady',
+                    'angular': './libs/angular/angular.min',
+                    'angular-route': './libs/angular-route/angular-route.min'                                
+                },
+                shim: {
+                    'angular': {
+                        exports: 'angular'
+                    }
+                },
+                findNestedDependencies: true,
+                include: false,
+                wrapShim: false,
+                exclude: []                                           
+           }))
+           .pipe(concatFile(filename))
+           .pipe(gulp.dest(output));
+    } else {
         cb();
-    }, function() {
-        cb('compile scripts error ...');
-    });
+    }
 });
 
 /*
@@ -187,97 +153,82 @@ gulp.task('build-dev', function (cb) {
  */
 gulp.task('compress-styles', function (cb) {
 
-    var modulesLen = modules.length;
-
     var imgDest = './assets/production/images/', 
         cssDest = './assets/production/styles/';
 
-    var stream = [];
+    var streams = [];
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
+    if(config.styles  && config.styles.state === 'develop') {
 
-        if(module.config.styles  && module.config.styles.state === 'develop') {
+        var styleSrc = './assets/develop/styles/*.css';
+        var imgBaseUrl = './assets/develop/images/';
 
-            var styleSrc = './assets/develop/styles/' + module.name + '/*.css';
-            var imgBaseUrl = './assets/develop/images/' + module.name;
+        var entry = config.styles.entry;
 
-            var entry = module.config.styles.entry;
+        if(entry) {
+            entry = entry.split('/');
+            entry = entry[entry.length - 1];
 
-            if(entry) {
-                entry = entry.split('/');
-                entry = entry[entry.length - 1];
+            entry = entry.slice(0, entry.lastIndexOf('.')) + '.css';
+        }
 
-                entry = entry.slice(0, entry.lastIndexOf('.')) + '.css';
-            }
+        var filename = entry || 'app.css';
 
-            var filename = entry || 'app.css';
+        // 需要自动合并雪碧图的样式文件
+        var spriteData = gulp.src(styleSrc)
+                             .pipe(spriter({
+                                baseUrl: '../../images/slice',
+                                spriteSheetPath: '../../images/slice',
+                                spriteSheetName: 'sprite.png'
+                             }));
 
-            // 需要自动合并雪碧图的样式文件
-            var spriteData = gulp.src(styleSrc)
-                                 .pipe(spriter({
-                                    baseUrl: '../../images/' + module.name + '/slice',
-                                    spriteSheetPath: '../../images/' + module.name + '/slice',
-                                    spriteSheetName: 'sprite.png'
-                                 }));
+        // 压缩图片
+        var spriteStream = spriteData.img
+                                  .pipe(imagemin())
+                                  .pipe(gulp.dest(imgDest));
 
-            // 压缩图片
-            var spriteStream = spriteData.img
-                                      .pipe(imagemin())
-                                      .pipe(gulp.dest(imgDest + module.name));
+        // 压缩css
+        var cssStream = spriteData.css
+                                  .pipe(minify({
+                                      advanced: false,        // 是否开启高级优化（合并选择器等）
+                                      compatibility: '*',     // 启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式
+                                      keepBreaks: false       // 是否保留换行          
+                                  }))   
+                                  .pipe(rename({suffix: '.min'}))  
+                                  .pipe(gulp.dest(cssDest));
 
-            // 压缩css
-            var cssStream = spriteData.css
-                                      .pipe(minify({
-                                          advanced: false,        // 是否开启高级优化（合并选择器等）
-                                          compatibility: '*',     // 启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式
-                                          keepBreaks: false       // 是否保留换行          
-                                      }))   
-                                      .pipe(rename({suffix: '.min'}))  
-                                      .pipe(gulp.dest(cssDest + module.name));
+        var imgStream = gulp.src([imgBaseUrl + '/**/*', '!' + imgBaseUrl + '/slice/**/*'])
+                                  .pipe(imagemin())
+                                  .pipe(gulp.dest(imgDest));
 
-            var imgStream = gulp.src([imgBaseUrl + '/**/*', '!' + imgBaseUrl + '/slice/**/*'])
-                                      .pipe(imagemin())
-                                      .pipe(gulp.dest(imgDest + module.name));
+        streams.push(spriteStream);
+        streams.push(cssStream);
+        streams.push(imgStream);
 
-            stream.push(spriteStream);
-            stream.push(cssStream);
-            stream.push(imgStream);
-        }        
+        es.concat(streams).on('end', cb);
+    } else {
+        cb();
     }
-
-    es.concat(stream).on('end', cb);
 });
 
 /*
  * @description 压缩脚本与版本号
  */
 gulp.task('compress-scripts', function (cb) {
-    var modulesLen = modules.length;
 
-    var src, 
-        dest,
-        filename;
+    var filename;
 
-    var stream = [];
+    var src = './assets/develop/scripts/*.js';
+    var dest = './assets/production/scripts/';
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
-
-        src = './assets/develop/scripts/' + module.name + '/*.js';
-        dest = './assets/production/scripts/' + module.name;
-
-        if(module.config.scripts  && module.config.scripts.state === 'develop') {
-            var _stream = gulp.src(src)
-                              .pipe(uglify())    
-                              .pipe(rename({suffix: '.min'}))  
-                              .pipe(gulp.dest(dest));  
-
-            stream.push(_stream);
-        }
+    if(config.scripts && config.scripts.state === 'develop') {
+        return gulp.src(src)
+                   .pipe(uglify())    
+                   .pipe(rename({suffix: '.min'}))  
+                   .pipe(gulp.dest(dest));  
+    } else {
+        cb();
     }
-
-    es.concat(stream).on('end', cb);
 });
 
 /*
@@ -285,30 +236,19 @@ gulp.task('compress-scripts', function (cb) {
  */
 gulp.task('hash-scripts', function (cb) { 
     var scriptBaseUrl = './assets/production/scripts/',
-        scriptSources = [],
-        modulesLen = modules.length;
+        scriptSources = [];
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
+    if(config.scripts && config.scripts.state === 'develop') {
+        var entry = config.scripts.entry;
 
-        if(module.config.scripts && module.config.scripts.state === 'develop') {
-            var entry = module.config.scripts.entry;
-
-            if(entry) {
-                entry = entry.split('/');
-                entry = entry[entry.length - 1];
-                entry = entry.slice(0, entry.lastIndexOf('.')) + '.min.js';
-            }
-
-            var scriptSource = scriptBaseUrl 
-                         + module.name 
-                         + '/' 
-                         + ( entry || 'app.min.js' );
-
-            module.config.scripts.state = 'production';   
-
-            scriptSources.push(scriptSource);                     
+        if(entry) {
+            entry = entry.split('/');
+            entry = entry[entry.length - 1];
+            entry = entry.slice(0, entry.lastIndexOf('.')) + '.min.js';
         }
+
+        config.scripts.state = 'production';   
+        scriptSources.push(scriptBaseUrl + ( entry || 'admin-app.min.js' ));                     
     }
 
     gulp.src(scriptSources, {base: scriptBaseUrl})
@@ -329,31 +269,20 @@ gulp.task('hash-scripts', function (cb) {
  */
 gulp.task('hash-styles', function (cb) {
     var cssBaseUrl = './assets/production/styles/',
-        cssSources = [],
-        modulesLen = modules.length;
+        cssSources = [];
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
+    if(config.styles && ( config.styles.state === 'develop' || ( config.images && config.images.state === 'develop' ))) {
+        var entry = config.styles.entry;
 
-        if(module.config.styles && ( module.config.styles.state === 'develop' || (module.config.images && module.config.images.state === 'develop'))) {
-            var entry = module.config.styles.entry;
+        if(entry) {
+            entry = entry.split('/');
+            entry = entry[entry.length - 1];
 
-            if(entry) {
-                entry = entry.split('/');
-                entry = entry[entry.length - 1];
+            entry = entry.slice(0, entry.lastIndexOf('.')) + '.min.css';
+        }
 
-                entry = entry.slice(0, entry.lastIndexOf('.')) + '.min.css';
-            }
-
-            var cssSource = cssBaseUrl 
-                          + module.name + '/' 
-                          + ( entry || 'app.min.css' );
-
-
-            module.config.styles.state = 'production'; 
-
-            cssSources.push(cssSource);
-        }        
+        config.styles.state = 'production'; 
+        cssSources.push(cssBaseUrl + ( entry || 'admin-app.min.css' ));
     }
 
     gulp.src(cssSources, { base: cssBaseUrl })
@@ -374,18 +303,11 @@ gulp.task('hash-styles', function (cb) {
  */
 gulp.task('hash-images', function(cb) {
     var imgBaseUrl = './assets/production/images/',
-        imgSources = [],
-        modulesLen = modules.length;
+        imgSources = [];
 
-    for(var i = 0; i < modulesLen; i ++) {
-        var module = modules[i];
-        
-        if(module.config.images && module.config.images.state === 'develop') {
-            var imgSource = imgBaseUrl + module.name + '/**/*';
-            module.config.images.state = 'production';      
-
-            imgSources.push(imgSource);     
-        }        
+    if(config.images && config.images.state === 'develop') {
+        config.images.state = 'production';      
+        imgSources.push(imgBaseUrl + '/**/*');     
     }
 
     gulp.src(imgSources, {base: imgBaseUrl})
@@ -407,24 +329,18 @@ gulp.task('hash-images', function(cb) {
 gulp.task('clear-production', function(cb) {
     let promiseAll = [];
 
-    modules.forEach(function (module) {
-        var moduleName = module.name;
+    if(config.styles && config.styles.state === 'develop') {
+        promiseAll.push(del('./assets/production/styles/**/*'));
+    }
 
-        if(module.config.styles && module.config.styles.state === 'develop') {
-            promiseAll.push(del('./assets/production/styles/' + moduleName+ '/**/*'));
-        }
+    if(config.scripts && config.scripts.state === 'develop') {
+        promiseAll.push(del('./assets/production/scripts/**/*'));
+    }
 
-        if(module.config.scripts && module.config.scripts.state === 'develop') {
-            promiseAll.push(del('./assets/production/scripts/' + moduleName + '/**/*'));
-        }
-
-        if(module.config.images && module.config.images.state === 'develop') {
-            promiseAll.push(del('./assets/production/images/' + moduleName + '/**/*'));           
-        }
-    });
+    if(config.images && config.images.state === 'develop') {
+        promiseAll.push(del('./assets/production/images/**/*'));           
+    }
     
-
-
     Promise.all(promiseAll).then(function () {
         cb();
     });
@@ -527,8 +443,8 @@ gulp.task('sync-hash', function(cb) {
 /*
  * @description 同步模块
  */
-gulp.task('sync-modules', function(cb) { 
-    gulptool.writeModulesConfig(modules, function() {
+gulp.task('sync-config', function(cb) { 
+    gulptool.writeConfig(config, function() {
         cb();
     });
 });
@@ -543,6 +459,6 @@ gulp.task('build', function (cb) {
                 ['compress-styles', 'compress-scripts'], 
                 ['hash-styles', 'hash-scripts', 'hash-images'],
                 'sync-hash',
-                'sync-modules',
+                'sync-config',
                 cb);
 });

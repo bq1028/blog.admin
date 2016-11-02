@@ -12,15 +12,6 @@ var tag = require('./schemas/tag');
 
 module.exports.init = function() {
     var arr = [
-        role.findOrCreate({
-            where: {
-                id: 1
-            },
-            defaults:{
-                name: 'administrator',
-                description: '最高权限用户'
-            }
-        }),
         user.findOrCreate({
             where: {
                 id: 1

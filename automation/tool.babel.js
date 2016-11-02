@@ -17,8 +17,8 @@ function transformFilename(file) {
 
 /*
  * @description 生成MD5版本号
- * @params {object} file对象
- * @return {string} 版本号
+ * @params { object } file对象
+ * @return { string } 版本号
  */
 gulptool.buildMd5 = function () {
 
@@ -107,16 +107,8 @@ gulptool.entries = function (globPath) {
  * @description 读取模块配置文件
  * @return {object} 配置对象
  */
-gulptool.readModulesConfig = function () {
-    return JSON.parse(fs.readFileSync('./modules.json'));
-};
-
-/*
- * @description 读取hash配置
- * @return none
- */
-gulptool.readManifest = function () {
-    return JSON.parse(fs.readFileSync('./assets/production/manifest.json'));
+gulptool.readConfig = function () {
+    return JSON.parse(fs.readFileSync('./config.json'));
 };
 
 /*
@@ -125,10 +117,18 @@ gulptool.readManifest = function () {
  * @params {function} 写入回调函数
  * @return none
  */
-gulptool.writeModulesConfig = function (data, callback) {
+gulptool.writeConfig = function (data, callback) {
     var str = JSON.stringify(data, null, 4);
 
-    return fs.writeFile('./modules.json', str, {}, callback);
+    return fs.writeFile('./config.json', str, {}, callback);
+};
+
+/*
+ * @description 读取hash配置
+ * @return none
+ */
+gulptool.readManifest = function () {
+    return JSON.parse(fs.readFileSync('./assets/production/manifest.json'));
 };
 
 export default gulptool;

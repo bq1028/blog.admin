@@ -1,0 +1,13 @@
+{
+    "config": {
+        "styles": {
+            "state": "develop"
+        },
+        "images": {
+            "state": "develop"
+        },
+        "scripts": {
+            "state": "develop"
+        }
+    }
+}
