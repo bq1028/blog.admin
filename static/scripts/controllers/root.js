@@ -4,6 +4,10 @@ define(['./controllers'], function (controllers) {
         $rootScope.$on('EVENT:CONTENTRESIZE', function () {
 
             $rootScope.$broadcast('EVENT:SCROLL-CONTENTRESIZE');
-        });          
+        });   
+
+        $rootScope.onLogout = function () {
+            location.href = '/logout';
+        };    
     }]);
 });

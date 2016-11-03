@@ -36,6 +36,7 @@ require([
     'controllers/journal',
     'controllers/content',
     'controllers/user',
+    'controllers/auth',
     'services/services',
     'services/interceptor',
     'directives/echarts',
@@ -70,32 +71,38 @@ require([
     app.config(['$routeProvider', function ($routeProvider) {
 
         $routeProvider
-            .when('/admin', {
+            .when('/', {
                 name: 'admin',
                 template: ngTemplates.templateIndex,
                 controller: 'indexCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/admin/journal', {
+            .when('/journal', {
                 name: 'journal',
                 template: ngTemplates.templateJournal,
                 controller: 'journalCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/admin/user', {
+            .when('/user', {
                 name: 'user',
                 template: ngTemplates.templateUser,
                 controller: 'userCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/admin/content', {
+            .when('/content', {
                 name: 'content',
                 template: ngTemplates.templateContent,
                 controller: 'contentCtrl as model',
                 reloadOnSearch: false
-            })                
+            }) 
+            .when('/auth', {
+                name: 'auth',
+                template: ngTemplates.templateAuth,
+                controller: 'authCtrl as model',
+                reloadOnSearch: false
+            })                            
             .otherwise({
-                redirectTo: '/admin'
+                redirectTo: '/'
             });
             
     }]);

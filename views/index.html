@@ -11,16 +11,15 @@
         <link rel="stylesheet" type="text/css" href="{% if env === 'development' %}/libs/pace/pace.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.css{% endif %}">
         <script type="text/javascript" src="{% if env === 'development' %}/libs/pace/pace.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.min.js{% endif %}"></script>
         <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/styles/admin/app.css">
         <link rel="stylesheet" 
               type="text/css"
-              href="{% if env === 'development' %}/styles/app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/app-e05f1d9614.min.css{% endif %}">        
+              href="{% if env === 'development' %}/styles/admin-app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/admin-app-e05f1d9614.min.css{% endif %}">        
     </head>
     <body fireworks ng-controller="root">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand unselectable" href="/admin">后台管理</a>
+                    <a class="navbar-brand unselectable" href="/">后台管理</a>
                     <button type="button" 
                             class="navbar-toggle collapsed" 
                             data-toggle="collapse"
@@ -32,27 +31,20 @@
                 </div>
                 <div class="main-menu unselectable" ng-controller="navigation">
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-class="{'active': curr === 'journal'}">
-                            <a href="/admin/journal">日志</a>
-                        </li>
                         <li ng-class="{'active': curr === 'user'}">
-                            <a href="/admin/user">用户</a>
+                            <a href="/user">用户</a>
                         </li>
-                        <li ng-class="{'active': curr === 'content'}">
-                            <a href="/admin/content">内容</a>
+                        <li ng-class="{'active': curr === 'auth'}">
+                            <a href="/auth">权限</a>
                         </li>                        
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作&nbsp;<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">切换</a>
-                                </li>
-                                <li>
-                                    <a href="#">登出</a>
-                                </li>
-                            </ul>
+                        <li ng-class="{'active': curr === 'content'}">
+                            <a href="/content">内容</a>
+                        </li>        
+                        <li ng-class="{'active': curr === 'journal'}">
+                            <a href="/journal">日志</a>
+                        </li>         
+                        <li>
+                            <a href="javascript:;" ng-click="onLogout()">退出</a>
                         </li>
                     </ul>
                 </div>
@@ -65,7 +57,7 @@
         <script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
         <script type="text/javascript" 
                 src="/libs/requirejs/require.js" 
-                data-main="{% if env === 'development' %}/scripts/app.js{% else %}http://ocgkyeaew.bkt.clouddn.com/scripts/app-69ae0a42a1.min.js{% endif %}">
+                data-main="{% if env === 'development' %}/scripts/admin-app.js{% else %}http://ocgkyeaew.bkt.clouddn.com/scripts/admin-app-69ae0a42a1.min.js{% endif %}">
         </script>
     </body>
 </html>

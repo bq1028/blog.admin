@@ -4,7 +4,9 @@ define(['./controllers'], function (controllers) {
         $rootScope.curr = '';  
 
         $rootScope.$on('$routeChangeSuccess', function (event, curr, last) {
-            $rootScope.curr = curr.$$route.name;
+            if (curr.$$route) {
+                $rootScope.curr = curr.$$route.name;
+            }
         });
     }]);
 });
