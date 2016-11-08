@@ -7,6 +7,9 @@
         <title>{{ cn_module }}</title>
         <link rel="bookmark"  type="image/x-icon"  href="/images/ui/icon-22a11c4bb9.png"/>
         <link rel="shortcut icon" href="/images/ui/icon-22a11c4bb9.png">        
+        <!-- 加载进度条 --> 
+        <link rel="stylesheet" type="text/css" href="{% if env === 'development' %}/libs/pace/pace.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.css{% endif %}">
+        <script type="text/javascript" src="{% if env === 'development' %}/libs/pace/pace.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.min.js{% endif %}"></script>        
         <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" 
               type="text/css"
