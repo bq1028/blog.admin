@@ -192,7 +192,9 @@ gulp.task('compress-styles', function (cb) {
         streams.push(cssStream);
         streams.push(imgStream);
 
-        es.concat(streams).on('end', cb);
+        es.concat(streams).on('end', function() {
+            console.log(arguments)
+        });
     } else {
         cb();
     }
