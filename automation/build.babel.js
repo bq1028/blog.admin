@@ -186,7 +186,7 @@ gulp.task('compress-styles', function (cb) {
 
         streams.push(spriteStream);
         streams.push(cssStream);
-        streams.push(imgStream);
+        //streams.push(imgStream);
 
         es.concat(streams).on('end', cb);
     } else {
