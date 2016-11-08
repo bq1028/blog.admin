@@ -14,14 +14,14 @@ var base = {
 var specifics = {
     development: {
         app: {
-            port: 3000,
+            port: 3030,
             env: "development",
             keys: ["super-secret-blog-keys"]
         }
     },
     test: {
         app: {
-            port: 3000,
+            port: 3030,
             env: "test",
             keys: ["super-secret-blog-keys"]
         }
