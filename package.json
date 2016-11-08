@@ -1,11 +1,11 @@
 {
-    "name": "blog_web",
+    "name": "blog_admin",
     "version": "0.1.1",
     "description": "chenxiangyu, blog, npm settings",
-    "main": "server/index.js",
+    "main": "server/app.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/CMCXY0321/blog_web.git"
+        "url": "https://github.com/CMCXY0321/blog_admin.git"
     },
     "author": "chenxiangyu",
     "license": "MIT",
@@ -14,7 +14,7 @@
     },
     "homepage": "47.88.9.143",
     "bugs": { 
-        "url" :"https://github.com/CMCXY0321/blog_web/issues",
+        "url" :"https://github.com/CMCXY0321/blog_admin/issues",
         "email" :"wowcxy2008@126.com"
     },
     "private": true,

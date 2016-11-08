@@ -161,17 +161,6 @@ gulp.task('compress-styles', function (cb) {
         var styleSrc = './assets/develop/styles/*.css';
         var imgBaseUrl = './assets/develop/images/';
 
-        var entry = config.styles.entry;
-
-        if(entry) {
-            entry = entry.split('/');
-            entry = entry[entry.length - 1];
-
-            entry = entry.slice(0, entry.lastIndexOf('.')) + '.css';
-        }
-
-        var filename = entry || 'app.css';
-
         // 需要自动合并雪碧图的样式文件
         var spriteData = gulp.src(styleSrc)
                              .pipe(spriter({
