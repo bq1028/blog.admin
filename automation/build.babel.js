@@ -184,17 +184,11 @@ gulp.task('compress-styles', function (cb) {
                                   .pipe(rename({suffix: '.min'}))  
                                   .pipe(gulp.dest(cssDest));
 
-        var imgStream = gulp.src([imgBaseUrl + '/**/*', '!' + imgBaseUrl + '/slice/**/*'])
-                                  .pipe(imagemin())
-                                  .pipe(gulp.dest(imgDest));
-
         streams.push(spriteStream);
         streams.push(cssStream);
         streams.push(imgStream);
 
-        es.concat(streams).on('end', function() {
-            console.log(arguments)
-        });
+        es.concat(streams).on('end', cb);
     } else {
         cb();
     }
