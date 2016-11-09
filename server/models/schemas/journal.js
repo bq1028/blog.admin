@@ -9,30 +9,34 @@ let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
 var journal = sequelize.define('journal', {
-    type: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
-    },
-    source: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false        
-    },
-    destination: {
+    target: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false          
     },
     operator: {
-        type: Sequelize.STRING,
+        type: Sequelize.JSON,
         allowNull: false,
-        unique: false   
+        unique: false,
+        get: function() {
+            var operator = this.getDataValue('operator');
+
+            if(typeof operator === 'string') {
+                return JSON.parse(operator);
+            } else {
+                return operator;
+            }
+        }
     },
     action: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false           
+    },
+    result: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false       
     }
 }, {
     paranoid: false,

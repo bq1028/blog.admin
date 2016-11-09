@@ -41,7 +41,7 @@ function scan(host, start, end, callback) {
             }
         });
     }
-}
+};
 
 module.exports = function (url) { 
     scan('192.168.253.30', 1, 65535, function (result) {
