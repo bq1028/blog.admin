@@ -1,11 +1,11 @@
 {
     "styles": {
-        "state": "published"
+        "state": "develop"
     },
     "images": {
         "state": "develop"
     },
     "scripts": {
-        "state": "published"
+        "state": "develop"
     }
 }
