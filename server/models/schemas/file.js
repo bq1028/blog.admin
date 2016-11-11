@@ -8,6 +8,8 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
+var user = require('./user');
+
 var file = sequelize.define('file', {
     name: {
         type: Sequelize.STRING,
@@ -31,8 +33,10 @@ var file = sequelize.define('file', {
     },
     author_id: {
         type: Sequelize.INTEGER(11),
-        references: 'user',
-        referencesKey: 'id'
+        references: {
+            model: user,
+            key: 'id'
+        }
     }
 }, {
     paranoid: false,
