@@ -23,14 +23,14 @@ var content = sequelize.define('content', {
         unique: false
     },
     figure: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
         allowNull: true,
         unique: false,
-        get: function() {
+        get: function () {
             var figure = this.getDataValue('figure');
 
-            if(figure) {
-                if(typeof figure === 'string') {
+            if (figure) {
+                if (typeof figure === 'string') {
                     return JSON.parse(figure);
                 } else {
                     return figure;
@@ -38,6 +38,9 @@ var content = sequelize.define('content', {
             } else {
                 return {};
             }
+        },
+        set: function (val) {
+            this.setDataValue('figure', JSON.stringify(val));
         }
     },        
     type: {

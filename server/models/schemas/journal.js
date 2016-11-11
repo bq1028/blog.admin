@@ -15,18 +15,21 @@ var journal = sequelize.define('journal', {
         unique: false          
     },
     operator: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: false,
-        get: function() {
+        get: function () {
             var operator = this.getDataValue('operator');
 
-            if(typeof operator === 'string') {
+            if (typeof operator === 'string') {
                 return JSON.parse(operator);
             } else {
                 return operator;
             }
-        }
+        },
+        set: function (val) {
+            this.setDataValue('operator', JSON.stringify(val));
+        }        
     },
     action: {
         type: Sequelize.STRING,
