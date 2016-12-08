@@ -5,7 +5,7 @@
     "main": "server/app.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/CMCXY0321/blog-admin.git"
+        "url": "https://github.com/mulberryx/blog-admin.git"
     },
     "author": "chenxiangyu",
     "license": "MIT",
@@ -14,7 +14,7 @@
     },
     "homepage": "47.88.9.143",
     "bugs": { 
-        "url" :"https://github.com/CMCXY0321/blog-admin/issues",
+        "url" :"https://github.com/mulberryx/blog-admin/issues",
         "email" :"wowcxy2008@126.com"
     },
     "private": true,
