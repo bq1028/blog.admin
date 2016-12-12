@@ -24,10 +24,10 @@ var sequelize = new Sequelize('blog', 'root', '123abc', {
 sequelize
     .authenticate()
     .then(function(err) {
-        console.log('Connection has been established successfully.');
+        console.info('Connection has been established successfully.');
     })
     .catch(function (err) {
-        console.log('Unable to connect to the database:', err);
+        console.error('Unable to connect to the database:', err);
     });
 
 module.exports = sequelize;

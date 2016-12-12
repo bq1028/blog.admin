@@ -41,8 +41,8 @@ module.exports.init = function() {
     ]
 
     Promise.all(arr).then(function() {
-        console.log('==================== >>> base date inited <<< ====================');
+        console.info('base date inited ======= >>>');
     },function() {
-        console.log(arguments);
+        console.error(arguments);
     });
 };

@@ -11,8 +11,6 @@ var path = require('path');
 var parse = require('co-busboy');
 var os = require('os');
 
-var fileModel = require('../../models/schemas/file')
-
 exports.login = function * () {
     var _this = this;
 
