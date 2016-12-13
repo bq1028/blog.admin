@@ -5,7 +5,7 @@ var role = require('./schemas/role');
 var user = require('./schemas/user');
 var tag = require('./schemas/tag');
 
-var role_auth = require('./schemas/role_auth');
+var role_auth = require('./schemas/role-auth');
 
 module.exports.init = function() {
     auth.belongsToMany(role, { 
