@@ -5,17 +5,17 @@ var role = require('./schemas/role');
 var user = require('./schemas/user');
 var tag = require('./schemas/tag');
 
-var role_auth = require('./schemas/role-auth');
+var roleAuth = require('./schemas/role-auth');
 
 module.exports.init = function() {
     auth.belongsToMany(role, { 
-        through: role_auth, 
+        through: roleAuth, 
         foreignKey: 'role_id', 
         as: 'roles'
     });
 
     role.belongsToMany(auth, { 
-        through: role_auth, 
+        through: roleAuth, 
         foreignKey: 'auth_id', 
         as: 'auths' 
     });
