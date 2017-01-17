@@ -42,7 +42,7 @@ module.exports = function (app, passport) {
         this.session = null;
         this.status = 204;
 
-	this.redirect('/login');
+        this.redirect('/login');
     });    
 
     app.use(router.routes());
