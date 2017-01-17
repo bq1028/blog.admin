@@ -5,12 +5,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>{{ cn_module }}</title>
-        <link rel="bookmark"  type="image/x-icon"  href="/images/ui/icon-e3195e2280.png"/>
-        <link rel="shortcut icon" href="/images/ui/icon-e3195e2280.png">        
+        <link rel="bookmark"  
+              type="image/x-icon" 
+              href="{% if env === 'development' %}/images/ui/icon.png{% else %}http://ocgkyeaew.bkt.clouddn.com/images/ui/icon.png{% endif %}"/>
+        <link rel="shortcut icon" 
+              href="{% if env === 'development' %}/images/ui/icon.png{% else %}http://ocgkyeaew.bkt.clouddn.com/images/ui/icon.png{% endif %}">        
         <!-- 加载进度条 --> 
-        <link rel="stylesheet" type="text/css" href="{% if env === 'development' %}/libs/pace/pace.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.css{% endif %}">
-        <script type="text/javascript" src="{% if env === 'development' %}/libs/pace/pace.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.min.js{% endif %}"></script>        
-        <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" 
+              type="text/css" 
+              href="{% if env === 'development' %}/libs/pace/pace.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.css{% endif %}">
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/pace/pace.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.min.js{% endif %}"></script>        
+        <link rel="stylesheet" 
+              type="text/css" 
+              href="{% if env === 'development' %}/libs/bootstrap/dist/css/bootstrap.min.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/bootstrap/dist/css/bootstrap.min.css{% endif %}">
         <link rel="stylesheet" 
               type="text/css"
               href="{% if env === 'development' %}/styles/admin-app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/admin-app-9d14f45d85.min.css{% endif %}">
@@ -45,7 +53,8 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/jquery/dist/jquery.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/jquery/dist/jquery.min.js{% endif %}"></script>
         <script type="text/javascript">
             (function() {
                 var $user = $('#user');
@@ -79,7 +88,8 @@
                 });
             })();
         </script>
-        <script type="text/javascript" src="/libs/three/three.min.js"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/three/three.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/three/three.min.js{% endif %}"></script>
 
         <script id="vs" type="x-shader/x-vertex">
             varying vec2 vUv;

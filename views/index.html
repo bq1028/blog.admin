@@ -5,12 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>{{ cn_module }}</title>
-        <link rel="bookmark"  type="image/x-icon"  href="/images/common/icon.png"/>
-        <link rel="shortcut icon" type="image/x-icon" href="/images/common/icon.png" >        
+        <link rel="bookmark"  
+              type="image/x-icon" 
+              href="{% if env === 'development' %}/images/ui/icon.png{% else %}http://ocgkyeaew.bkt.clouddn.com/images/ui/icon.png{% endif %}"/>
+        <link rel="shortcut icon" 
+              href="{% if env === 'development' %}/images/ui/icon.png{% else %}http://ocgkyeaew.bkt.clouddn.com/images/ui/icon.png{% endif %}">      
         <!-- 加载进度条 --> 
         <link rel="stylesheet" type="text/css" href="{% if env === 'development' %}/libs/pace/pace.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.css{% endif %}">
         <script type="text/javascript" src="{% if env === 'development' %}/libs/pace/pace.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/pace/pace.min.js{% endif %}"></script>
-        <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" 
+              type="text/css" 
+              href="{% if env === 'development' %}/libs/bootstrap/dist/css/bootstrap.min.css{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/bootstrap/dist/css/bootstrap.min.css{% endif %}">
         <link rel="stylesheet" 
               type="text/css"
               href="{% if env === 'development' %}/styles/admin-app.css{% else %}http://ocgkyeaew.bkt.clouddn.com/styles/admin-app-9d14f45d85.min.css{% endif %}">        
@@ -51,10 +56,14 @@
             </div>
         </nav>
         <ng-view scrollbar></ng-view>
-        <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/libs/sketch/sketch.min.js"></script>
-        <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/jquery/dist/jquery.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/jquery/dist/jquery.min.js{% endif %}"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/sketch/sketch.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/sketch/sketch.min.js{% endif %}"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/bootstrap/dist/js/bootstrap.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/bootstrap/dist/js/bootstrap.min.js{% endif %}"></script>
+        <script type="text/javascript" 
+                src="{% if env === 'development' %}/libs/echarts/echarts.min.js{% else %}http://ocgkyeaew.bkt.clouddn.com/libs/echarts/echarts.min.js{% endif %}"></script>
         <script type="text/javascript" 
                 src="/libs/requirejs/require.js" 
                 data-main="{% if env === 'development' %}/scripts/admin-app.js{% else %}http://ocgkyeaew.bkt.clouddn.com/scripts/admin-app-3c41f77587.min.js{% endif %}">
