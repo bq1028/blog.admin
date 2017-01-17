@@ -28,6 +28,11 @@ module.exports = function (app, passport) {
         yield index.apply(this);
     });
     
+    router.get("/views/*", secured, function *() {
+        this.type = "html";
+        yield index.apply(this);
+    });
+
     router.get("/login", unsecured, function *() {
         this.type = "html";
         yield login.apply(this);

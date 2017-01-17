@@ -71,38 +71,38 @@ require([
     app.config(['$routeProvider', function ($routeProvider) {
 
         $routeProvider
-            .when('/', {
+            .when('/views', {
                 name: 'admin',
                 template: ngTemplates.templateIndex,
                 controller: 'indexCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/journal', {
+            .when('/views/journal', {
                 name: 'journal',
                 template: ngTemplates.templateJournal,
                 controller: 'journalCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/user', {
+            .when('/views/user', {
                 name: 'user',
                 template: ngTemplates.templateUser,
                 controller: 'userCtrl as model',
                 reloadOnSearch: false
             })
-            .when('/content', {
+            .when('/views/content', {
                 name: 'content',
                 template: ngTemplates.templateContent,
                 controller: 'contentCtrl as model',
                 reloadOnSearch: false
             }) 
-            .when('/auth', {
+            .when('/views/auth', {
                 name: 'auth',
                 template: ngTemplates.templateAuth,
                 controller: 'authCtrl as model',
                 reloadOnSearch: false
             })                            
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/views'
             });
             
     }]);
