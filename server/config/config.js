@@ -28,7 +28,7 @@ var specifics = {
     },
     production: {
         app: {
-            port: 8080,
+            port: 80,
             env: 'production',
             keys: ['super-secret-blog-keys']
         }
