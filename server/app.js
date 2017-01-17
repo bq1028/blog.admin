@@ -15,11 +15,9 @@ const fs = require('fs');
 const api = require('./config/api');
 const routes = require('./config/routes');
 const config = require('./config/config');
-const database = require('./models/sync');
+const db = require('./models/db');
 const passport = require('./config/passport');
 const middleware = require('./config/middleware');
-
-const modelsPath = config.app.root + "/server/models";
 
 var app = koa();
 
@@ -33,7 +31,7 @@ middleware(app, config, koaPassport);
 routes(app, koaPassport);
 api(app, koaPassport);
 
-database.init();
+db.init();
 
 app.listen(config.app.port);
 

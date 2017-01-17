@@ -1,8 +1,8 @@
 "use strict";
 var Router = require("koa-router");
 
-var admin = require("../controllers/routes/admin");
-var admin_login = require("../controllers/routes/admin_login");
+var index = require("../controllers/routes/index");
+var login = require("../controllers/routes/login");
 
 var secured = function * (next) {
     if (this.isAuthenticated()) {
@@ -25,22 +25,23 @@ module.exports = function (app, passport) {
 
     router.get("/", secured, function *() {
         this.type = "html";
-        yield admin.apply(this);
+        yield index.apply(this);
     });
     
     router.get("/*", secured, function *() {
         this.type = "html";
-        yield admin.apply(this);
+        yield index.apply(this);
     });
 
     router.get("/login", unsecured, function *() {
         this.type = "html";
-        yield admin_login.apply(this);
+        yield login.apply(this);
     });
 
     router.get("/logout", secured, function *() {
         this.session = null;
         this.status = 204;
+        
         this.redirect('/login');
     });    
 

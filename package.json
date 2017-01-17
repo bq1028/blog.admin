@@ -18,11 +18,6 @@
         "email" :"wowcxy2008@126.com"
     },
     "private": true,
-    "publishConfig": {
-        "scripts": {
-            "start": "node server.js"
-        }
-    },
     "engines": {
         "node": ">= 5.8.0"
     },
@@ -37,9 +32,9 @@
     ],     
     "scripts": {
         "start": "node server/app.js --harmony production",
-        "start-dev": "./node_modules/.bin/nodemon -e js,html --ignore ./assets/ --ignore ./static/ --ignore ./automation/ server/app.js --harmony development",
+        "start:dev": "./node_modules/.bin/nodemon -e js,html --ignore ./assets/ --ignore ./static/ --ignore ./automation/ server/app.js --harmony development",
         "build": "gulp build",
-        "build-dev": "gulp build-dev",
+        "build:dev": "gulp build-dev",
         "publish": "gulp publish",
         "watch": "gulp watch",
         "lint": "gulp eslint",

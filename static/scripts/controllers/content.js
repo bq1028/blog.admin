@@ -16,7 +16,7 @@ define(['./controllers'], function (controllers) {
                 validate: 'mobile',
                 align: 'left',
                 editableType: 'textbox'
-            },{
+            }, {
                 value: 'v2',
                 title: '例子',
                 sort: true,
@@ -25,7 +25,7 @@ define(['./controllers'], function (controllers) {
                 validate: 'mobile',
                 align: 'left',
                 editableType: 'textbox'
-            },{
+            }, {
                 value: 'v3',
                 title: '例子',
                 sort: true,
@@ -50,4 +50,12 @@ define(['./controllers'], function (controllers) {
             }]
         };           
     }]);
+
+    var ctrl = function () {
+
+    };
+
+    var model = function () {
+
+    };
 });
