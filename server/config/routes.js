@@ -41,6 +41,8 @@ module.exports = function (app, passport) {
     router.get("/logout", secured, function *() {
         this.session = null;
         this.status = 204;
+
+	this.redirect('/login');
     });    
 
     app.use(router.routes());
