@@ -28,7 +28,7 @@ module.exports = function (app, passport) {
         yield index.apply(this);
     });
     
-    router.get("/views/*", secured, function *() {
+    router.get("/*", secured, function *() {
         this.type = "html";
         yield index.apply(this);
     });
