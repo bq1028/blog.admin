@@ -14,7 +14,7 @@ var auth = sequelize.define('auth', {
         allowNull: false,
         unique: false
     },
-    resource: {
+    type: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false

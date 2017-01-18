@@ -26,7 +26,7 @@ var content = sequelize.define('content', {
         type: Sequelize.STRING,
         allowNull: true,
         unique: false,
-        get: function() {
+        get: function () {
             var figure = this.getDataValue('figure');
 
             if(figure) {

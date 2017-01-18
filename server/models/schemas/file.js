@@ -28,11 +28,6 @@ var file = sequelize.define('file', {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
-    },
-    author_id: {
-        type: Sequelize.INTEGER(11),
-        references: 'user',
-        referencesKey: 'id'
     }
 }, {
     paranoid: false,
