@@ -444,7 +444,9 @@ gulp.task('build', function (cb) {
                 'clear-production',
                 'sync-libs-pro',
                 ['compress-styles', 'compress-scripts'], 
-                ['hash-styles', 'hash-scripts', 'hash-images'],
+                'hash-styles', 
+                'hash-scripts', 
+                'hash-images',
                 'sync-hash',
                 'sync-config',
                 cb);
