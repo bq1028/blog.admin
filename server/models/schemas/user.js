@@ -51,7 +51,7 @@ var user = sequelize.define('user', {
         allowNull: true,
         primaryKey: false
     },
-    role_id: {
+    roleId: {
         type: Sequelize.INTEGER,
 
         references: {

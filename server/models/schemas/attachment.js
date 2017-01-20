@@ -1,5 +1,5 @@
 /**
- * 内容模型
+ * 附件
  * @author Philip
  */
 
@@ -8,11 +8,12 @@
 var Sequelize = require('sequelize');
 var sequelize = require('./../sequelize');
 
-var user = require('./user');
+var file = require('./file');
 var auth = require('./auth');
+var content = require('./content');
 
-var content = sequelize.define('content', {
-    title: {
+var attachment = sequelize.define('attachment', {
+    name: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
@@ -21,21 +22,11 @@ var content = sequelize.define('content', {
         type: Sequelize.STRING,
         allowNull: true,
         unique: false
-    },       
+    },    
     type: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false
-    },
-    content: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-        unique: false
-    },
-    tags: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false        
     },
     authId: {
         type: Sequelize.INTEGER,
@@ -45,11 +36,19 @@ var content = sequelize.define('content', {
             key: 'id'
         }  
     },
-    userId: {
+    fileId: {
         type: Sequelize.INTEGER,
 
         references: {
-            model: user,
+            model: file,
+            key: 'id'
+        }    
+    },
+    contentId: {
+        type: Sequelize.INTEGER,
+
+        references: {
+            model: content,
             key: 'id'
         }    
     }      
@@ -60,4 +59,4 @@ var content = sequelize.define('content', {
     freezeTableName: true
 });
 
-module.exports = content;
+module.exports = attachment;

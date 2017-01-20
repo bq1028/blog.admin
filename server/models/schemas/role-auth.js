@@ -11,7 +11,7 @@ let sequelize = require('./../sequelize');
 var auth = require('./auth');
 var role = require('./role');
 
-var role_auth = sequelize.define('role_auth', {
+var roleAuth = sequelize.define('role_auth', {
     role_id: {
         type: Sequelize.INTEGER,
 
@@ -20,7 +20,7 @@ var role_auth = sequelize.define('role_auth', {
             key: 'id'
         }    
     },
-    auth_id: {
+    authId: {
         type: Sequelize.INTEGER,
 
         references: {
@@ -35,4 +35,4 @@ var role_auth = sequelize.define('role_auth', {
     freezeTableName: true
 });
 
-module.exports = role_auth;
+module.exports = roleAuth;

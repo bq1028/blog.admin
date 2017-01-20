@@ -36,7 +36,7 @@ var journal = sequelize.define('journal', {
         allowNull: false,
         unique: false           
     },
-    result: {
+    response: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false       

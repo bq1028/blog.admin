@@ -8,23 +8,23 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
-var user = require('./user');
+var file = require('./file');
 var content = require('./content');
 
-var contentUser= sequelize.define('content_user', {
-    content_id: {
+var contentUser = sequelize.define('content_user', {
+    fileId: {
         type: Sequelize.INTEGER,
 
         references: {
-            model: content,
+            model: file,
             key: 'id'
         }    
     },
-    user_id: {
-        type: Sequelize.INTEGER,
+    type: {
+        type: Sequelize.STRING,
 
         references: {
-            model: user,
+            model: file,
             key: 'id'
         }    
     }
