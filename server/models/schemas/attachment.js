@@ -9,7 +9,8 @@ var Sequelize = require('sequelize');
 var sequelize = require('./../sequelize');
 
 var file = require('./file');
-var auth = require('./auth');
+var authority = require('./authority');
+var user = require('./user');
 var content = require('./content');
 
 var attachment = sequelize.define('attachment', {
@@ -28,11 +29,11 @@ var attachment = sequelize.define('attachment', {
         allowNull: false,
         unique: false
     },
-    authId: {
+    authorityId: {
         type: Sequelize.INTEGER,
 
         references: {
-            model: auth,
+            model: authority,
             key: 'id'
         }  
     },
@@ -51,7 +52,15 @@ var attachment = sequelize.define('attachment', {
             model: content,
             key: 'id'
         }    
-    }      
+    },  
+    userId: {
+        type: Sequelize.INTEGER,
+
+        references: {
+            model: user,
+            key: 'id'
+        }    
+    }        
 }, {
     paranoid: false,
     timestamps: true,

@@ -8,28 +8,13 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
-var journal = sequelize.define('journal', {
+let user = require('./user');
+
+let journal = sequelize.define('journal', {
     target: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false          
-    },
-    operator: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false,
-        get: function () {
-            var operator = this.getDataValue('operator');
-
-            if (typeof operator === 'string') {
-                return JSON.parse(operator);
-            } else {
-                return operator;
-            }
-        },
-        set: function (val) {
-            this.setDataValue('operator', JSON.stringify(val));
-        }        
     },
     action: {
         type: Sequelize.STRING,
@@ -40,7 +25,15 @@ var journal = sequelize.define('journal', {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false       
-    }
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+
+        references: {
+            model: user,
+            key: 'id'
+        }        
+    }    
 }, {
     paranoid: false,
     timestamps: true,

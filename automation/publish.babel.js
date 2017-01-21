@@ -25,7 +25,7 @@ const qiniu_options = {
 
 
 /*
- * @description 发布脚本
+ * 发布脚本
  */
 gulp.task('publish-scripts', function () {
     return gulp.src(['./assets/production/scripts/**/*'])
@@ -36,7 +36,7 @@ gulp.task('publish-scripts', function () {
 });
 
 /*
- * @description 发布文字和图片
+ * 发布文字和图片
  */
 gulp.task('publish-font-img', function () {
     return gulp.src(['./assets/production/images/**/**/*', './assets/production/font/**/**/*'])
@@ -47,7 +47,7 @@ gulp.task('publish-font-img', function () {
 });
 
 /*
- * @description 发布样式
+ * 发布样式
  */
 gulp.task('publish-styles', function () {
     return gulp.src(['./assets/production/styles/**/*'])
@@ -58,7 +58,7 @@ gulp.task('publish-styles', function () {
 });
 
 /*
- * @description 发布样式
+ * 发布样式
  */
 gulp.task('publish-libs', function () {
     return gulp.src(['./assets/production/libs/**/**/**/*'])
@@ -69,7 +69,7 @@ gulp.task('publish-libs', function () {
 });
 
 /*
- * @description 同步模块
+ * 同步模块
  */
 gulp.task('sync-config-states', function(cb) { 
 
@@ -92,7 +92,7 @@ gulp.task('sync-config-states', function(cb) {
 
 
 /*
- * @description 发布静态资源至CDN
+ * 发布静态资源至CDN
  */
 gulp.task('publish', function (cb) {
     runSequence('build', ['publish-scripts', 'publish-styles', 'publish-font-img', 'publish-libs'], 'sync-config-states', cb);

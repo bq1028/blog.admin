@@ -7,8 +7,6 @@
 
 var user = require('./schemas/user');
 var role = require('./schemas/role');
-var auth = require('./schemas/auth');
-var tag = require('./schemas/tag');
 
 module.exports.init = function() {
     var arr = [
@@ -16,7 +14,7 @@ module.exports.init = function() {
             where: {
                 id: 1
             },
-            defaults:{
+            defaults: {
                 name: 'administrator',
                 description: '最高权限用户'
             }
@@ -35,7 +33,7 @@ module.exports.init = function() {
                 birth: new Date('1990-03-21 06:06:06'),
                 description: null,
                 tags: [],
-                role_id: '1'
+                roleId: '1'
             }
         })               
     ]

@@ -1,5 +1,5 @@
 /**
- * 内容的owner
+ * 角色的权限
  * @author Philip
  */
 
@@ -8,26 +8,26 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
-var file = require('./file');
-var content = require('./content');
+var authority = require('./authority');
+var role = require('./role');
 
-var contentUser = sequelize.define('content_user', {
-    fileId: {
+var roleAuth = sequelize.define('roleAuth', {
+    roleId: {
         type: Sequelize.INTEGER,
 
         references: {
-            model: file,
+            model: role,
             key: 'id'
         }    
     },
-    type: {
-        type: Sequelize.STRING,
+    authorityId: {
+        type: Sequelize.INTEGER,
 
         references: {
-            model: file,
+            model: authority,
             key: 'id'
         }    
-    }
+    }    
 }, {
     paranoid: false,
     timestamps: true,
@@ -35,4 +35,4 @@ var contentUser = sequelize.define('content_user', {
     freezeTableName: true
 });
 
-module.exports = contentUser;
+module.exports = roleAuth;

@@ -16,7 +16,7 @@ function transformFilename(file) {
 }
 
 /*
- * @description 生成MD5版本号
+ * 生成MD5版本号
  * @params { object } file对象
  * @return { string } 版本号
  */
@@ -34,7 +34,7 @@ gulptool.buildMd5 = function () {
 };
 
 /**
- * @description Calculate a 32 bit FNV-1a hash
+ * Calculate a 32 bit FNV-1a hash
  * @param {string} str the input value
  * @param {boolean} [asString=false] set to true to return the hash value as 
  *     8-digit hex string instead of an integer
@@ -61,7 +61,7 @@ gulptool.hashFnv32a = function (str, asString, seed) {
 };
 
 /*
- * @description 过滤和移除
+ * 过滤和移除
  * @params {object} file对象
  * @return {boolean} 是否合并
  */
@@ -85,7 +85,7 @@ function filterAdd_Del (file) {
 gulptool.filterAdd_Del = filter(filterAdd_Del);
 
 /*
- * @description 获取
+ * 获取
  * @params {object} golbPath对象
  * @return {array} 
  */
@@ -104,7 +104,7 @@ gulptool.entries = function (globPath) {
 };
 
 /*
- * @description 读取模块配置文件
+ * 读取模块配置文件
  * @return {object} 配置对象
  */
 gulptool.readConfig = function () {
@@ -112,7 +112,7 @@ gulptool.readConfig = function () {
 };
 
 /*
- * @description 写入模块配置文件
+ * 写入模块配置文件
  * @params {stirng | buffer} 写入的数据
  * @params {function} 写入回调函数
  * @return none
@@ -124,7 +124,7 @@ gulptool.writeConfig = function (data, callback) {
 };
 
 /*
- * @description 读取hash配置
+ * 读取hash配置
  * @return none
  */
 gulptool.readManifest = function () {

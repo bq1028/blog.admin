@@ -1,6 +1,6 @@
 var sequelize = require('./sequelize');
 
-var auth = require('./schemas/auth');
+var authority = require('./schemas/authority');
 var role = require('./schemas/role');
 var user = require('./schemas/user');
 var file = require('./schemas/file');
@@ -10,30 +10,54 @@ var message = require('./schemas/message');
 var journal = require('./schemas/journal');
 var attachment = require('./schemas/attachment');
 
-var roleAuth = require('./schemas/role-auth');
+var roleAuth = require('./schemas/role-authority');
 
 module.exports.init = function() {
-    auth.belongsToMany(role, { 
+    authority.belongsToMany(role, { 
         through: roleAuth, 
-        foreignKey: 'role_id', 
+        foreignKey: 'roleId', 
         as: 'roles'
     });
 
-    role.belongsToMany(auth, { 
+    role.belongsToMany(authority, { 
         through: roleAuth, 
-        foreignKey: 'auth_id', 
+        foreignKey: 'authId', 
         as: 'auths' 
     });
 
-    role.hasMany(user, {
+    user.belongsTo(role, {
         foreignKey: 'roleId',
         constraints: false,
-        as: 'role'     
+        as: 'role'  
+    });
+
+    journal.belongsTo(user, {
+        foreignKey: 'roleId',
+        constraints: false,
+        as: 'role'              
     });
 
     content.hasMany(attachment, {
-        foreignKey: 'attachmentId',
+        foreignKey: 'contentId',
         constraints: false,
-        as: 'role'     
+        as: 'attachments'     
+    });    
+
+    content.hasMany(message, {
+        foreignKey: 'contentId',
+        constraints: false,
+        as: 'messages'              
+    });
+
+    attachment.hasOne(file, {
+        foreignKey: 'fileId',
+        constraints: false,
+        as: 'file'   
+    });
+
+    attachment.belongsTo(user, {
+        foreignKey: 'userId',
+        constraints: false,
+        as: 'owner'   
     });    
 }

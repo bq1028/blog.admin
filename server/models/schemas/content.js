@@ -9,7 +9,7 @@ var Sequelize = require('sequelize');
 var sequelize = require('./../sequelize');
 
 var user = require('./user');
-var auth = require('./auth');
+var authority = require('./authority');
 
 var content = sequelize.define('content', {
     title: {
@@ -37,11 +37,11 @@ var content = sequelize.define('content', {
         allowNull: false,
         unique: false        
     },
-    authId: {
+    authorityId: {
         type: Sequelize.INTEGER,
 
         references: {
-            model: auth,
+            model: authority,
             key: 'id'
         }  
     },

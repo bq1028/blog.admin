@@ -25,7 +25,7 @@ var message = sequelize.define('message', {
             key: 'id'
         }    
     },
-    content_id: {
+    contentId: {
         type: Sequelize.INTEGER,
 
         references: {

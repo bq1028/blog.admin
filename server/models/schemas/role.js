@@ -18,11 +18,6 @@ var role = sequelize.define('role', {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false        
-    },
-    auth: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false        
     }
 }, {
     paranoid: false,

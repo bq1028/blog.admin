@@ -18,7 +18,7 @@ const source = 'static',
 
 
 /*
- * @description 观察view文件
+ * 观察view文件
  */
 gulp.task('watch-scripts', function () {
     watch('static/scripts/**/**/**/**', {}, function(vinyl) {
@@ -30,7 +30,7 @@ gulp.task('watch-scripts', function () {
 });
 
 /*
- * @description 观察样式文件
+ * 观察样式文件
  */
 gulp.task('watch-styles', function () {
     watch('static/styles/**/**/**', {}, function(vinyl) {
@@ -42,7 +42,7 @@ gulp.task('watch-styles', function () {
 });
 
 /*
- * @description 观察图片文件
+ * 观察图片文件
  */
 gulp.task('watch-images', function () {
     var dest = assets + '/' + develop  + '/images';
@@ -59,7 +59,7 @@ gulp.task('watch-images', function () {
 });
 
 /*
- * @description 观察图片文件
+ * 观察图片文件
  */
 gulp.task('watch-libs', function () {
     var dest = assets + '/' + develop  + '/libs';
@@ -72,7 +72,7 @@ gulp.task('watch-libs', function () {
 
 
 /*
- * @description 观察
+ * 观察
  */
 gulp.task('watch', function () {
     gulp.run('build-dev');

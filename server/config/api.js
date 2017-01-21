@@ -4,7 +4,7 @@ var Router = require('koa-router');
 var Restful = require('../libs/restful');
 var common = require('../controllers/apis/common');
 
-var auth = require('../models/schemas/auth');
+var authority = require('../models/schemas/authority');
 var role = require('../models/schemas/role');
 var tag = require('../models/schemas/tag');
 var user = require('../models/schemas/user');
@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
     api.get("/logout", secured, common.logout);
     api.post("/api/login", unsecured, common.login);
 
-    Restful.create('auth', auth, secured);
+    Restful.create('authority', authority, secured);
     Restful.create('tag', tag, secured);
     Restful.create('user', user, secured);
     Restful.create('role', role, secured);

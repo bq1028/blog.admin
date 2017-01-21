@@ -3,7 +3,7 @@ import mocha from 'gulp-mocha';
 import eslint from 'gulp-eslint';       
 
 /*
- * @description 脚本格式校验
+ * 脚本格式校验
  */
 gulp.task('eslint', function () {
   return gulp.src('./static/views/**/**/*.js')
@@ -12,7 +12,7 @@ gulp.task('eslint', function () {
 });
 
 /*
- * @description 测试
+ * 测试
  */
 gulp.task('mocha', function () {
     

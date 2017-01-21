@@ -34,7 +34,7 @@ const source = 'static',
       production = 'production';
 
 /*
- * @description 编译样式
+ * 编译样式
  */
 gulp.task('compile-styles', function (cb) {
     var entry, output;
@@ -43,7 +43,7 @@ gulp.task('compile-styles', function (cb) {
         if(config.styles.entry) {
             entry = config.styles.entry;
         } else {
-            entry = './static/styles/admin-app.less';
+            entry = './static/styles/app.less';
         }
 
         if(config.styles.output) {
@@ -59,15 +59,15 @@ gulp.task('compile-styles', function (cb) {
         filename = filename.join('.');
 
         return gulp.src(entry) 
-            .pipe(less())
-            .pipe(gulp.dest(output));
+                   .pipe(less())
+                   .pipe(gulp.dest(output));
     } else {
         cb();
     }
 });
 
 /*
- * @description 编译scripts
+ * 编译scripts
  */
 gulp.task('compile-scripts', function (cb) {
     var entry, 
@@ -75,7 +75,7 @@ gulp.task('compile-scripts', function (cb) {
 
     if(config.scripts && config.scripts.state === 'develop') {
         var src = './static/scripts/**/**/**';
-        var filename = 'admin-app.js';
+        var filename = 'app.js';
         var entryArr = null;
 
         if(config.scripts.entry) {
@@ -91,35 +91,34 @@ gulp.task('compile-scripts', function (cb) {
             output = './assets/develop/scripts/';
         }
 
-        
         return gulp.src(src)
-           .pipe(amdOptimize(filename.replace('.js', ''), {
-                baseUrl: '',
-                paths: {
-                    'text': './libs/requirejs/text',
-                    'domReady': './libs/requirejs/domReady',
-                    'angular': './libs/angular/angular.min',
-                    'angular-route': './libs/angular-route/angular-route.min'                                
-                },
-                shim: {
-                    'angular': {
-                        exports: 'angular'
-                    }
-                },
-                findNestedDependencies: true,
-                include: false,
-                wrapShim: false,
-                exclude: []                                           
-           }))
-           .pipe(concatFile(filename))
-           .pipe(gulp.dest(output));
+                   .pipe(amdOptimize(filename.replace('.js', ''), {
+                        baseUrl: '',
+                        paths: {
+                            'text': './libs/requirejs/text',
+                            'domReady': './libs/requirejs/domReady',
+                            'angular': './libs/angular/angular.min',
+                            'angular-route': './libs/angular-route/angular-route.min'                                
+                        },
+                        shim: {
+                            'angular': {
+                                exports: 'angular'
+                            }
+                        },
+                        findNestedDependencies: true,
+                        include: false,
+                        wrapShim: false,
+                        exclude: []                                           
+                   }))
+                   .pipe(concatFile(filename))
+                   .pipe(gulp.dest(output));
     } else {
         cb();
     }
 });
 
 /*
- * @description 同步图片
+ * 同步图片
  */
 gulp.task('sync-imgs', function (cb) {
     var dest = assets + '/' + develop;
@@ -129,7 +128,7 @@ gulp.task('sync-imgs', function (cb) {
 });
 
 /*
- * @description 同步第三方库
+ * 同步第三方库
  */
 gulp.task('sync-libs', function (cb) {
     var dest = assets + '/' + develop;
@@ -139,7 +138,7 @@ gulp.task('sync-libs', function (cb) {
 });
 
 /*
- * @description 构建dev环境
+ * 构建dev环境
  */
 gulp.task('build-dev', function (cb) {
     runSequence(['compile-styles', 'compile-scripts', 'sync-imgs', 'sync-libs'], cb);    
@@ -147,7 +146,7 @@ gulp.task('build-dev', function (cb) {
 
 
 /*
- * @description 压缩样式
+ * 压缩样式
  */
 gulp.task('compress-styles', function (cb) {
 
@@ -199,7 +198,7 @@ gulp.task('compress-styles', function (cb) {
 });
 
 /*
- * @description 压缩脚本与版本号
+ * 压缩脚本与版本号
  */
 gulp.task('compress-scripts', function (cb) {
 
@@ -219,7 +218,7 @@ gulp.task('compress-scripts', function (cb) {
 });
 
 /*
- * @description 生成脚本hash号
+ * 生成脚本hash号
  */
 gulp.task('hash-scripts', function (cb) { 
     var scriptBaseUrl = './assets/production/scripts/',
@@ -235,7 +234,7 @@ gulp.task('hash-scripts', function (cb) {
         }
 
         config.scripts.state = 'production';   
-        scriptSources.push(scriptBaseUrl + ( entry || 'admin-app.min.js' ));                     
+        scriptSources.push(scriptBaseUrl + ( entry || 'app.min.js' ));                     
     }
 
     gulp.src(scriptSources, {base: scriptBaseUrl})
@@ -252,7 +251,7 @@ gulp.task('hash-scripts', function (cb) {
 });
 
 /*
- * @description 生成样式hash号
+ * 生成样式hash号
  */
 gulp.task('hash-styles', function (cb) {
     var cssBaseUrl = './assets/production/styles/',
@@ -269,7 +268,7 @@ gulp.task('hash-styles', function (cb) {
         }
 
         config.styles.state = 'production'; 
-        cssSources.push(cssBaseUrl + ( entry || 'admin-app.min.css' ));
+        cssSources.push(cssBaseUrl + ( entry || 'app.min.css' ));
     }
 
     gulp.src(cssSources, { base: cssBaseUrl })
@@ -286,7 +285,7 @@ gulp.task('hash-styles', function (cb) {
 });
 
 /*
- * @description 生成图片hash号
+ * 生成图片hash号
  */
 gulp.task('hash-images', function(cb) {
     var imgBaseUrl = './assets/production/images/',
@@ -311,7 +310,7 @@ gulp.task('hash-images', function(cb) {
 });
 
 /*
- * @description 清理生成区
+ * 清理生成区
  */
 gulp.task('clear-production', function(cb) {
     let promiseAll = [];
@@ -334,7 +333,7 @@ gulp.task('clear-production', function(cb) {
 });
 
 /*
- * @description 同步hash值至样式表和html
+ * 同步hash值至样式表和html
  */
 gulp.task('sync-libs-pro', function (cb) {
     var dest = assets + '/' + production;
@@ -344,7 +343,7 @@ gulp.task('sync-libs-pro', function (cb) {
 });
 
 /*
- * @description 同步hash值至样式表和html
+ * 同步hash值至样式表和html
  */
 gulp.task('sync-hash', function(cb) {
     var manifest = gulptool.readManifest();
@@ -428,7 +427,7 @@ gulp.task('sync-hash', function(cb) {
 });
 
 /*
- * @description 同步模块
+ * 同步模块
  */
 gulp.task('sync-config', function(cb) { 
     gulptool.writeConfig(config, function() {
@@ -437,7 +436,7 @@ gulp.task('sync-config', function(cb) {
 });
 
 /*
- * @description 构建
+ * 构建
  */
 gulp.task('build', function (cb) {
     runSequence('build-dev', 
