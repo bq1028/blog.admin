@@ -242,7 +242,7 @@ gulp.task('hash-scripts', function (cb) {
         }
 
         config.scripts.state = 'production';   
-        scriptSources.push(scriptBaseUrl + ( entry || 'app.min.js' ));                     
+        scriptSources.push(scriptBaseUrl + ( entry || 'admin.min.js' ));                     
     }
 
     gulp.src(scriptSources, {base: scriptBaseUrl})
@@ -277,7 +277,7 @@ gulp.task('hash-styles', function (cb) {
         }
 
         config.styles.state = 'production'; 
-        cssSources.push(cssBaseUrl + ( entry || 'app.min.css' ));
+        cssSources.push(cssBaseUrl + ( entry || 'admin.min.css' ));
     }
 
     gulp.src(cssSources, { base: cssBaseUrl })
