@@ -49,6 +49,7 @@ gulp.task('watch-images', function () {
     var source = 'static/images/**/**';
 
     gulp.src(source)
+        .pipe(plumber())
         .pipe(gulp.dest(dest))
         .pipe(watch(source, function() {
             config.images.state = 'develop';
@@ -65,6 +66,7 @@ gulp.task('watch-libs', function () {
     var dest = assets + '/' + develop  + '/libs';
 
     gulp.src('static/libs/**/**/**')
+        .pipe(plumber())
         .pipe(gulp.dest(dest))
         .pipe(watch('static/libs/**/**/**'))
         .pipe(gulp.dest(dest));

@@ -47,7 +47,7 @@ require([
     'filters/filters'
 ], function (text, domReady, ng, route, views) {
     'use strict';
-
+    
     var app = ng.module('app', [
         'app.controllers',
         'app.directives',

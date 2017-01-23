@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 
+import plumber from 'gulp-plumber';
 import qniu from 'gulp-qniu';
-
 import uglify from 'gulp-uglify';
 import gulptool from './tool.babel';
 
@@ -29,7 +29,8 @@ const qiniu_options = {
  */
 gulp.task('publish-scripts', function () {
     return gulp.src(['./assets/production/scripts/**/*'])
-                .pipe(qniu({
+               .pipe(plumber())
+               .pipe(qniu({
                     qiniu: qiniu_options,
                     baseDir: 'production'
                 }));
@@ -40,6 +41,7 @@ gulp.task('publish-scripts', function () {
  */
 gulp.task('publish-font-img', function () {
     return gulp.src(['./assets/production/images/**/**/*', './assets/production/font/**/**/*'])
+                .pipe(plumber())
                 .pipe(qniu({
                     qiniu: qiniu_options,
                     baseDir: 'production'
@@ -51,6 +53,7 @@ gulp.task('publish-font-img', function () {
  */
 gulp.task('publish-styles', function () {
     return gulp.src(['./assets/production/styles/**/*'])
+                .pipe(plumber())
                 .pipe(qniu({
                     qiniu: qiniu_options,
                     baseDir: 'production'
@@ -62,6 +65,7 @@ gulp.task('publish-styles', function () {
  */
 gulp.task('publish-libs', function () {
     return gulp.src(['./assets/production/libs/**/**/**/*'])
+                .pipe(plumber())
                 .pipe(qniu({
                     qiniu: qiniu_options,
                     baseDir: 'production'

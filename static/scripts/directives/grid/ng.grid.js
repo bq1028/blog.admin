@@ -6,7 +6,7 @@
 /** 
  * 列配置（数组）
  * columns:
- * value: 'value'
+ * field: 'field'
  * title: '例子'
  * width: '20%'
  * sortable: true
@@ -30,11 +30,19 @@
  * sequenceAlign: 'left'
  * sortState: 'asc' | 'desc'
  * sortable: true
- * dataFilter: function () {}
+ * filter: function (res) {}
  */ 
 
 define(['../directives', 'text!./ng.grid.html'], function (directives, template) {
     'use strict';
+
+    var addListState = function (list) {
+        for (var i = 0, len = list.length; i < len; i ++) {
+            list[i].state = 'view';
+        }
+
+        return list;
+    };
 
     directives.directive('grid', ['$http', function ($http) {
         return {
@@ -42,48 +50,62 @@ define(['../directives', 'text!./ng.grid.html'], function (directives, template)
             scope: {
                 columns: '=',
                 options: '=',
-                source: '='            
+                list: '=',
+                remote: '='          
             },
             template: template,
             replace: true,
-            link: function (scope, ele, attrs) {
-                var source = scope.source;
-                var remote = typeof source === 'string';
+            link: function ($scope, ele, attrs) {
+                $scope.list = $scope.list || [];
+                $scope.list = addListState($scope.list);
 
-                scope.isLoading = false;
+                $scope.isLoading = false;
 
-                scope.getSource = function () {
-                    scope.params = {};
-
-                    scope.isLoading = true;
+                /**
+                 * 权限需登录
+                 * @returns none
+                 */                
+                $scope.getList = function () {
+                    $scope.params = {};
+                    $scope.isLoading = true;
 
                     $http({
                         url: source,
                         method: 'get',
-                        data: scope.params,
+                        data: $scope.params,
                         success: function (res) {
-                            scope.source = scope.options.dataFilter(res);
-                            scope.isLoading = false;
+                            var list = res;
+
+                            if ($scope.options.filter) {
+                                list = $scope.options.filter(list);
+                            }
+
+                            $scope.list = list;
+                            $scope.isLoading = false;
                         },
                         error: function (res) {
-                            scope.isLoading = false;  
+                            $scope.isLoading = false;  
                         }
                     });
                 };
 
-                scope.sortBy = function (column) {
-
+                /**
+                 * 排序
+                 * @params { object } 列对象
+                 * @returns none
+                 */
+                $scope.sortBy = function (column) {
                     if(column === 'sequence') {
-                        scope.source.reverse();
-                        scope.options.sortState = scope.options.sortState === 'asc' ? 'desc' : 'asc';
+                        $scope.source.reverse();
+                        $scope.options.sortstate = $scope.options.sortstate === 'asc' ? 'desc' : 'asc';
                     } else {
-                        var key = column.value;
-                        var state = column.sortState = column.sortState === 'asc' ? 'desc' : 'asc';
+                        var key = column.field;
+                        var state = column.sortstate = column.sortstate === 'asc' ? 'desc' : 'asc';
 
-                        if(remote) {
-                            scope.getSource();
+                        if($scope.remote) {
+                            $scope.getList();
                         } else {
-                            scope.source.sort(function (v1, v2) {
+                            $scope.list.sort(function (v1, v2) {
                                 var result;
 
                                 if( state === 'asc' ) {
@@ -96,6 +118,15 @@ define(['../directives', 'text!./ng.grid.html'], function (directives, template)
                             });
                         }
                     }
+                };
+
+                /**
+                 * 处理打开关闭
+                 * @params { object } 列对象
+                 * @returns none
+                 */
+                $scope.handleToggle = function () {
+
                 };
             }
         };

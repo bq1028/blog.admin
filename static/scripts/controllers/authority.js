@@ -5,61 +5,92 @@
 
 define(['./controllers'], function (controllers) {
     'use strict';
-    controllers.controller('authorityCtrl', ['$scope', function ($scope) {
-        $scope.grid = {
-            columns: [{
-                value: 'v1',
-                title: '例子',
-                sort: true,
-                editable: true,
-                width: '30%',
-                validate: 'mobile',
-                align: 'left',
-                editableType: 'textbox'
-            }, {
-                value: 'v2',
-                title: '例子',
-                sort: true,
-                editable: true,
-                width: '30%',
-                validate: 'mobile',
-                align: 'left',
-                editableType: 'textbox'
-            }, {
-                value: 'v3',
-                title: '例子',
-                sort: true,
-                editable: true,
-                width: '30%',
-                validate: 'mobile',
-                align: 'left',
-                editableType: 'select'
-            }],
-            options: {
-                striped: true, 
-                bordered: true,
-                sequence: true,
-                sequenceWidth: '10%', 
-                sequenceAlign: 'left',
-                sort: true            
-            },
-            source: [{ 
-                v1: '1990', 
-                v2: '2016', 
-                v3: '2020' 
-            }]
-        };           
+    controllers.controller('authorityCtrl', ['$scope', '$injector', function ($scope, $injector) {
+        var locals = {
+            model: this
+        };
+
+        $injector.invoke(authorityModel, this, {});
+        $injector.invoke(authorityConfig, $scope, {});   
+        $injector.invoke(authorityCtrl, $scope, locals);        
     }]);
 
-    var ctrl = function () {
+    // 模型
+    var authorityModel = [function () {
+        this.list = [{ 
+            name: '战术巡洋舰', 
+            description: '攻击型，战术核武器', 
+            type: '雷神类型',
+            code: '1900'
+        }];
 
-    };
+        this.tab = 'role';
+    }];
 
-    var model = function () {
+    // 控制器
+    var authorityCtrl = ['model', function (model) {
+        this.$watch('model.list', function () {
+            
+        });
 
-    };
+        this.handleSwtichTab = function (tab) {
+            model.tab = tab;
+        };
+    }];
 
-    var config = function () {
+    // 配置
+    var authorityConfig = [function () {
+        this.columns = [{
+            field: 'name',
+            title: '权限名称',
+            sortable: true,
+            sortstate: 'asc',
+            editable: true,
+            width: '20%',
+            validate: 'mobile',
+            align: 'left',
+            editabletype: 'textbox'
+        }, {
+            field: 'description',
+            title: '描述',
+            sortable: true,
+            sortstate: 'asc',
+            editable: true,
+            width: '30%',
+            validate: 'mobile',
+            align: 'left',
+            editabletype: 'textbox'
+        }, {
+            field: 'type',
+            title: '类型',
+            sortable: true,
+            sortstate: 'asc',
+            editable: true,
+            width: '20%',
+            validate: 'mobile',
+            align: 'left',
+            editabletype: 'select'
+        }, {
+            field: 'code',
+            title: 'CODE',
+            sortable: true,
+            sortstate: 'asc',
+            editable: true,
+            width: '20%',
+            validate: 'mobile',
+            align: 'left',
+            editabletype: 'select'
+        }];
 
-    };
+        this.options = {
+            striped: true, 
+            bordered: true,
+            sequence: true,
+            sequenceWidth: '10%', 
+            sequenceAlign: 'left',
+            sortable: true
+        };
+
+        this.remote = false;
+    }];
 });

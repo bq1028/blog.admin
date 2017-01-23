@@ -13,14 +13,14 @@
                 <th ng-if="options.sequence">
                     <span>#</span>
                     <i class="glyphicon"
-                       ng-class="{'glyphicon-menu-down': options.sortState === 'asc', 'glyphicon-menu-up': options.sortState === 'desc'}"
+                       ng-class="{'glyphicon-menu-down': options.sortstate === 'asc', 'glyphicon-menu-up': options.sortstate === 'desc'}"
                        ng-if="options.sortable"
                        ng-click="sortBy('sequence')"></i>
                 </th>
                 <th ng-repeat="column in columns track by $index">
                     <span>{{ column.title }}</span>
                     <i class="glyphicon"
-                       ng-class="{'glyphicon-menu-down': column.sortState === 'asc', 'glyphicon-menu-up': column.sortState === 'desc'}"
+                       ng-class="{'glyphicon-menu-down': column.sortstate === 'asc', 'glyphicon-menu-up': column.sortstate === 'desc'}"
                        ng-click="sortBy(column)"
                        ng-if="column.sortable">
                     </i>
@@ -28,32 +28,39 @@
             </tr>
         </thead>
     </table>
-    <table class="table ui-grid-body"
-           ng-class="{ 'table-striped': options.striped, 'table-bordered': options.bordered }"
-           ng-if="!isLoading && source.length !== 0">
-        <colgroup>
-            <col align="{{ options.sequenceAlign }}" 
-                 width="{{ options.sequenceWidth }}"/>
-            <col ng-repeat="column in columns track by $index" 
-                 align="{{ column.align }}" 
-                 width="{{ column.width }}" />     
-        </colgroup>           
-        <tbody>
-            <tr ng-repeat="row in source track by $index">
-                <td scope="row"
-                    ng-if="options.sequence">
-                    <span>{{ $index + 1 }}</span>
-                </td>
-                <td ng-repeat="column in columns track by $index">
-                    <span ng-if="!column.editable">{{ row[column.value] }}</span>
-                    <textbox ng-if="column.editable && editableType === 'textbox'" 
-                             value="row[column.value]" 
-                             validate="column.validate"></textbox>
-                    <select ng-if="column.editable && editableType === 'select'" 
-                            value="row[column.value]" 
-                            validate="column.validate"></select>
-                </td>
-            </tr>                  
-        </tbody>
-    </table>
+    <div class="table-content-wrapper">
+        <table class="table ui-grid-body"
+               ng-class="{ 'table-striped': options.striped, 'table-bordered': options.bordered }"
+               ng-if="!isLoading && source.length !== 0">
+            <colgroup>
+                <col align="{{ options.sequenceAlign }}" 
+                     width="{{ options.sequenceWidth }}"/>
+                <col ng-repeat="column in columns track by $index" 
+                     align="{{ column.align }}" 
+                     width="{{ column.width }}" />     
+            </colgroup>           
+            <tbody>
+                <tr ng-repeat="row in list track by $index">
+                    <td scope="row"
+                        ng-if="options.sequence">
+                        <span>{{ $index + 1 }}</span>
+                    </td>
+                    <td ng-repeat="column in columns track by $index">
+                        <span ng-if="row.state === 'view'">{{ row[column.field] }}</span>
+                        <textbox ng-if="row.state === 'edit' && editabletype === 'textbox'" 
+                                 value="row[column.field]" 
+                                 validate="column.validate"></textbox>
+                        <select ng-if="row.state === 'edit' && editabletype === 'select'" 
+                                value="row[column.field]" 
+                                validate="column.validate"></select>
+                        <i class="glyphicon"
+                           ng-class="{'glyphicon-pencil': row.state === 'view', 'glyphicon-ok-circle': row.state === 'edit'}"
+                           ng-click="handleToggle(column)"
+                           ng-if="column.editable">
+                        </i>
+                    </td>
+                </tr>                  
+            </tbody>
+        </table>
+    </div>
 </div>
