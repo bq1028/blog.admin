@@ -17,7 +17,7 @@ var message = sequelize.define('message', {
         allowNull: false,
         unique: false        
     },
-    user_id: {
+    userId: {
         type: Sequelize.INTEGER,
 
         references: {
