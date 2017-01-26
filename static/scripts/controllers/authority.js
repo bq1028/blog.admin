@@ -10,13 +10,13 @@ define(['./controllers'], function (controllers) {
             model: this
         };
 
-        $injector.invoke(authorityModel, this, {});
-        $injector.invoke(authorityConfig, $scope, {});   
-        $injector.invoke(authorityCtrl, $scope, locals);        
+        $injector.invoke(model, this, {});
+        $injector.invoke(config, $scope, {});   
+        $injector.invoke(ctrl, $scope, locals);        
     }]);
 
     // 模型
-    var authorityModel = [function () {
+    var model = [function () {
         this.list = [{ 
             name: '战术巡洋舰', 
             description: '攻击型，战术核武器', 
@@ -28,7 +28,7 @@ define(['./controllers'], function (controllers) {
     }];
 
     // 控制器
-    var authorityCtrl = ['model', function (model) {
+    var ctrl = ['model', function (model) {
         this.$watch('model.list', function () {
             
         });
@@ -39,7 +39,7 @@ define(['./controllers'], function (controllers) {
     }];
 
     // 配置
-    var authorityConfig = [function () {
+    var config = [function () {
         this.columns = [{
             field: 'name',
             title: '权限名称',

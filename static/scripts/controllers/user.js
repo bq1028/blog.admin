@@ -5,7 +5,15 @@
 
 define(['./controllers'], function (controllers) {
     'use strict';
-    controllers.controller('userCtrl', ['$scope', function ($scope) {
+    controllers.controller('userCtrl', ['$scope', '$injector', function ($scope, $injector) {
+        var locals = {
+            model: this
+        };
+
+        $injector.invoke(model, this, {});
+        $injector.invoke(config, $scope, {});   
+        $injector.invoke(ctrl, $scope, locals);   
+
         $scope.grid = {
             columns: [{
                 value: 'v1',
@@ -130,4 +138,16 @@ define(['./controllers'], function (controllers) {
             }]
         };        
     }]);
+
+    var model = [function () {
+
+    }];
+
+    var config = [function () {
+
+    }];
+
+    var ctrl = [function () {
+
+    }];        
 });
