@@ -5,7 +5,7 @@
 
 define(['./controllers'], function (controllers) {
     'use strict';
-    controllers.controller('journalCtrl', ['$scope', function ($scope) {
+    controllers.controller('journalCtrl', ['$scope', '$injector', function ($scope, $injector) {
         $scope.grid = {
             columns: [{
                 value: 'v1',
