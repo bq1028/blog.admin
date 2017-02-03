@@ -17,7 +17,7 @@
  * editableType 'select' | 'textbox'
  * align: 'left'
  * validate: function () {} | 'mobile'
- * type: 'radio | checkbox'
+ * type: 'radio' | 'checkbox'
  * sortState: 'asc' | 'desc'
  */
 
@@ -36,14 +36,6 @@
 define(['../directives', 'text!./ng.grid.html'], function (directives, template) {
     'use strict';
 
-    var addListState = function (list) {
-        for (var i = 0, len = list.length; i < len; i ++) {
-            list[i].state = 'view';
-        }
-
-        return list;
-    };
-
     directives.directive('grid', ['$http', function ($http) {
         return {
             restrict: 'E',
@@ -57,7 +49,6 @@ define(['../directives', 'text!./ng.grid.html'], function (directives, template)
             replace: true,
             link: function ($scope, ele, attrs) {
                 $scope.list = $scope.list || [];
-                $scope.list = addListState($scope.list);
 
                 $scope.isLoading = false;
 
@@ -70,9 +61,9 @@ define(['../directives', 'text!./ng.grid.html'], function (directives, template)
                     $scope.isLoading = true;
 
                     $http({
-                        url: source,
+                        url: $scope.remote.url,
                         method: 'get',
-                        data: $scope.params,
+                        data: $scope.remote.params,
                         success: function (res) {
                             var list = res;
 
@@ -126,7 +117,7 @@ define(['../directives', 'text!./ng.grid.html'], function (directives, template)
                  * @returns none
                  */
                 $scope.handleToggle = function () {
-
+                    
                 };
             }
         };

@@ -3,21 +3,20 @@
  * @author Philip
  */
 
-define(
-    ['text!./views/index.html',
+define(['text!./views/index.html',
      'text!./views/journal.html',
      'text!./views/user.html',
      'text!./views/content.html',
      'text!./views/authority.html'], 
-    function () {
+    function (indexView, journalView, userView, contentView, authorityView) {
     'use strict';
 
     var templates = {
-        index: arguments[0],
-        journal: arguments[1],
-        user: arguments[2],
-        content: arguments[3],
-        authority: arguments[4]
+        index: indexView,
+        journal: journalView,
+        user: userView,
+        content: contentView,
+        authority: authorityView
     };
 
     return templates;

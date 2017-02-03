@@ -47,10 +47,10 @@
                     </td>
                     <td ng-repeat="column in columns track by $index">
                         <span ng-if="row.state === 'view'">{{ row[column.field] }}</span>
-                        <textbox ng-if="row.state === 'edit' && editabletype === 'textbox'" 
+                        <textbox ng-if="row.state === 'edit' && column.editabletype === 'textbox'" 
                                  value="row[column.field]" 
                                  validate="column.validate"></textbox>
-                        <select ng-if="row.state === 'edit' && editabletype === 'select'" 
+                        <select ng-if="row.state === 'edit' && column.editabletype === 'select'" 
                                 value="row[column.field]" 
                                 validate="column.validate"></select>
                         <i class="glyphicon"
