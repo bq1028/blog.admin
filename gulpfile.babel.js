@@ -1,9 +1,9 @@
 'use strict';
 
-import build from './automation/build.babel';
-import publish from './automation/publish.babel';
-import watch from './automation/watch.babel';
-import test from './automation/test.babel';
+import build from './gulp/build.babel';
+import publish from './gulp/publish.babel';
+import watch from './gulp/watch.babel';
+import test from './gulp/test.babel';
 
 
 
