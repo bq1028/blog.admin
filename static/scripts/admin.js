@@ -5,10 +5,10 @@
 
 require.config({
     paths: {
-        'text': './libs/requirejs/text',
-        'domReady': './libs/requirejs/domReady',
-        'angular': './libs/angular/angular.min',
-        'angular-route': './libs/angular-route/angular-route.min'
+        'text': '../libs/requirejs/text',
+        'domReady': '../libs/requirejs/domReady',
+        'angular': '../libs/angular/angular.min',
+        'angular-route': '../libs/angular-route/angular-route.min'
     },
     shim: {
         'angular': {

@@ -97,10 +97,10 @@ gulp.task('compile-scripts', function (cb) {
                    .pipe(amdOptimize(filename.replace('.js', ''), {
                         baseUrl: '',
                         paths: {
-                            'text': './libs/requirejs/text',
-                            'domReady': './libs/requirejs/domReady',
-                            'angular': './libs/angular/angular.min',
-                            'angular-route': './libs/angular-route/angular-route.min'                                
+                            'text': 'static/libs/requirejs/text',
+                            'domReady': 'static/libs/requirejs/domReady',
+                            'angular': 'static/libs/angular/angular.min',
+                            'angular-route': 'static/libs/angular-route/angular-route.min'                                
                         },
                         shim: {
                             'angular': {
