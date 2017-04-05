@@ -11,10 +11,10 @@ var path = require('path');
 var parse = require('co-busboy');
 var os = require('os');
 
-exports.login = function * () {
-    var _this = this;
+exports.login = async function (ctx) {
+    var _this = ctx;
 
-    yield * passport.authenticate("local", function * (err, user, info) {
+    await passport.authenticate("local", async function (err, user, info) {
         if (err) {
             throw err;
         }
@@ -26,22 +26,22 @@ exports.login = function * () {
                 msg: info
             };
         } else {
-            yield _this.login(user.dataValues);
+            await _this.login(user.dataValues);
 
             _this.body = {
                 user: user
             };
         }
 
-    }).call(this);
+    }).call(ctx);
 };
 
-exports.logout = function * () {
+exports.logout = async function () {
     this.session = null;
     this.status = 204;
 };
 
-exports.getCurrentUser = function * () {
+exports.getCurrentUser = async function () {
     if (this.passport.user) {
         this.body = {
             user: this.passport.user
@@ -51,14 +51,14 @@ exports.getCurrentUser = function * () {
     this.status = 200;
 };
 
-exports.upload = function * (next) {
+exports.upload = async function (next) {
     var parts = parse(this);
     var part;
 
     var params = [];
     var name, ext, type, url;
 
-    while (part = yield parts) {
+    while (part = await parts) {
         if(part.pipe) {
             var _path = path.resolve('resources/' + name);
             var stream = fs.createWriteStream(_path);
@@ -80,7 +80,7 @@ exports.upload = function * (next) {
         }
     }
 
-    var file = yield fileModel.create({
+    var file = await fileModel.create({
         name: name,
         type: type,
         ext: ext,
@@ -96,8 +96,8 @@ exports.upload = function * (next) {
     };
 };
 
-exports.upload_remove = function * () {
-    var file = yield fileModel.destroy({
+exports.upload_remove = async function () {
+    var file = await fileModel.destroy({
         where: {
             id: this.params.id
         }

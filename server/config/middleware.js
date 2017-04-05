@@ -37,18 +37,17 @@ module.exports = function(app, config, passport) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(function * (next) {
-        var viewsBase = process.env.ENV === 'production' ? '/_views': '/views';
+    app.use(async (ctx, next) => {
         var memory = config.app.env === "development" ? "memory": false;
 
-        this.render = views(config.app.root.replace('server','') + "/views", {
+        ctx.render = views(config.app.root.replace('server', '') + "/views", {
             map: {
                 html: "swig"
             },
             cache: memory
         });
 
-        yield next;
+        await next();
     });   
 
     app.use(compress());

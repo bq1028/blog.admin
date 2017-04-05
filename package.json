@@ -85,7 +85,7 @@
         "koa-error": "latest",
         "koa-generic-session": "latest",
         "koa-response-time": "latest",
-        "koa-router": "5.x",
+        "koa-router": "latest",
         "koa-static-cache": "latest",       
         "passport-local": "latest", 
         "swig": "latest",

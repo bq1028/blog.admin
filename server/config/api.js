@@ -14,9 +14,9 @@ var journal = require('../models/schemas/journal');
  * 权限需登录
  * @returns none
  */
-var secured = function * (next) {
+var secured = async function (next) {
     if (this.isAuthenticated()) {
-        yield next;
+        await next;
     } else {
         this.status = 403;
     }
@@ -26,20 +26,20 @@ var secured = function * (next) {
  * 权限无需登录
  * @returns none
  */
-var unsecured = function * (next) {
+var unsecured = async function (next) {
     if (!this.isAuthenticated()) {
-        yield next;
+        await next;
     } else {
         this.status = 404;
     }
 };
 
-module.exports = function (app, passport) { 
+module.exports = async function (app, passport) { 
     var api = new Router();
 
-    api.use(function * (next) {
+    api.use(async function (next) {
         this.type = "json";
-        yield next;
+        await next;
     }); 
 
     api.get("/logout", secured, common.logout);

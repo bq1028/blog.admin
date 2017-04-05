@@ -4,17 +4,17 @@ var Router = require("koa-router");
 var index = require("../controllers/routes/index");
 var login = require("../controllers/routes/login");
 
-var secured = function * (next) {
+var secured = async function (next) {
     if (this.isAuthenticated()) {
-        yield next;
+        await next;
     } else {
         this.redirect('/login');
     }
 };
 
-var unsecured = function * (next) {
+var unsecured = async function (next) {
     if (!this.isAuthenticated()) {
-        yield next;
+        await next;
     } else {
         this.redirect('/');
     }
@@ -23,22 +23,22 @@ var unsecured = function * (next) {
 module.exports = function (app, passport) {
     var router = new Router();
 
-    router.get("/", secured, function *() {
+    router.get("/", secured, async function () {
         this.type = "html";
-        yield index.apply(this);
+        await index.apply(this);
     });
     
-    router.get(["/journal", "/user", "/content", "/authority"], secured, function *() {
+    router.get(["/journal", "/user", "/content", "/authority"], secured, async function () {
         this.type = "html";
-        yield index.apply(this);
+        await index.apply(this);
     });
 
-    router.get("/login", unsecured, function *() {
+    router.get("/login", unsecured, async function () {
         this.type = "html";
-        yield login.apply(this);
+        await login.apply(this);
     });
 
-    router.get("/logout", secured, function *() {
+    router.get("/logout", secured, async function () {
         this.session = null;
         this.redirect('/login');
     });    

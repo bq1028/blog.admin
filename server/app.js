@@ -5,7 +5,7 @@
 
 'use strict';
 
-const koa = require('koa');
+const Koa = require('koa');
 const logger = require('koa-logger');
 const koaPassport = require('koa-passport');
 
@@ -19,7 +19,7 @@ const db = require('./models/db');
 const passport = require('./config/passport');
 const middleware = require('./config/middleware');
 
-var app = koa();
+var app = new Koa();
 
 // Logger
 app.use(logger());
