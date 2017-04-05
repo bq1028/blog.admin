@@ -375,13 +375,13 @@ gulp.task('sync-hash', function(cb) {
                 contents = contents.replace(new RegExp(originReg, 'g'), manifest[origin]);
             }
 
-            var defer = Promise.defer();
-
-            fs.writeFile(vinyl.path, contents, {}, function() {
-                defer.resolve();
+            var promise = new Promise(function(resolve, reject) {
+                fs.writeFile(vinyl.path, contents, {}, function() {
+                    resolve();
+                });
             });
 
-            promiseArr.push(defer);
+            promiseArr.push(promise);
             
             return true;
         }));
@@ -400,13 +400,13 @@ gulp.task('sync-hash', function(cb) {
                 contents = contents.replace(new RegExp(originReg, 'g'), manifest[origin]);
             }
 
-            var defer = Promise.defer();
-
-            fs.writeFile(vinyl.path, contents, {}, function() {
-                defer.resolve();
+            var promise = new Promise(function(resolve, reject) {
+                fs.writeFile(vinyl.path, contents, {}, function() {
+                    resolve();
+                });
             });
 
-            promiseArr.push(defer);
+            promiseArr.push(promise);
 
             return true;
         }));
@@ -425,13 +425,13 @@ gulp.task('sync-hash', function(cb) {
                 contents = contents.replace(new RegExp(originReg, 'g'), manifest[origin]);
             }
 
-            var defer = Promise.defer();
-
-            fs.writeFile(vinyl.path, contents, {}, function() {
-                defer.resolve();
+            var promise = new Promise(function(resolve, reject) {
+                fs.writeFile(vinyl.path, contents, {}, function() {
+                    resolve();
+                });
             });
 
-            promiseArr.push(defer);
+            promiseArr.push(promise);
 
             return true;
         }));        
