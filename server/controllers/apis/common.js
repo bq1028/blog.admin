@@ -12,28 +12,37 @@ var parse = require('co-busboy');
 var os = require('os');
 
 exports.login = async function (ctx) {
-    var _this = ctx;
+    let _ctx = this;
 
-    await passport.authenticate("local", async function (err, user, info) {
+    let passportAuthenticate = passport.authenticate("local", function (err, user, info) {
         if (err) {
             throw err;
         }
 
         if (!user) {
-            _this.status = 401;
+            _ctx.status = 401;
 
-            _this.body = {
+            _ctx.body = {
                 msg: info
             };
         } else {
-            await _this.login(user.dataValues);
+            var password = _ctx.request.body.password;
 
-            _this.body = {
-                user: user
-            };
+            if (user.password === password) {
+                _ctx.login(user.dataValues);
+                _ctx.body = user;
+            } else {
+                _ctx.status = 401;
+
+                _ctx.body = {
+                    msg: '用户名和密码不匹配'
+                };                
+            }
         }
 
-    }).call(ctx);
+    });
+
+    await passportAuthenticate(this);
 };
 
 exports.logout = async function () {

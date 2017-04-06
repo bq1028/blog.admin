@@ -30,7 +30,11 @@ var unsecured = async function (next) {
     if (!this.isAuthenticated()) {
         await next;
     } else {
-        this.status = 404;
+        this.status = 403;
+        
+        this.body = {
+            msg: '当前用户已授权'
+        };
     }
 };
 

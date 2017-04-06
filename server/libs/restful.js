@@ -23,7 +23,7 @@ var Restful = function (model, include) {
      * 代理函数
      * @returns none
      */
-    this.proxy = function *() {
+    this.proxy = async function () {
         var context = this;
 
         var REQ = context.request;
@@ -41,16 +41,16 @@ var Restful = function (model, include) {
 
         switch(REQ.method) {
             case 'GET':
-                yield restful.get(params, context);
+                await restful.get(params, context);
                 break;
             case 'POST':
-                yield restful.post(params, context);
+                await restful.post(params, context);
                 break;
             case 'PUT':
-                yield restful.put(params, context);
+                await restful.put(params, context);
                 break;
             case 'DELETE':
-                yield restful.delete(params, context);
+                await restful.delete(params, context);
                 break;
             default:
                 this.body = 'method is not supported';
@@ -124,7 +124,7 @@ Restful.api = api;
  * @params { Function } 权限机制 
  * @returns none
  */
-Restful.prototype.get = function *(params, context) {
+Restful.prototype.get = async function (params, context) {
     var _model;
     
     var query = {
@@ -154,7 +154,7 @@ Restful.prototype.get = function *(params, context) {
     }
 
     try {
-        _model = yield this.model.findAll(query);
+        _model = await this.model.findAll(query);
     } catch (e) {
         context.throw(e.status || 500, e.message);
     }
@@ -178,16 +178,16 @@ Restful.prototype.get = function *(params, context) {
  * @params { Function } 权限机制 
  * @returns none
  */
-Restful.prototype.post = function *(params, context) {
+Restful.prototype.post = async function (params, context) {
     if(!_.isEmpty(params)) {
         var _model;
 
         try {
             if(this.include.create && typeof this.include.create === 'function') {
                 var association = this.include.create(params.data);
-                _model = yield this.model.create(params.data).then(association);
+                _model = await this.model.create(params.data).then(association);
             } else {
-                _model = yield this.model.create(params.data);
+                _model = await this.model.create(params.data);
             }
         } catch (e) {
             context.throw(e.status || 500, e.message);
@@ -211,7 +211,7 @@ Restful.prototype.post = function *(params, context) {
  * @params { Function } 权限机制 
  * @returns none
  */
-Restful.prototype.put = function *(params, context) {
+Restful.prototype.put = async function (params, context) {
     if(!_.isEmpty(params) && params.id) {
         var _model;
 
@@ -226,7 +226,7 @@ Restful.prototype.put = function *(params, context) {
         query.fields = fields;
 
         try {
-            _model = yield this.model.update(params.data, { where: {id: params.id}, fields: fields});
+            _model = await this.model.update(params.data, { where: {id: params.id}, fields: fields});
         } catch (e) {
             context.throw(e.status || 500, e.message);
         }
@@ -241,7 +241,7 @@ Restful.prototype.put = function *(params, context) {
                 var self = this;
                 var update = this.include.update;
 
-                context.body = yield this.model.find(query).then(function(item) {
+                context.body = await this.model.find(query).then(function (item) {
                     if(update) {
                         var arr = [];
 
@@ -280,7 +280,7 @@ Restful.prototype.put = function *(params, context) {
  * @params { Function } 权限机制 
  * @returns none
  */
-Restful.prototype.delete = function *(params, context) {
+Restful.prototype.delete = async function (params, context) {
     var _model, query = {};
 
     if(params && params.id) {
@@ -294,7 +294,7 @@ Restful.prototype.delete = function *(params, context) {
             var update = this.include.update;
 
             if(update) {
-                yield this.model.find(query).then(function(item) {
+                await this.model.find(query).then(function(item) {
                     if(update) {
                         var arr = [];
 
@@ -315,7 +315,7 @@ Restful.prototype.delete = function *(params, context) {
                 });
             }
 
-            _model = yield this.model.destroy(query);
+            _model = await this.model.destroy(query);
         } catch (e) {
             context.throw(e.status || 500, e.message);
         }
@@ -349,17 +349,13 @@ Restful.prototype.include = function (next) {
  * trace
  * @returns none
  */
-Restful.prototype.trace = function (next) {
-    this.body = 'you can\'t trace.';
-};
+Restful.prototype.trace = function (next) { this.body = 'you can\'t trace.';};
 
 /**
  * head
  * @returns none
  */
-Restful.prototype.head = function (next) {
-    return;
-};
+Restful.prototype.head = function (next) { return; };
 
 /**
  * 连接者
