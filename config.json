@@ -1,11 +1,24 @@
 {
-    "styles": {
+    "develop": {
+        "source": "./static",
+        "dest": "./src/main/webapp/static/develop"
+    },
+    "production": {
+        "source": "./src/main/webapp/static/develop",
+        "dest": "./src/main/webapp/static/production"
+    },
+    "DEVELOP": "develop",
+    "PRODUCTION": "production",
+    "css": {
         "state": "develop"
     },
     "images": {
         "state": "develop"
     },
-    "scripts": {
+    "js": {
+        "state": "develop"
+    },
+    "libs": {
         "state": "develop"
     }
 }
