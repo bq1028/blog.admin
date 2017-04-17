@@ -1,11 +1,11 @@
 {
     "develop": {
         "source": "./static",
-        "dest": "./src/main/webapp/static/develop"
+        "dest": "./assets/develop"
     },
     "production": {
-        "source": "./src/main/webapp/static/develop",
-        "dest": "./src/main/webapp/static/production"
+        "source": "./assets/develop",
+        "dest": "./assets/production"
     },
     "DEVELOP": "develop",
     "PRODUCTION": "production",
@@ -13,7 +13,7 @@
         "state": "develop"
     },
     "images": {
-        "state": "develop"
+        "state": "published"
     },
     "js": {
         "state": "develop"
