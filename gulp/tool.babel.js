@@ -11,7 +11,7 @@ import fs from 'fs';
 
 var gulptool = {};
 
-function transformFilename(file) {
+function transformFilename (file) {
     return revHash(file.contents);
 }
 
