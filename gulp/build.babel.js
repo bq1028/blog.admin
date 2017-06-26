@@ -43,13 +43,13 @@ gulp.task('compile-styles', function (cb) {
         if(config.styles.entry) {
             entry = config.styles.entry;
         } else {
-            entry = './static/styles/admin.less';
+            entry = './static/less/admin.less';
         }
 
         if(config.styles.output) {
             output = config.styles.output;
         } else {
-            output = './assets/develop/styles/';
+            output = './assets/develop/css/';
         }
 
         var entryArr = entry.split('/');
@@ -57,6 +57,8 @@ gulp.task('compile-styles', function (cb) {
 
         filename[1] = 'css';
         filename = filename.join('.');
+
+        console.log(entry, output)
 
         return gulp.src(entry) 
                     .pipe(plumber())
@@ -89,7 +91,7 @@ gulp.task('compile-scripts', function (cb) {
         if(config.scripts.output) {
             output = config.scripts.output;
         } else {
-            output = './assets/develop/scripts/';
+            output = './assets/develop/js/';
         }
 
         return gulp.src(src)
@@ -166,18 +168,18 @@ gulp.task('compress-styles', function (cb) {
 
         // 需要自动合并雪碧图的样式文件
         var spriteData = gulp.src(styleSrc)
-                             .pipe(plumber())
-                             .pipe(spriter({
-                                baseUrl: '../../images/slice',
-                                spriteSheetPath: '../../images/slice',
-                                spriteSheetName: 'sprite.png'
-                             }));
+                                         .pipe(plumber())
+                                         .pipe(spriter({
+                                            baseUrl: '../../images/slice',
+                                            spriteSheetPath: '../../images/slice',
+                                            spriteSheetName: 'sprite.png'
+                                         }));
 
         // 压缩图片
         var spriteStream = spriteData.img
-                                     .pipe(plumber())
-                                     .pipe(imagemin())
-                                     .pipe(gulp.dest(imgDest));
+                                                       .pipe(plumber())
+                                                       .pipe(imagemin())
+                                                       .pipe(gulp.dest(imgDest));
 
         // 压缩css
         var cssStream = spriteData.css

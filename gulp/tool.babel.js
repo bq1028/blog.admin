@@ -108,7 +108,7 @@ gulptool.entries = function (globPath) {
  * @return {object} 配置对象
  */
 gulptool.readConfig = function () {
-    return JSON.parse(fs.readFileSync('./config.json'));
+    return JSON.parse(fs.readFileSync('./build-config.json'));
 };
 
 /*
@@ -120,7 +120,7 @@ gulptool.readConfig = function () {
 gulptool.writeConfig = function (data, callback) {
     var str = JSON.stringify(data, null, 4);
 
-    return fs.writeFile('./config.json', str, {}, callback);
+    return fs.writeFile('./build-config.json', str, {}, callback);
 };
 
 /*

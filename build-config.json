@@ -9,13 +9,13 @@
     },
     "DEVELOP": "develop",
     "PRODUCTION": "production",
-    "css": {
+    "styles": {
         "state": "develop"
     },
     "images": {
-        "state": "published"
+        "state": "develop"
     },
-    "js": {
+    "scripts": {
         "state": "develop"
     },
     "libs": {
