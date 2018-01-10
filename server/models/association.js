@@ -13,51 +13,51 @@ var attachment = require('./schemas/attachment');
 var roleAuth = require('./schemas/role-authority');
 
 module.exports.init = function() {
-    authority.belongsToMany(role, { 
-        through: roleAuth, 
-        foreignKey: 'roleId', 
-        as: 'roles'
-    });
+  authority.belongsToMany(role, { 
+    through: roleAuth, 
+    foreignKey: 'roleId', 
+    as: 'roles'
+  });
 
-    role.belongsToMany(authority, { 
-        through: roleAuth, 
-        foreignKey: 'authId', 
-        as: 'auths' 
-    });
+  role.belongsToMany(authority, { 
+    through: roleAuth, 
+    foreignKey: 'authId', 
+    as: 'auths'
+  });
 
-    user.belongsTo(role, {
-        foreignKey: 'roleId',
-        constraints: false,
-        as: 'role'  
-    });
+  user.belongsTo(role, {
+    foreignKey: 'roleId',
+    constraints: false,
+    as: 'role'
+  });
 
-    journal.belongsTo(user, {
-        foreignKey: 'roleId',
-        constraints: false,
-        as: 'role'              
-    });
+  journal.belongsTo(user, {
+    foreignKey: 'roleId',
+    constraints: false,
+    as: 'role'
+  });
 
-    content.hasMany(attachment, {
-        foreignKey: 'contentId',
-        constraints: false,
-        as: 'attachments'     
-    });    
+  content.hasMany(attachment, {
+    foreignKey: 'contentId',
+    constraints: false,
+    as: 'attachments'
+  });
 
-    content.hasMany(message, {
-        foreignKey: 'contentId',
-        constraints: false,
-        as: 'messages'              
-    });
+  content.hasMany(message, {
+    foreignKey: 'contentId',
+    constraints: false,
+    as: 'messages'
+  });
 
-    attachment.hasOne(file, {
-        foreignKey: 'fileId',
-        constraints: false,
-        as: 'file'   
-    });
+  attachment.hasOne(file, {
+    foreignKey: 'fileId',
+    constraints: false,
+    as: 'file'
+  });
 
-    attachment.belongsTo(user, {
-        foreignKey: 'userId',
-        constraints: false,
-        as: 'owner'   
-    });    
+  attachment.belongsTo(user, {
+    foreignKey: 'userId',
+    constraints: false,
+    as: 'owner'
+  });
 }
