@@ -344,7 +344,6 @@ Restful.prototype.include = function (next) {
     this.body = 'ALLOW: HEAD, GET, PUT, DELETE, OPTIONS';
 };
 
-
 /**
  * trace
  * @returns none
