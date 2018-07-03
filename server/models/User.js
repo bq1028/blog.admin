@@ -3,8 +3,6 @@
  * @author Philip
  */
 
-"use strict";
-
 let Sequelize = require('sequelize');
 let sequelize = require('./../sequelize');
 
