@@ -3,8 +3,6 @@
  * @author Philip
  */
 
-"use strict";
-
 var user = require('./schemas/user');
 var role = require('./schemas/role');
 
