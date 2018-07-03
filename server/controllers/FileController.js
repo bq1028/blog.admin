@@ -126,4 +126,4 @@ class FileController {
 
 }
 
-export default new UsersControllers()
+module.exports = new UsersControllers()
