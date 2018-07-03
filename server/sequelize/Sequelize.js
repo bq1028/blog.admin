@@ -3,8 +3,6 @@
  * @author Philip
  */
 
-'use strict';
-
 var Sequelize = require('sequelize');
 
 var sequelize = new Sequelize('blog', 'root', 'wowcxy2008', {
