@@ -1,16 +1,16 @@
 {
-  "name": "blog-admin",
+  "name": "blog.admin",
   "version": "0.1.1",
   "description": "chenxiangyu, blog, npm settings",
   "main": "server/app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mulberryx/blog.admin.git"
+    "url": "https://github.com/raddeana/blog.admin.git"
   },
   "author": "chenxiangyu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mulberryx/blog.admin/issues",
+    "url": "https://github.com/raddeana/blog.admin/issues",
     "email": "wowcxy2008@126.com"
   },
   "homepage": "mulberryx.tech",
