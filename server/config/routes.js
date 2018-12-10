@@ -2,7 +2,7 @@
  * 路由设置
  * @author Philip
  */
-"use strict";
+"use strict"
 
 const Router = require("koa-router")
 
@@ -29,9 +29,9 @@ module.exports = function (app, passport) {
     let router = new Router();
 
     router.get("/", secured, async function (ctx, next) {
-        ctx.type = "html";
-        await index.apply(ctx);
-    });
+        ctx.type = "html"
+        await index.apply(ctx)
+    })
     
     router.get(["/journal", "/user", "/content", "/authority"], secured, async function (ctx, next) {
         ctx.type = "html"
