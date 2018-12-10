@@ -3,12 +3,13 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-let user = require('./user');
+// models
+const user = require('./user')
 
-let journal = sequelize.define('journal', {
+const journal = sequelize.define('journal', {
     target: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -37,6 +38,6 @@ let journal = sequelize.define('journal', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = journal;
+module.exports = journal
