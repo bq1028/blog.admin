@@ -2,16 +2,17 @@
  * 附件
  * @author Philip
  */
+"use strict"
 
-var Sequelize = require('sequelize');
-var sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var file = require('./file');
-var authority = require('./authority');
-var user = require('./user');
-var content = require('./content');
+const file = require('./file')
+const authority = require('./authority')
+const user = require('./user')
+const content = require('./content')
 
-var attachment = sequelize.define('attachment', {
+const attachment = sequelize.define('attachment', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -64,6 +65,6 @@ var attachment = sequelize.define('attachment', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = attachment;
+module.exports = attachment
