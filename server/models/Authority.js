@@ -3,10 +3,10 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var authority = sequelize.define('authority', {
+const authority = sequelize.define('authority', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -32,6 +32,6 @@ var authority = sequelize.define('authority', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = authority;
+module.exports = authority
