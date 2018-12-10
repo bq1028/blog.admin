@@ -3,10 +3,10 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var role = sequelize.define('role', {
+const role = sequelize.define('role', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -22,7 +22,7 @@ var role = sequelize.define('role', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
 
-module.exports = role;
+module.exports = role
