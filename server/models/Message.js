@@ -3,13 +3,14 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var user = require('./user');
-var content = require('./content');
+// models
+const user = require('./user')
+const content = require('./content')
 
-var message = sequelize.define('message', {
+const message = sequelize.define('message', {
     message: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -36,6 +37,6 @@ var message = sequelize.define('message', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = message;
+module.exports = message
