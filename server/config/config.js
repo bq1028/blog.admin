@@ -1,8 +1,13 @@
-'use strict';
-const path = require('path');
-const _ = require('lodash');
+/**
+ * 服务器配置
+ * @author Philip
+ */
+"use strict"
 
-const env = process.env.ENV = process.argv.pop() || 'development';
+const path = require('path')
+const _ = require('lodash')
+
+const env = process.env.ENV = process.argv.pop() || 'development'
 
 const base = {
     app: {
@@ -33,6 +38,6 @@ const specifics = {
             keys: ['super-secret-blog-keys']
         }
     }
-};
+}
 
-module.exports =  _.merge(base, specifics[env]);
+module.exports =  _.merge(base, specifics[env])
