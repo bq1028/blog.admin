@@ -3,19 +3,19 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize')
-let sequelize = require('./../sequelize')
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var authority = require('./authority')
-var role = require('./role')
+const authority = require('./authority')
+const role = require('./role')
 
-var roleAuth = sequelize.define('roleAuth', {
+const roleAuth = sequelize.define('roleAuth', {
     roleId: {
       type: Sequelize.INTEGER,
 
       references: {
         model: role,
-        key: 'id',
+        key: 'id'
       }
     },
     authorityId: {
@@ -23,14 +23,14 @@ var roleAuth = sequelize.define('roleAuth', {
 
       references: {
         model: authority,
-        key: 'id',
+        key: 'id'
       }
     }    
 }, {
   paranoid: false,
   timestamps: true,
   underscored: true,
-  freezeTableName: true,
-});
+  freezeTableName: true
+})
 
-module.exports = roleAuth;
+module.exports = roleAuth
