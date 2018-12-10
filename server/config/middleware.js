@@ -1,4 +1,10 @@
-"use strict";
+/** 
+ * 中间件
+ * @author Philip
+ */
+
+"use strict"
+
 const path = require("path")
 const serve = require("koa-static")
 const session = require("koa-generic-session")
