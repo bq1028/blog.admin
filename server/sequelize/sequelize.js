@@ -3,7 +3,7 @@
  * @author Philip
  */
 
-var Sequelize = require('sequelize');
+var Sequelize = require('sequelize')
 
 var sequelize = new Sequelize('blog', 'root', 'wowcxy2008', {
   host: '127.0.0.1',
@@ -16,16 +16,16 @@ var sequelize = new Sequelize('blog', 'root', 'wowcxy2008', {
     max: 25,
     min: 0,
     idle: 10000,
-  },
-});
+  }
+})
 
 sequelize
   .authenticate()
   .then(function(err) {
-    console.info('Connection has been established successfully.');
+    console.info('Connection has been established successfully.')
   })
   .catch(function (err) {
-    console.error('Unable to connect to the database:', err);
-  });
+    console.error('Unable to connect to the database:', err)
+  })
 
-module.exports = sequelize;
+module.exports = sequelize
