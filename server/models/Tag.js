@@ -3,30 +3,30 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var tag = sequelize.define('tag', {
+const tag = sequelize.define('tag', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   color: {
     type: Sequelize.STRING,
     allowNull: true,
-    unique: true,
+    unique: true
   },
   description: {
     type: Sequelize.STRING,
     allowNull: true,
-    unique: false,
+    unique: false
   }
 }, {
   paranoid: false,
   timestamps: true,
   underscored: true,
-  freezeTableName: true,
-});
+  freezeTableName: true
+})
 
-module.exports = tag;
+module.exports = tag
