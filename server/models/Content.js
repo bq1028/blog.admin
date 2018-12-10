@@ -3,13 +3,14 @@
  * @author Philip
  */
 
-var Sequelize = require('sequelize');
-var sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var user = require('./user');
-var authority = require('./authority');
+// models
+const user = require('./user')
+const authority = require('./authority')
 
-var content = sequelize.define('content', {
+const content = sequelize.define('content', {
     title: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -41,7 +42,7 @@ var content = sequelize.define('content', {
         references: {
             model: authority,
             key: 'id'
-        }  
+        }
     },
     userId: {
         type: Sequelize.INTEGER,
@@ -49,13 +50,13 @@ var content = sequelize.define('content', {
         references: {
             model: user,
             key: 'id'
-        }    
+        }
     }      
 }, {
     paranoid: false,
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = content;
+module.exports = content
