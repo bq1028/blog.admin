@@ -3,12 +3,13 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var role = require('./role');
+// models
+const role = require('./role')
 
-var user = sequelize.define('user', {
+const user = sequelize.define('user', {
     username: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -51,7 +52,6 @@ var user = sequelize.define('user', {
     },
     roleId: {
         type: Sequelize.INTEGER,
-
         references: {
             model: role,
             key: 'id'
@@ -62,6 +62,6 @@ var user = sequelize.define('user', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = user;
+module.exports = user
