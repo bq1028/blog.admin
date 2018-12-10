@@ -3,12 +3,13 @@
  * @author Philip
  */
 
-let Sequelize = require('sequelize');
-let sequelize = require('./../sequelize');
+const Sequelize = require('sequelize')
+const sequelize = require('./../sequelize')
 
-var user = require('./user');
+// models
+const user = require('./user')
 
-var file = sequelize.define('file', {
+const file = sequelize.define('file', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -42,6 +43,6 @@ var file = sequelize.define('file', {
     timestamps: true,
     underscored: true,
     freezeTableName: true
-});
+})
 
-module.exports = file;
+module.exports = file
