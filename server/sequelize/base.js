@@ -3,8 +3,8 @@
  * @author Philip
  */
 
-var user = require('./schemas/user');
-var role = require('./schemas/role');
+const user = require('./schemas/user')
+const role = require('./schemas/role')
 
 module.exports.init = function() {
     var arr = [
@@ -16,7 +16,7 @@ module.exports.init = function() {
                 name: 'administrator',
                 description: '最高权限用户'
             }
-        }),    
+        }),
         user.findOrCreate({
             where: {
                 id: 1
@@ -36,9 +36,9 @@ module.exports.init = function() {
         })               
     ]
 
-    Promise.all(arr).then(function() {
-        console.info('base date inited ======= >>>');
+    Promise.all(arr).then(function () {
+        console.info('base date inited ======= >>>')
     },function() {
-        console.error(arguments);
-    });
-};
+        console.error(arguments)
+    })
+}
