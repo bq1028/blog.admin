@@ -1,7 +1,13 @@
-import 'babel-polyfill'
-import User from '../models/users'
+/**
+ * 角色
+ * @author Philip
+ */
 
-class ContentController {
+import 'babel-polyfill'
+import User from '../dao/users'
+
+class Role {
+
     /**
      * Get all users
      * @param {ctx} Koa Context
@@ -125,4 +131,4 @@ class ContentController {
 
 }
 
-module.exports = new UsersControllers()
+export default new Role()

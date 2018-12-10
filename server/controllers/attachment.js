@@ -1,8 +1,12 @@
+/**
+ * 附件 控制器
+ * @author Philip
+ */
+
 import 'babel-polyfill'
-import User from '../models/users'
+import User from '../dao/users'
 
-class AuthorityController {
-
+class Attachment {
     /**
      * Get all users
      * @param {ctx} Koa Context
@@ -38,16 +42,16 @@ class AuthorityController {
      * @param {ctx} Koa Context
      */
     async add(ctx) {
-      try {
-        const user = await new User(ctx.request.body).save()
+        try {
+          const user = await new User(ctx.request.body).save()
 
-        ctx.body = {
-          retData: user,
-          message: '注册成功'
+          ctx.body = {
+            retData: user,
+            message: '注册成功',
+          }
+        } catch (err) {
+          ctx.throw(err)
         }
-      } catch (err) {
-        ctx.throw(err)
-      }
     }
 
     /**
@@ -55,22 +59,22 @@ class AuthorityController {
      * @param {ctx} Koa Context
      */
     async update(ctx) {
-      try {
-        const user = await User.findByIdAndUpdate(ctx.params.id, { ...ctx.request.body, updated_at: Date.now() })
+        try {
+          const user = await User.findByIdAndUpdate(ctx.params.id,
+            { ...ctx.request.body, updated_at: Date.now() })
+          if (!user) {
+            ctx.throw(404)
+          }
 
-        if (!user) {
-          ctx.throw(404)
+          const updated = await User.findById(ctx.params.id)
+          ctx.body = updated
+        } catch (err) {
+          if (err.name === 'CastError' || err.name === 'NotFoundError') {
+            return ctx.throw(err, 404)
+          }
+
+          ctx.throw(err.message, 500)
         }
-
-        const updated = await User.findById(ctx.params.id)
-        ctx.body = updated
-      } catch (err) {
-        if (err.name === 'CastError' || err.name === 'NotFoundError') {
-          return ctx.throw(err, 404)
-        }
-
-        ctx.throw(err.message, 500)
-      }
     }
 
     /**
@@ -88,7 +92,6 @@ class AuthorityController {
               message: '查无此账号'
             }
           }
-
           ctx.body = {
             message: '删除用户成功'
           }
@@ -112,17 +115,18 @@ class AuthorityController {
             await User.findOne({ username }, (err, user) => {
               if (!user) {
                 ctx.status = 400
+
                 return ctx.body = {
                   message: '账号不存在'
                 }
               }
-
+              
               user.comparePassword(password, (err, isMatch) => {
                 if (isMatch) {
                   ctx.state = user._id
                   return next()
                 }
-                
+
                 ctx.status = 401
                 ctx.body = {
                   message: '账户名和密码不匹配'
@@ -139,4 +143,4 @@ class AuthorityController {
 
 }
 
-export default new UsersControllers()
+module.exports = new Attachment()

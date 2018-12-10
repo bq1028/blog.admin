@@ -1,7 +1,12 @@
-import 'babel-polyfill'
-import User from '../models/users'
+/**
+ * 文件 控制器
+ * @author Philip
+ */
 
-class JournalController {
+import 'babel-polyfill'
+import User from '../dao/users'
+
+class Message {
 
     /**
      * Get all users
@@ -126,4 +131,4 @@ class JournalController {
 
 }
 
-export default new UsersControllers()
+module.exports = new Message()

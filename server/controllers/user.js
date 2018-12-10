@@ -1,7 +1,13 @@
-import 'babel-polyfill'
-import User from '../models/users'
+/**
+ * 用户
+ * @author Philip
+ */
 
-class FileController {
+
+import 'babel-polyfill'
+import User from '../dao/users'
+
+class User {
 
     /**
      * Get all users
@@ -126,4 +132,4 @@ class FileController {
 
 }
 
-module.exports = new UsersControllers()
+export default new User()

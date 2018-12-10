@@ -1,7 +1,12 @@
-import 'babel-polyfill'
-import User from '../models/users'
+/**
+ * 标签
+ * @author Philip
+ */
 
-class MessageController {
+import 'babel-polyfill'
+import User from '../dao/users'
+
+class Tag {
 
     /**
      * Get all users
@@ -126,4 +131,4 @@ class MessageController {
 
 }
 
-module.exports = new UsersControllers()
+export default new Tag()

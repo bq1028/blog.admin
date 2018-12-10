@@ -1,8 +1,12 @@
+/**
+ * 内容 控制器
+ * @author Philip
+ */
+
 import 'babel-polyfill'
-import User from '../models/users'
+import User from '../dao/users'
 
-class TagController {
-
+class Content {
     /**
      * Get all users
      * @param {ctx} Koa Context
@@ -126,4 +130,4 @@ class TagController {
 
 }
 
-export default new UsersControllers()
+module.exports = new Content()
