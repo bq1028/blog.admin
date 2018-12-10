@@ -1,7 +1,7 @@
 {
   "name": "blog.admin",
   "version": "0.1.1",
-  "description": "chenxiangyu, blog, npm settings",
+  "description": "philip, blog, npm settings",
   "main": "server/app.js",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
     "url": "https://github.com/raddeana/blog.admin/issues",
     "email": "wowcxy2008@126.com"
   },
-  "homepage": "mulberryx.tech",
+  "homepage": "raddeana.tech",
   "private": true,
   "engines": {
     "node": ">=8.9.1"
@@ -26,34 +26,44 @@
     ".eslintrc"
   ],
   "scripts": {
-    "start": "node server/app.js --harmony production",
-    "start:dev": "./node_modules/.bin/nodemon -e js,html --ignore ./assets/ --ignore ./static/ --ignore ./automation/ server/app.js --harmony development",
+    "start": "cross-env node server/index.js --harmony NODE_ENV=prod",
+    "dev": "cross-env nodemon -e js --ignore ./assets/ server/index.js --harmony NODE_ENV=dev",
     "lint": "eslint",
     "test": "mocha"
   },
   "dependencies": {
-    "koa": "latest",
-    "koa-bodyparser": "latest",
-    "koa-compress": "latest",
-    "koa-error": "latest",
-    "koa-generic-session": "latest",
-    "koa-logger": "latest",
-    "koa-passport": "latest",
-    "koa-response-time": "latest",
-    "koa-router": "latest",
-    "koa-proxy": "latest",
-    "koa-ejs": "latest",
-    "lodash": "latest",
-    "mysql2": "latest",
-    "os": "latest",
-    "passport-local": "latest",
-    "redis": "latest",
-    "request": "latest",
-    "sequelize": "latest",
+    "cross-env": "^5.2.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-ejs": "^4.1.2",
+    "koa-error": "^3.2.0",
+    "koa-generic-session": "^2.0.1",
+    "koa-passport": "^4.1.1",
+    "koa-proxy": "^0.9.0",
+    "koa-response-time": "^2.1.0",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.11",
+    "mysql2": "^1.6.4",
+    "os": "^0.1.1",
+    "passport-local": "^1.0.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "sequelize": "^4.41.2"
   },
   "devDependencies": {
-    "nodemon": "latest",
-    "eslint": "latest",
-    "babel-eslint": "latest"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-html": "^5.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
