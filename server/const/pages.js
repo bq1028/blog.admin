@@ -1,4 +1,4 @@
-module.exports.pages = {
+module.exports = {
     ARTICLES: "文章",
     HOME: "首页",
     LOGIN: "登录",
