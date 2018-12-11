@@ -3,7 +3,7 @@
  * @author Philip
  */
 
-module.exports.actions = {
+module.exports = {
     "VISIT": "访问",
     "ADD": "增加",
     "MODIFIED": "修改",
