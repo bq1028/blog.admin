@@ -1,3 +1,7 @@
+/**
+ * 客户端路由
+ * @author Philip
+ */
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
