@@ -5,22 +5,25 @@
 
 "use strict"
 
+// 路径
 const path = require("path")
+
+// koa
+const views = require("koa-views")
 const serve = require("koa-static")
-const session = require("koa-generic-session")
-const responseTime = require("koa-response-time")
 const logger = require("koa-logger")
-const views = require("co-views")
 const compress = require("koa-compress")
 const errorHandler = require("koa-error")
+const session = require("koa-generic-session")
+const responseTime = require("koa-response-time")
 const bodyParser = require("koa-bodyparser")
 
 const STATIC_FILES_MAP = {}
 const SERVE_OPTIONS = { maxAge: 365 * 24 * 60 * 60 }
 
-module.exports = function(app, config, passport) {
+module.exports = function (app, config, passport) {
     if (!config.app.keys) {
-        throw new Error("Please add session secret key in the config file!")
+        throw new Error("please add session secret key in the config file")
     }
 
     app.keys = config.app.keys
@@ -54,7 +57,7 @@ module.exports = function(app, config, passport) {
         })
 
         await next()
-    });   
+    })
 
     app.use(compress())
     app.use(responseTime())
