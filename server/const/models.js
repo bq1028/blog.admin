@@ -1,4 +1,4 @@
-module.exports.models = {
+module.exports = {
     AUTH: "权限",
     CONTENT: "内容",
     FILE: "文件",
