@@ -5,7 +5,7 @@
 
 "use strict"
 
-// 
+// 基本库类
 const path = require("path")
 const fs = require("fs")
 
