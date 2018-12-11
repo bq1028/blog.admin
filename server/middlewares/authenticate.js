@@ -1,3 +1,7 @@
+/**
+ * 验证
+ * @author Philip
+ */
 import jwt from 'jsonwebtoken'
 
 export default function (ctx) {
