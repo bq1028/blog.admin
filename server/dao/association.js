@@ -6,6 +6,7 @@
 
 const sequelize = require('./sequelize')
 
+// 模型
 const authority = require('./schemas/authority')
 const role = require('./schemas/role')
 const user = require('./schemas/user')
@@ -28,7 +29,7 @@ module.exports.init = function () {
     through: roleAuth, 
     foreignKey: 'authId', 
     as: 'auths'
-  });
+  })
 
   user.belongsTo(role, {
     foreignKey: 'roleId',
@@ -40,7 +41,7 @@ module.exports.init = function () {
     foreignKey: 'roleId',
     constraints: false,
     as: 'role'
-  });
+  })
 
   content.hasMany(attachment, {
     foreignKey: 'contentId',
