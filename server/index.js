@@ -3,34 +3,40 @@
  * @author Philip
  */
 
-'use strict';
+"use strict"
 
-const Koa = require('koa');
-const logger = require('koa-logger');
-const koaPassport = require('koa-passport');
+// 
+const path = require("path")
+const fs = require("fs")
 
-const path = require('path');
-const fs = require('fs');
+// koa
+const Koa = require("koa")
+const logger = require("koa-logger")
+const koaPassport = require("koa-passport")
 
-const api = require('./config/api');
-const routes = require('./config/routes');
-const config = require('./config/config');
-const db = require('./models/db');
-const passport = require('./config/passport');
-const middleware = require('./config/middleware');
+// 配置项
+const apis = require("./config/apis")
+const config = require("./config/config")
+const passport = require("./config/passport")
+const middleware = require("./config/middleware")
 
-var app = new Koa();
+// 路由
+const routes = require("./routes")
+
+// 数据库初始化
+require("./models/db")()
+
+var app = new Koa()
 
 // Logger
-app.use(logger());
+app.use(logger())
 
-passport(koaPassport, config);
-middleware(app, config, koaPassport);
+// 中间件
+passport(koaPassport, config)
+middleware(app, config, koaPassport)
 
 // Routes
-routes(app, koaPassport);
-api(app, koaPassport);
+routes(app, koaPassport)
+api(app, koaPassport)
 
-db.init();
-
-app.listen(config.app.port);
+app.listen(config.app.port)
