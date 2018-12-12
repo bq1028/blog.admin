@@ -4,7 +4,7 @@
  */
 
 import 'babel-polyfill'
-import contentModel from '../dao/users'
+import contentModel from '../dao/content'
 
 class Content {
     /**
