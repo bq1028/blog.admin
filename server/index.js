@@ -15,16 +15,16 @@ const logger = require("koa-logger")
 const koaPassport = require("koa-passport")
 
 // 配置项
-const apis = require("./config/apis")
 const config = require("./config/config")
 const passport = require("./config/passport")
 const middleware = require("./config/middleware")
 
 // 路由
 const routes = require("./routes")
+const apis = require("./apis")
 
 // 数据库初始化
-require("./models/db")()
+require("./sequelize/db")()
 
 var app = new Koa()
 
@@ -37,6 +37,7 @@ middleware(app, config, koaPassport)
 
 // Routes
 routes(app, koaPassport)
+apis(app, koaPassport)
 api(app, koaPassport)
 
 app.listen(config.app.port)
