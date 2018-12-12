@@ -4,7 +4,7 @@
  */
 
 import 'babel-polyfill'
-import User from '../dao/users'
+import tagModel from '../dao/tag'
 
 class Tag {
 
