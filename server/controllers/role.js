@@ -4,7 +4,7 @@
  */
 
 import 'babel-polyfill'
-import User from '../dao/users'
+import roleModel from '../dao/role'
 
 class Role {
 
@@ -95,40 +95,6 @@ class Role {
             ctx.throw(500)
         }
     }
-
-    /**
-     * user login, get token
-     * @param {ctx} Koa Context
-     */
-    async login(ctx, next) {
-        try {
-            const { username, password } = ctx.request.body
-            await User.findOne({ username }, (err, user) => {
-                if (!user) {
-                    ctx.status = 400
-                    return ctx.body = {
-                        message: '账号不存在'
-                    }
-                }
-                user.comparePassword(password, (err, isMatch) => {
-                    if (isMatch) {
-                        ctx.state = user._id
-                        return next()
-                    }
-                    ctx.status = 401
-                    ctx.body = {
-                        message: '账户名和密码不匹配'
-                    }
-                })
-            })
-        } catch (err) {
-            ctx.status = 401
-            ctx.body = {
-                message: '登陆失败'
-            }
-        }
-    }
-
 }
 
 export default new Role()
