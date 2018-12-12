@@ -2,30 +2,29 @@
  * 切片模型
  * @author Philip
  */
+"use strict"
 
-"use strict";
-var co = require("co");
-var user = require("../models/schemas/user");
+const co = require("co")
+const user = require("../dao/user")
 
 exports.localUser = function (username, password, done) {
-    co(function * () {
+    co(async function () {
         try {
-            return yield user.findOne({ where: {username: username} });
+            return await user.findOne({ where: { username: username } })
         } catch(ex) {
-            return null;
+            return null
         }
     }).then(function (data) {
+        let info
 
-        var info;
-
-        if(data !== null) {
-            if(data.password !== password) {
-                info = '密码不正确';
+        if (data !== null) {
+            if (data.password !== password) {
+                info = '密码不正确'
             }
         } else {
-            info = '用户不存在';
-        }        
+            info = '用户不存在'
+        }
         
-        done(null, data, info);
-    });
-};
+        done(null, data, info)
+    })
+}
