@@ -3,61 +3,60 @@
  * @author Philip
  */
 
-'use strict';
+"use strict"
 
-var co = require('co');
-var _ = require('lodash');
-var Router = require("koa-router");
+const Router = require("koa-router")
+const co = require("co")
+const _ = require("lodash")
+const paginator = require("../dto/paginator")
 
-var pagination = require('./pagination');
+const api = new Router()
 
-var api = new Router();
+const Restful = function (model, include) {
+    this.model = model
+    this.include = include || {}
 
-var Restful = function (model, include) {
-    this.model = model;
-    this.include = include || {};
-
-    var restful = this;
+    let restful = this
 
     /**
      * 代理函数
      * @returns none
      */
     this.proxy = async function () {
-        var context = this;
+        let context = this
 
-        var REQ = context.request;
-        var RES = context.response;
+        let REQ = context.request
+        let RES = context.response
 
-        var params = _.merge({}, REQ.query);
+        let params = _.merge({}, REQ.query)
 
-        if(context.params.id) {
-            params.id = context.params.id;
+        if (context.params.id) {
+            params.id = context.params.id
         }
 
-        if(REQ.method === 'POST' || REQ.method === 'PUT') {
-            params.data = REQ.body;
+        if (REQ.method === "POST" || REQ.method === "PUT") {
+            params.data = REQ.body
         }
 
         switch(REQ.method) {
-            case 'GET':
-                await restful.get(params, context);
+            case "GET":
+                await restful.get(params, context)
                 break;
-            case 'POST':
-                await restful.post(params, context);
+            case "POST":
+                await restful.post(params, context)
                 break;
-            case 'PUT':
-                await restful.put(params, context);
+            case "PUT":
+                await restful.put(params, context)
                 break;
-            case 'DELETE':
-                await restful.delete(params, context);
+            case "DELETE":
+                await restful.delete(params, context)
                 break;
             default:
-                this.body = 'method is not supported';
-                this.status = '500';
+                this.body = "method is not supported"
+                this.status = "500"
         }
-    };
-};
+    }
+}
 
 /**
  * 根据资源和模型创建一组restful api
@@ -68,17 +67,17 @@ var Restful = function (model, include) {
  * @returns none
  */
 Restful.create = function(name, model, security, include) {
-    var restful = new Restful(model, include);
-    var urls = this.urls(name);
+    let restful = new Restful(model, include)
+    let urls = this.urls(name)
 
-    for(var i = 0, len = urls.length; i < len; i ++) {
-        var urlObj = urls[i];
-        var url = urlObj.url;
-        var method = urlObj.method;
+    for (let i = 0, len = urls.length; i < len; i ++) {
+        let urlObj = urls[i]
+        let url = urlObj.url
+        let method = urlObj.method
 
-        this.api[method](url, security, restful.proxy);
+        this.api[method](url, security, restful.proxy)
     }
-};
+}
 
 /**
  * 根据资源名称返回对应的路由配置
@@ -86,37 +85,37 @@ Restful.create = function(name, model, security, include) {
  * @returns { Array } url名称
  */
 Restful.urls = function (name) {
-    var arr = [];
-    var suffix = '/:id';
-    var base = '/api/' + name;
+    let arr = []
+    let suffix = "/:id"
+    let base = "/api/" + name
 
-    var get = [{
+    let get = [{
         url: base,
-        method: 'get'
+        method: "get"
     },{
         url: base + suffix,
-        method: 'get'
-    }];
+        method: "get"
+    }]
 
-    var post = [{
+    let post = [{
         url: base,
-        method: 'post'
-    }];
+        method: "post"
+    }]
 
-    var put = [{
+    let put = [{
         url: base + suffix,
-        method: 'put'
-    }];
+        method: "put"
+    }]
 
-    var remove = [{
+    let remove = [{
         url: base + suffix,
-        method: 'delete'
-    }];
+        method: "delete"
+    }]
 
-    return arr.concat(get, post, put, remove);
-};
+    return arr.concat(get, post, put, remove)
+}
 
-Restful.api = api;
+Restful.api = api
 
 /**
  * 获取资源
@@ -125,49 +124,48 @@ Restful.api = api;
  * @returns none
  */
 Restful.prototype.get = async function (params, context) {
-    var _model;
-    
-    var query = {
+    let _model;
+    let query = {
         where: params
-    };
-
-    if(this.include) {
-        query.include = this.include.query;
     }
 
-    var page_num = params.page_num ? parseInt(params.page_num) : 1;
-    var page_size = params.page_size ? parseInt(params.page_size) : 'infinite';
+    if(this.include) {
+        query.include = this.include.query
+    }
+
+    let page_num = params.page_num ? parseInt(params.page_num) : 1
+    let page_size = params.page_size ? parseInt(params.page_size) : "infinite"
 
     if (!params.id) {
-        if(page_size !== 'infinite') {
-            var gt = (page_num - 1) * page_size;
-            var lt = page_num * page_size;
+        if(page_size !== "infinite") {
+            let gt = (page_num - 1) * page_size
+            let lt = page_num * page_size
             
             query.id = {
-                gt: gt,
-                lt: lt
-            };
+                gt,
+                lt
+            }
         }
 
-        delete query.where.page_size;
-        delete query.where.page_num;
+        delete query.where.page_size
+        delete query.where.page_num
     }
 
     try {
-        _model = await this.model.findAll(query);
+        _model = await this.model.findAll(query)
     } catch (e) {
-        context.throw(e.status || 500, e.message);
+        context.throw(e.status || 500, e.message)
     }
     
     if(_model === null) {
-        context.status = 404;
-        context.body = '没有查询结果'
+        context.status = 404
+        context.body = "没有查询结果"
     } else {
 
         if(params.id) {
-            context.body = _model[0];
+            context.body = _model[0]
         } else {
-            context.body = pagination(_model, page_num, page_size);
+            context.body = pagination(_model, page_num, page_size)
         }
     }
 };
@@ -180,28 +178,28 @@ Restful.prototype.get = async function (params, context) {
  */
 Restful.prototype.post = async function (params, context) {
     if(!_.isEmpty(params)) {
-        var _model;
+        let _model
 
         try {
-            if(this.include.create && typeof this.include.create === 'function') {
-                var association = this.include.create(params.data);
-                _model = await this.model.create(params.data).then(association);
+            if(this.include.create && typeof this.include.create === "function") {
+                let association = this.include.create(params.data)
+                _model = await this.model.create(params.data).then(association)
             } else {
-                _model = await this.model.create(params.data);
+                _model = await this.model.create(params.data)
             }
         } catch (e) {
-            context.throw(e.status || 500, e.message);
+            context.throw(e.status || 500, e.message)
         }
         
         if(_model === null) {
-            context.status = 404;
-            context.body = '未知错误，保存数据失败';
+            context.status = 404
+            context.body = "未知错误，保存数据失败"
         } else {
-            context.body = _model.dataValues;
+            context.body = _model.dataValues
         }
     } else {
-        context.status = 500;
-        context.body = '参数不正确，请填写正确的参数';
+        context.status = 500
+        context.body = "参数不正确，请填写正确的参数"
     }
 };
 
@@ -213,66 +211,66 @@ Restful.prototype.post = async function (params, context) {
  */
 Restful.prototype.put = async function (params, context) {
     if(!_.isEmpty(params) && params.id) {
-        var _model;
+        let _model
 
-        var query = {};
-        var fields = [];
+        let query = {}
+        let fields = []
 
-        for(var i in params.data) {
-            fields.push(i);
+        for (let i in params.data) {
+            fields.push(i)
         }
 
-        query.where = { id: params.id };
-        query.fields = fields;
+        query.where = { id: params.id }
+        query.fields = fields
 
         try {
-            _model = await this.model.update(params.data, { where: {id: params.id}, fields: fields});
+            _model = await this.model.update(params.data, { where: { id: params.id }, fields: fields })
         } catch (e) {
-            context.throw(e.status || 500, e.message);
+            context.throw(e.status || 500, e.message)
         }
         
         if(_model === null) {
-            context.status = 404;
-            context.body = '该资源未找到';
+            context.status = 404
+            context.body = "该资源未找到"
         } else {
             try {
-                query = { where: { id: params.id } };
+                query = { where: { id: params.id } }
 
-                var self = this;
-                var update = this.include.update;
+                let self = this
+                let update = this.include.update
 
                 context.body = await this.model.find(query).then(function (item) {
                     if(update) {
-                        var arr = [];
+                        let arr = []
 
-                        for( var i = 0, len = update.length; i < len; i ++ ) {
-                            var acs = update[i];
-                            arr.push(item['set' + acs.replace(acs.substring(0, 1), acs.substring(0, 1).toUpperCase())](params.data[acs]));
+                        for( let i = 0, len = update.length; i < len; i ++ ) {
+                            let acs = update[i]
+                            arr.push(item["set" + acs.replace(acs.substring(0, 1), acs.substring(0, 1).toUpperCase())](params.data[acs]))
                         }
 
                         return Promise.all(arr).then(function() {
                             if(self.include.query) {
-                                query.include = self.include.query;
+                                query.include = self.include.query
                             }
 
-                            return self.model.find(query);
+                            return self.model.find(query)
                         });
 
                     } else {
-                        return item;
+                        return item
                     }
-                });
+                })
             } catch (e) {
-                context.throw(e.status || 500, e.message);
+                context.throw(e.status || 500, e.message)
             }
         }        
     } else {
-        context.status = 500;
-        context.body = '缺少对象id';
+        context.status = 500
+        context.body = "缺少对象id"
     }
 
-    return params;
-};
+    return params
+}
 
 /**
  * 删除
@@ -281,7 +279,7 @@ Restful.prototype.put = async function (params, context) {
  * @returns none
  */
 Restful.prototype.delete = async function (params, context) {
-    var _model, query = {};
+    var _model, query = {}
 
     if(params && params.id) {
 
@@ -290,76 +288,81 @@ Restful.prototype.delete = async function (params, context) {
         };
 
         try {
-            var self = this;
-            var update = this.include.update;
+            var self = this
+            var update = this.include.update
 
-            if(update) {
+            if (update) {
                 await this.model.find(query).then(function(item) {
                     if(update) {
-                        var arr = [];
+                        var arr = []
 
                         for( var i = 0, len = update.length; i < len; i ++ ) {
-                            var acs = update[i];
-                            arr.push(item['set' + acs.replace(acs.substring(0, 1), acs.substring(0, 1).toUpperCase())]([]));
+                            var acs = update[i]
+                            arr.push(item["set" + acs.replace(acs.substring(0, 1), acs.substring(0, 1).toUpperCase())]([]))
                         }
 
                         return Promise.all(arr).then(function() {
                             if(self.include.query) {
-                                query.include = self.include.query;
+                                query.include = self.include.query
                             }
 
-                            return self.model.find(query);
-                        });
-
+                            return self.model.find(query)
+                        })
                     }
-                });
+                })
             }
 
-            _model = await this.model.destroy(query);
+            _model = await this.model.destroy(query)
         } catch (e) {
-            context.throw(e.status || 500, e.message);
+            context.throw(e.status || 500, e.message)
         }
         
         if(_model === null) {
-            context.status = 404;
-            context.body = '资源未找到';
+            context.status = 404
+            context.body = "资源未找到"
         } else {
             context.body = {
-                msg: '移除成功'
-            };
+                msg: "移除成功"
+            }
         }        
     } else {
-        context.status = 500;
-        context.body = '缺少对象id';
+        context.status = 500
+        context.body = "缺少对象id"
     }
 
-    return params;
-};
+    return params
+}
 
 /**
  * include
  * @returns none
  */
 Restful.prototype.include = function (next) {
-    this.body = 'ALLOW: HEAD, GET, PUT, DELETE, OPTIONS';
-};
+    this.body = "ALLOW: HEAD, GET, PUT, DELETE, OPTIONS"
+}
 
 /**
  * trace
  * @returns none
  */
-Restful.prototype.trace = function (next) { this.body = 'you can\'t trace.';};
+Restful.prototype.trace = function (next) { 
+    this.body = "you can\"t trace."
+}
 
 /**
  * head
  * @returns none
  */
-Restful.prototype.head = function (next) { return; };
+Restful.prototype.head = function (next) { return }
 
 /**
- * 连接者
+ * 连接
  * @returns none
  */
-Restful.prototype.connect = function (next) {};
+Restful.prototype.connect = function (next) {}
 
-module.exports = Restful;
+/**
+ * 连接
+ * @returns none
+ */
+module.exports = Restful
