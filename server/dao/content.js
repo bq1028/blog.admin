@@ -4,7 +4,7 @@
  */
 
 const Sequelize = require('sequelize')
-const sequelize = require('./../sequelize')
+const sequelize = require('../sequelize/instance')
 
 // models
 const user = require('./user')

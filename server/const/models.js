@@ -1,3 +1,7 @@
+/**
+ * 行为
+ * @author Philip
+ */
 module.exports = {
     AUTH: "权限",
     CONTENT: "内容",

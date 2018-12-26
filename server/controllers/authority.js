@@ -2,7 +2,6 @@
  * 权限 控制器
  * @author Philip
  */
-
 import 'babel-polyfill'
 import User from '../dao/users'
 

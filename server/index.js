@@ -15,9 +15,9 @@ const logger = require("koa-logger")
 const koaPassport = require("koa-passport")
 
 // 配置项
-const config = require("./config/config")
-const passport = require("./config/passport")
-const middleware = require("./config/middleware")
+const config = require("./config")
+const passport = require("./services/passport")
+const middleware = require("./middlewares/common")
 
 // 路由
 const routes = require("./routes")

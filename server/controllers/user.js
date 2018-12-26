@@ -2,8 +2,6 @@
  * 用户
  * @author Philip
  */
-
-
 import 'babel-polyfill'
 import userModel from '../dao/users'
 
@@ -13,7 +11,7 @@ class User {
      * Get all users
      * @param {ctx} Koa Context
      */
-    async find(ctx) {
+    async find (ctx) {
         ctx.body = await User.find()
     }
 
@@ -21,7 +19,7 @@ class User {
      * Find a user
      * @param {ctx} Koa Context
      */
-    async findById(ctx) {
+    async findById (ctx) {
         try {
             const user = await User.findById(ctx.params.id)
             if (!user) {
@@ -40,7 +38,7 @@ class User {
      * Add a user
      * @param {ctx} Koa Context
      */
-    async add(ctx) {
+    async add (ctx) {
         try {
             const user = await new User(ctx.request.body).save()
             ctx.body = {
@@ -56,7 +54,7 @@ class User {
      * Update a user
      * @param {ctx} Koa Context
      */
-    async update(ctx) {
+    async update (ctx) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id,
                 { ...ctx.request.body, updated_at: Date.now() })
@@ -75,7 +73,7 @@ class User {
 
     /**
      * Delete a user
-     * @param {ctx} Koa Context
+     * @param {ctx} context
      */
     async delete(ctx) {
         try {

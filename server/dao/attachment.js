@@ -5,7 +5,7 @@
 "use strict"
 
 const Sequelize = require('sequelize')
-const sequelize = require('./../sequelize')
+const sequelize = require('../sequelize/instance')
 
 const file = require('./file')
 const authority = require('./authority')

@@ -2,7 +2,6 @@
  * 行为
  * @author Philip
  */
-
 module.exports = {
     "VISIT": "访问",
     "ADD": "增加",

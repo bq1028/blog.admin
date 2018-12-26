@@ -7,7 +7,7 @@ const user = require('./schemas/user')
 const role = require('./schemas/role')
 
 module.exports.init = function() {
-    var arr = [
+    let arr = [
         role.findOrCreate({
             where: {
                 id: 1

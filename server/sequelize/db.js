@@ -3,28 +3,29 @@
  * @author Philip
  */
 
-var fs = require("fs")
-var path = require("path")
+const fs = require("fs")
+const path = require("path")
 
-var sequelize = require('./sequelize')
-var normalizedPath = path.join(__dirname, "schemas")
+const sequelize = require('./instance')
+const normalizedPath = path.join(__dirname, "../dao")
 
-module.exports = function() {
-    var arr = []
+module.exports = () => {
+    let arr = []
 
-    fs.readdirSync(normalizedPath).forEach(function(file) {
-        var name = file.replace('.js', '')
-        var model = require("./schemas/" + file)
-        
-        arr.push(model)
+    fs.readdirSync(normalizedPath).forEach((file) => {
+        if (file !== 'association.js') {
+            let name = file.replace('.js', '')
+            let model = require(path.join(__dirname, `../dao/${file}`))
+            
+            arr.push(model)
+        }
     })
 
     require('./association').init()
-           
 
-    sequelize.sync().then(function () {
+    sequelize.sync().then(() => {
         require('./base').init()
-    }).catch(function (err) {
+    }).catch((err) => {
         restart(err)
     })
 }

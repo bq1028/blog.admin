@@ -1,3 +1,7 @@
+/**
+ * 行为
+ * @author Philip
+ */
 module.exports = {
     ARTICLES: "文章",
     HOME: "首页",

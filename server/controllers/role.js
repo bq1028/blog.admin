@@ -2,7 +2,6 @@
  * 角色
  * @author Philip
  */
-
 import 'babel-polyfill'
 import roleModel from '../dao/role'
 

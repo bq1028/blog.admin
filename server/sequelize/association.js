@@ -4,20 +4,24 @@
  */
 "use strict"
 
-const sequelize = require('./sequelize')
+const sequelize = require('../sequelize/instance')
 
 // 模型
-const authority = require('./schemas/authority')
-const role = require('./schemas/role')
-const user = require('./schemas/user')
-const file = require('./schemas/file')
-const tag = require('./schemas/tag')
-const content = require('./schemas/content')
-const message = require('./schemas/message')
-const journal = require('./schemas/journal')
-const attachment = require('./schemas/attachment')
-const roleAuth = require('./schemas/role-authority')
+const authority = require('../dao/authority')
+const role = require('../dao/role')
+const user = require('../dao/user')
+const file = require('../dao/file')
+const tag = require('../dao/tag')
+const content = require('../dao/content')
+const message = require('../dao/message')
+const journal = require('../dao/journal')
+const attachment = require('../dao/attachment')
+const roleAuth = require('../dao/role-authority')
 
+/**
+ * 初始化
+ * @return none
+ */
 module.exports.init = function () {
   authority.belongsToMany(role, { 
     through: roleAuth, 

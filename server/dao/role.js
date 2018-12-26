@@ -4,7 +4,7 @@
  */
 
 const Sequelize = require('sequelize')
-const sequelize = require('./../sequelize')
+const sequelize = require('../sequelize/instance')
 
 const role = sequelize.define('role', {
     name: {

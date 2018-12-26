@@ -2,7 +2,6 @@
  * 内容 控制器
  * @author Philip
  */
-
 import 'babel-polyfill'
 import contentModel from '../dao/content'
 

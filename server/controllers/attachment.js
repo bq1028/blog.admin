@@ -2,7 +2,6 @@
  * 附件 控制器
  * @author Philip
  */
-
 import "babel-polyfill"
 import attachmentDao from "../dao/attachment"
 

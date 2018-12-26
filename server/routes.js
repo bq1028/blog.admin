@@ -4,6 +4,7 @@
  */
 "use strict"
 
+const path = require('path')
 const Router = require("koa-router")
 const render = require('koa-ejs')
 
@@ -49,7 +50,6 @@ module.exports = function (app, passport) {
         cache: false,
         debug: true
     })
-
-    app.use(views(__dirname, { map: {html: 'nunjucks' }}))
+    
     app.use(router.routes())
 }
