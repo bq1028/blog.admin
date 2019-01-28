@@ -14,7 +14,7 @@ module.exports.getRounds = bcrypt.getRounds
 
 /**
  * hash化
- * @returns { Promise } hash化promise对象
+ * @returns {Promise} hash化promise对象
  */
 module.exports.genSalt = function (rounds, ignore) {
     return new Promise(function (resolve, reject) {
@@ -30,7 +30,7 @@ module.exports.genSalt = function (rounds, ignore) {
 
 /**
  * hash化
- * @returns { Promise } hash化promise对象
+ * @return {Promise} hash化promise对象
  */
 module.exports.hash = function (data, salt) {
     return new Promise(function (resolve, reject) {
@@ -46,7 +46,7 @@ module.exports.hash = function (data, salt) {
 
 /**
  * 校验hash化的值
- * @returns { Promise } 校验的promise对象
+ * @return {Promise} 校验的promise对象
  */
 module.exports.compare = function (data, hash) {
     return new Promise(function (resolve, reject) {

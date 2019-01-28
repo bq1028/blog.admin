@@ -38,6 +38,5 @@ middleware(app, config, koaPassport)
 // Routes
 routes(app, koaPassport)
 apis(app, koaPassport)
-api(app, koaPassport)
 
 app.listen(config.app.port)

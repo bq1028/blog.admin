@@ -49,17 +49,8 @@ module.exports = async function (app, passport) {
 
     api.use(async function (next) {
         this.type = "json"
-        await next
+        await next()
     })
-
-    api.get("/logout", secured, common.logout)
-    api.post("/api/login", unsecured, common.login)
-
-    Restful.create('authority', authority, secured)
-    Restful.create('tag', tag, secured)
-    Restful.create('user', user, secured)
-    Restful.create('role', role, secured)
-    Restful.create('journal', journal, secured)
 
     app.use(api.routes())
     app.use(Restful.api.routes())
