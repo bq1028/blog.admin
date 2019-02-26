@@ -32,6 +32,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "bluebird": "^3.5.3",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
@@ -48,6 +49,7 @@
     "mysql2": "^1.6.4",
     "os": "^0.1.1",
     "passport-local": "^1.0.0",
+    "redis": "^2.8.0",
     "request": "^2.88.0",
     "sequelize": "^4.41.2"
   },

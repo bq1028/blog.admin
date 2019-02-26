@@ -1,5 +1,5 @@
 /**
- * 附件
+ * 附件DTO
  * @author Philip
  */
 

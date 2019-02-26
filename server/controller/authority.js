@@ -6,7 +6,6 @@ import 'babel-polyfill'
 import User from '../dao/users'
 
 class Authority {
-
     /**
      * Get all users
      * @param {ctx} Koa Context

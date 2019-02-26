@@ -1,5 +1,5 @@
 /**
- * 分页
+ * 消息DTO
  * @author Philip
  */
 

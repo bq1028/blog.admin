@@ -1,4 +1,4 @@
 /**
- * 权限
+ * 权限DTO
  * @author Philip
  */

@@ -1,4 +1,4 @@
 /**
- * 分页
+ * 分页DTO
  * @author Philip
  */

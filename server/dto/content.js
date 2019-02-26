@@ -1,5 +1,5 @@
 /**
- * 内容
+ * 内容DTO
  * @author Philip
  */
 

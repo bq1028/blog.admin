@@ -2,9 +2,10 @@
  * 登录状态校验
  * @author Philip 
  */
+const passport = require('koa-passport')
 const LocalStrategy = require("passport-local").Strategy
-const authenticator = require("../services/authenticator")
-const userDao = require('../dao/user')
+const auth = require("../service/auth")
+const userCache = require('./user-cache')
 
 /**
  * 序列化
@@ -23,13 +24,15 @@ const serialize = (user, done) => {
  * @return none
  */
 const deserialize = (id, done) => {
-  userDao.findById(id).then((data) => {
+  userCache.findById(id).then((data) => {
     done(null, data)
   })
 }
 
-module.exports = (passport, config) => {
+module.exports = (app, passport) => {
   passport.serializeUser(serialize)
   passport.deserializeUser(deserialize)
-  passport.use(new LocalStrategy(authenticator.localUser))
+
+  app.use(passport.initialize())
+  app.use(passport.session())
 }

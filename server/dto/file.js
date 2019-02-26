@@ -1,5 +1,5 @@
 /**
- * 文件
+ * 文件DTO
  * @author Philip
  */
 
