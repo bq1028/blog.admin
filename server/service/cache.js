@@ -3,8 +3,8 @@
  * @author Philip
  */
 const redis = require("redis")
-const config = require("../config/app")
-const client = redis.createClient(config.redis)
+const { host, port, password } = require("../config/redis")
+const client = redis.createClient(host, port, password)
 
 /**
  * 保存用户
