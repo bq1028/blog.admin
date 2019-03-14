@@ -7,9 +7,8 @@ const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-
-const config = require("../config/app")
-const client = redis.createClient(config.redis)
+const { host, port, password } = require("../config/redis")
+const client = redis.createClient(host, port, password)
 
 /**
  * 保存用户
@@ -29,3 +28,4 @@ exports.storeUser = async (userId, user) => {
 exports.findUser = async () => {
     await client.get(userId)
 }
+
