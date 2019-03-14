@@ -2,8 +2,7 @@
  * 标签
  * @author Philip
  */
-import 'babel-polyfill'
-import tagModel from '../dao/tag'
+const tagDao = require('../dao/tag')
 
 class Tag {
 
@@ -11,7 +10,7 @@ class Tag {
      * Get all users
      * @param {ctx} Koa Context
      */
-    async find(ctx) {
+    async find (ctx, next) {
         ctx.body = await User.find()
     }
 
@@ -19,7 +18,7 @@ class Tag {
      * Find a user
      * @param {ctx} Koa Context
      */
-    async findById(ctx) {
+    async findById (ctx, next) {
         try {
             const user = await User.findById(ctx.params.id)
             if (!user) {
@@ -38,7 +37,7 @@ class Tag {
      * Add a user
      * @param {ctx} Koa Context
      */
-    async add(ctx) {
+    async add (ctx, next) {
         try {
             const user = await new User(ctx.request.body).save()
             ctx.body = {
@@ -54,7 +53,7 @@ class Tag {
      * Update a user
      * @param {ctx} Koa Context
      */
-    async update(ctx) {
+    async update (ctx, next) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id,
                 { ...ctx.request.body, updated_at: Date.now() })
@@ -75,7 +74,7 @@ class Tag {
      * Delete a user
      * @param {ctx} Koa Context
      */
-    async delete(ctx) {
+    async delete (ctx, next) {
         try {
             const user = await User.findByIdAndRemove(ctx.params.id)
             if (!user) {
@@ -94,40 +93,6 @@ class Tag {
             ctx.throw(500)
         }
     }
-
-    /**
-     * user login, get token
-     * @param {ctx} Koa Context
-     */
-    async login(ctx, next) {
-        try {
-            const { username, password } = ctx.request.body
-            await User.findOne({ username }, (err, user) => {
-                if (!user) {
-                    ctx.status = 400
-                    return ctx.body = {
-                        message: '账号不存在'
-                    }
-                }
-                user.comparePassword(password, (err, isMatch) => {
-                    if (isMatch) {
-                        ctx.state = user._id
-                        return next()
-                    }
-                    ctx.status = 401
-                    ctx.body = {
-                        message: '账户名和密码不匹配'
-                    }
-                })
-            })
-        } catch (err) {
-            ctx.status = 401
-            ctx.body = {
-                message: '登陆失败'
-            }
-        }
-    }
-
 }
 
 export default new Tag()

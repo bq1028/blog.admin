@@ -14,9 +14,9 @@ const errorHandler = require("koa-error")
 const responseTime = require("koa-response-time")
 
 module.exports = function (app, config) {
-    app.keys = config.app.keys
+    app.keys = config.keys
 
-    if (config.app.env !== "test") {
+    if (config.env !== "develpo") {
         app.use(logger())
     }
 

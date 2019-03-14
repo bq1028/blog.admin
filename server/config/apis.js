@@ -5,70 +5,70 @@
 module.exports = {
     attachment: {
         query: 'GET /api/attachment',
-        details: 'GET /api/attachment',
+        findById: 'GET /api/attachment/:id',
         add: 'POST /api/attachment',
         delete: 'DELETE /api/attachment',
         update: 'PUT /api/attachment'
     },
     authority: {
         query: 'GET /api/authority',
-        details: 'GET /api/authority',
+        findById: 'GET /api/authority/:id',
         add: 'POST /api/authority',
         delete: 'DELETE /api/authority',
         update: 'PUT /api/authority'
     },
     content: {
         query: 'GET /api/content',
-        details: 'GET /api/content',
+        findById: 'GET /api/content/:id',
         add: 'POST /api/content',
         delete: 'DELETE /api/content',
         update: 'PUT /api/content'
     },
     file: {
         query: 'GET /api/file',
-        details: 'GET /api/file',
+        findById: 'GET /api/file/:id',
         add: 'POST /api/file',
         delete: 'DELETE /api/file',
         update: 'PUT /api/file'
     },
     journal: {
         query: 'GET /api/journal',
-        details: 'GET /api/journal',
+        findById: 'GET /api/journal/:id',
         add: 'POST /api/journal',
         delete: 'DELETE /api/journal',
         update: 'PUT /api/journal'
     },
     message: {
         query: 'GET /api/message',
-        details: 'GET /api/message',
+        findById: 'GET /api/message/:id',
         add: 'POST /api/message',
         delete: 'DELETE /api/message',
         update: 'PUT /api/message'
     },
     roleAuthority: {
         query: 'GET /api/role-authority',
-        details: 'GET /api/role-authority',
+        findById: 'GET /api/role-authority/:id',
         add: 'POST /api/role-authority',
         delete: 'DELETE /api/role-authority',
         update: 'PUT /api/role-authority'
     },
     role: {
         query: 'GET /api/role',
-        details: 'GET /api/role',
+        findById: 'GET /api/role/:id',
         add: 'POST /api/role',
         delete: 'DELETE /api/role',
         update: 'PUT /api/role'
     },
     tag: {
         query: 'GET /api/tag',
-        details: 'GET /api/tag',
+        findById: 'GET /api/tag/:id',
         add: 'POST /api/tag',
         delete: 'DELETE /api/tag',
         update: 'PUT /api/tag'
     },
     user: {
         query: 'GET /api/user',
-        details: 'GET /api/user',
+        findById: 'GET /api/user/:id',
         add: 'POST /api/user',
         delete: 'DELETE /api/user',
         update: 'PUT/api/user'

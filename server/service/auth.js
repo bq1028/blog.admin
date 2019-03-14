@@ -3,7 +3,7 @@
  * @author Philip
  */
 "use strict"
-const cache = require("./cache")
+const cache = require("./redis-store")
 
 /**
  * 权限需登录

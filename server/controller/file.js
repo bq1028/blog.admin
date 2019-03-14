@@ -2,8 +2,7 @@
  * 文件 控制器
  * @author Philip
  */
-import 'babel-polyfill'
-import fileModel from '../dao/file'
+const fileDao = require('../dao/file')
 
 class File {
 
@@ -11,7 +10,7 @@ class File {
      * Get all users
      * @param {ctx} Koa Context
      */
-    async find(ctx) {
+    async find (ctx, next) {
         ctx.body = await User.find()
     }
 
@@ -19,7 +18,7 @@ class File {
      * Find a user
      * @param {ctx} Koa Context
      */
-    async findById(ctx) {
+    async findById (ctx, next) {
         try {
             const user = await User.findById(ctx.params.id)
             if (!user) {
@@ -38,7 +37,7 @@ class File {
      * Add a user
      * @param {ctx} Koa Context
      */
-    async add(ctx) {
+    async add (ctx, next) {
         try {
             const user = await new User(ctx.request.body).save()
             ctx.body = {
@@ -54,7 +53,7 @@ class File {
      * Update a user
      * @param {ctx} Koa Context
      */
-    async update(ctx) {
+    async update (ctx, next) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id,
                 { ...ctx.request.body, updated_at: Date.now() })
@@ -75,7 +74,7 @@ class File {
      * Delete a user
      * @param {ctx} Koa Context
      */
-    async delete(ctx) {
+    async delete (ctx, next) {
         try {
             const user = await User.findByIdAndRemove(ctx.params.id)
             if (!user) {

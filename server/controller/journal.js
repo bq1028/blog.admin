@@ -2,15 +2,14 @@
  * 文件 控制器
  * @author Philip
  */
-import 'babel-polyfill'
-import User from '../dao/users'
+const journalDao = require('../dao/journal')
 
 class Journal {
     /**
      * Get all users
      * @param {ctx} Koa Context
      */
-    async find (ctx) {
+    async find (ctx, next) {
         ctx.body = await User.find()
     }
 
@@ -18,7 +17,7 @@ class Journal {
      * Find a user
      * @param {ctx} Koa Context
      */
-    async findById (ctx) {
+    async findById (ctx, next) {
         try {
             const user = await User.findById(ctx.params.id)
             if (!user) {
@@ -37,7 +36,7 @@ class Journal {
      * Add a user
      * @param {ctx} Koa Context
      */
-    async add (ctx) {
+    async add (ctx, next) {
         try {
             const user = await new User(ctx.request.body).save()
             ctx.body = {
@@ -53,7 +52,7 @@ class Journal {
      * Update a user
      * @param {ctx} Koa Context
      */
-    async update (ctx) {
+    async update (ctx, next) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id,
                 { ...ctx.request.body, updated_at: Date.now() })
@@ -74,7 +73,7 @@ class Journal {
      * Delete a user
      * @param {ctx} Koa Context
      */
-    async delete (ctx) {
+    async delete (ctx, next) {
         try {
             const user = await User.findByIdAndRemove(ctx.params.id)
             if (!user) {

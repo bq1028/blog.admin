@@ -1,5 +1,5 @@
 /**
- * 扫描
+ * 登陆中间件
  * @author Philip
  */
 module.exports = () => {

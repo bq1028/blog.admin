@@ -6,13 +6,16 @@
 "use strict"
 // koa
 const Koa = require("koa")
+const session = require("koa-session2")
 
 // 配置项
-const config = require("./config/app")
+const appConfig = require("./config/app")
 
 // 中间件
-const passport = require("./middleware/passport")
-const middleware = require("./middleware/app")
+const middleware = require("./middleware/common")
+
+// session store
+const RedisStore = require("./service/redis-store");
 
 // 路由
 const apis = require("./apis")
@@ -21,14 +24,18 @@ const routes = require("./routes")
 const app = new Koa()
 
 // 中间件
-passport(app, passport)
-middleware(app, config)
+middleware(app, appConfig)
+
+// session
+app.use(session({
+    store: new RedisStore()
+}))
 
 // Routes
-routes(app, passport)
-apis(app, passport)
+routes(app)
+apis(app)
 
 // 数据库初始化
 require("./sequelize/db")()
 
-app.listen(config.app.port)
+app.listen(appConfig.port)

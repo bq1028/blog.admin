@@ -2,23 +2,22 @@
  * 附件 控制器
  * @author Philip
  */
-import "babel-polyfill"
-import attachmentDao from "../dao/attachment"
+const attachmentDao = require("../dao/attachment")
 
 class Attachment {
     /**
      * 获取全部附件
      * @param {Context} context
      */
-    async find (ctx) {
-        ctx.body = await User.find()
+    async query (ctx, next) {
+        ctx.body = await attachmentDao.find()
     }
 
     /**
      * 根据id查询
      * @param {Context} Koa Context
      */
-    async findById (ctx) {
+    async findById (ctx, next) {
         try {
             const user = await User.findById(ctx.params.id)
 
@@ -40,7 +39,7 @@ class Attachment {
      * 添加
      * @param {Context} Koa Context
      */
-    async add (ctx) {
+    async add (ctx, next) {
         try {
             const user = await new User(ctx.request.body).save()
 
@@ -57,7 +56,7 @@ class Attachment {
      * 更新
      * @param {Context} Koa Context
      */
-    async update (ctx) {
+    async update (ctx, next) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id, { ...ctx.request.body, updated_at: Date.now() })
 
@@ -80,7 +79,7 @@ class Attachment {
      * 删除
      * @param {Context} Context
      */
-    async delete (ctx) {
+    async delete (ctx, next) {
         try {
             const user = await User.findByIdAndRemove(ctx.params.id)
 

@@ -2,15 +2,14 @@
  * 内容 控制器
  * @author Philip
  */
-import 'babel-polyfill'
-import contentModel from '../dao/content'
+const contentDao = require('../dao/content')
 
 class Content {
     /**
      * Get all users
      * @param {ctx} Koa Context
      */
-    async find(ctx) {
+    async find (ctx, next) {
         ctx.body = await User.find()
     }
 
@@ -18,7 +17,7 @@ class Content {
      * Find a user
      * @param {ctx} Koa Context
      */
-    async findById(ctx) {
+    async findById (ctx, next) {
         try {
             const user = await User.findById(ctx.params.id)
             if (!user) {
@@ -37,7 +36,7 @@ class Content {
      * Add a user
      * @param {ctx} Koa Context
      */
-    async add(ctx) {
+    async add (ctx, next) {
         try {
             const user = await new User(ctx.request.body).save()
             ctx.body = {
@@ -53,7 +52,7 @@ class Content {
      * Update a user
      * @param {ctx} Koa Context
      */
-    async update(ctx) {
+    async update (ctx, next) {
         try {
             const user = await User.findByIdAndUpdate(ctx.params.id,
                 { ...ctx.request.body, updated_at: Date.now() })
@@ -74,7 +73,7 @@ class Content {
      * Delete a user
      * @param {ctx} Koa Context
      */
-    async delete(ctx) {
+    async delete (ctx, next) {
         try {
             const user = await User.findByIdAndRemove(ctx.params.id)
             if (!user) {
@@ -90,6 +89,7 @@ class Content {
             if (err.name === 'CastError' || err.name === 'NotFoundError') {
                 ctx.throw(404)
             }
+            
             ctx.throw(500)
         }
     }
