@@ -5,7 +5,7 @@
 const passport = require('koa-passport')
 const LocalStrategy = require("passport-local").Strategy
 const auth = require("../service/auth")
-const userCache = require('./user-cache')
+const cache = require('./cache')
 
 /**
  * 序列化
@@ -14,25 +14,29 @@ const userCache = require('./user-cache')
  * @return none 
  */
 const serialize = (user, done) => {
-  done(null, user.id)
+    done(null, user.id)
 }
 
 /**
  * 反序列化
  * @param {string} 反序列化 
  * @param {function} 序列化处理函数
- * @return none
+ * @return {none}
  */
-const deserialize = (id, done) => {
-  userCache.findById(id).then((data) => {
-    done(null, data)
-  })
+const deserialize = async (id, done) => {
+    let user = await cache.findUser(id)
+
+    if (user) {
+        done(null, user)
+    } else {
+        done(new Error('用户未找到'))
+    }
 }
 
 module.exports = (app, passport) => {
-  passport.serializeUser(serialize)
-  passport.deserializeUser(deserialize)
+    passport.serializeUser(serialize)
+    passport.deserializeUser(deserialize)
 
-  app.use(passport.initialize())
-  app.use(passport.session())
+    app.use(passport.initialize())
+    app.use(passport.session())
 }
