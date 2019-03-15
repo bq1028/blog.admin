@@ -7,7 +7,7 @@
 const path = require('path')
 const Router = require("koa-router")
 const render = require('koa-ejs')
-const { secured } = require('./service/auth')
+const { secured } = require('./service/secure')
 
 module.exports = (app) => {
     let router = new Router()

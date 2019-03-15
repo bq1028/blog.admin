@@ -3,60 +3,60 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
 // models
-const role = require('./role')
+const role = require("./role")
 
-const user = sequelize.define('user', {
+const user = sequelize.define("user", {
     username: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     nick: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     mobile: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     avatar: {
         type: Sequelize.STRING,
-        allowNull: true,
-        unique: false
+        allowNull: true
     },
     birth: {
         type: Sequelize.DATE,
-        allowNull: true,
-        unique: false
+        allowNull: true
     },
     description: {
         type: Sequelize.STRING,
         allowNull: true,
-        primaryKey: false
     },
     roleId: {
         type: Sequelize.INTEGER,
         references: {
             model: role,
-            key: 'id'
-        }    
-    }    
+            key: "id"
+        }
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    }
 }, {
     paranoid: false,
     timestamps: true,

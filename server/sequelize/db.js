@@ -26,6 +26,6 @@ module.exports = () => {
     sequelize.sync().then(() => {
         require('./base').init()
     }).catch((err) => {
-        restart(err)
+        console.error(err)
     })
 }

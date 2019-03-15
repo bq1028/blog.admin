@@ -2,6 +2,7 @@
  * 附件 控制器
  * @author Philip
  */
+const Controller = require("")
 const attachmentDao = require("../dao/attachment")
 
 class Attachment {
@@ -14,12 +15,14 @@ class Attachment {
     }
 
     /**
-     * 根据id查询
-     * @param {Context} Koa Context
+     * 根据 id 查询附件
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
-            const user = await User.findById(ctx.params.id)
+            const user = await attachmentDao.findById(ctx.params.id)
 
             if (!user) {
                 ctx.throw(404)
@@ -36,8 +39,10 @@ class Attachment {
     }
 
     /**
-     * 添加
-     * @param {Context} Koa Context
+     * 添加附件
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -53,8 +58,10 @@ class Attachment {
     }
 
     /**
-     * 更新
-     * @param {Context} Koa Context
+     * 更新附件
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -76,8 +83,10 @@ class Attachment {
     }
 
     /**
-     * 删除
-     * @param {Context} Context
+     * 删除附件
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {

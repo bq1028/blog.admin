@@ -6,8 +6,15 @@
 "use strict"
 const Router = require('koa-router')
 const apis = require('./config/apis')
+const { secured } = require('./service/secure') 
 
-module.exports = async (app, passport) => { 
+
+/**
+ * 
+ * @param {koa} koa 实例
+ * @return none
+ */
+module.exports = async (app) => { 
     let api = new Router()
 
     api.use(async function (next) {
@@ -20,11 +27,11 @@ module.exports = async (app, passport) => {
         let module = apis[moduleName]
 
         Object.keys(module).forEach((handler) => {
-            let api = module[handler].split(' ')
-            let method = api[0]
-            let url = api[1]
+            let apiConfig = module[handler].split(' ')
+            let method = apiConfig[0].toLowerCase()
+            let url = apiConfig[1]
             
-            router[method](url, secured, async (ctx, next) => {
+            api[method](url, secured, async (ctx, next) => {
                 await controller[handler](ctx, next);
             })
         })

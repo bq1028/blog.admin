@@ -4,36 +4,33 @@
  */
 "use strict"
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
-const file = require('./file')
-const authority = require('./authority')
-const user = require('./user')
-const content = require('./content')
+const file = require("./file")
+const authority = require("./authority")
+const user = require("./user")
+const content = require("./content")
 
-const attachment = sequelize.define('attachment', {
+const attachment = sequelize.define("attachment", {
     name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     keywords: {
         type: Sequelize.STRING,
-        allowNull: true,
-        unique: false
+        allowNull: true
     },    
     type: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     authorityId: {
         type: Sequelize.INTEGER,
 
         references: {
             model: authority,
-            key: 'id'
+            key: "id"
         }  
     },
     fileId: {
@@ -41,7 +38,7 @@ const attachment = sequelize.define('attachment', {
 
         references: {
             model: file,
-            key: 'id'
+            key: "id"
         }    
     },
     contentId: {
@@ -49,7 +46,7 @@ const attachment = sequelize.define('attachment', {
 
         references: {
             model: content,
-            key: 'id'
+            key: "id"
         }    
     },  
     userId: {
@@ -57,8 +54,16 @@ const attachment = sequelize.define('attachment', {
 
         references: {
             model: user,
-            key: 'id'
+            key: "id"
         }    
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }        
 }, {
     paranoid: false,

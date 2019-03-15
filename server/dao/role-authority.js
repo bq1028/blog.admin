@@ -3,19 +3,19 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
-const authority = require('./authority')
-const role = require('./role')
+const authority = require("./authority")
+const role = require("./role")
 
-const roleAuth = sequelize.define('roleAuth', {
+const roleAuth = sequelize.define("roleAuth", {
     roleId: {
       type: Sequelize.INTEGER,
 
       references: {
         model: role,
-        key: 'id'
+        key: "id"
       }
     },
     authorityId: {
@@ -23,7 +23,7 @@ const roleAuth = sequelize.define('roleAuth', {
 
       references: {
         model: authority,
-        key: 'id'
+        key: "id"
       }
     }    
 }, {

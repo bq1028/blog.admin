@@ -3,29 +3,33 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
-const authority = sequelize.define('authority', {
+const authority = sequelize.define("authority", {
     name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     type: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     description: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false        
+        allowNull: false    
     },
     code: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }
 }, {
     paranoid: false,

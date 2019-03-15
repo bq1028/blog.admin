@@ -7,16 +7,20 @@ const messageDao = require('../dao/message')
 class Message {
 
     /**
-     * Get all users
-     * @param {ctx} Koa Context
+     * 查询消息
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
-    async find (ctx, next) {
+    async query (ctx, next) {
         ctx.body = await User.find()
     }
 
     /**
-     * Find a user
-     * @param {ctx} Koa Context
+     * 根据id查询消息
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
@@ -34,8 +38,10 @@ class Message {
     }
 
     /**
-     * Add a user
-     * @param {ctx} Koa Context
+     * 添加消息
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -50,8 +56,10 @@ class Message {
     }
 
     /**
-     * Update a user
-     * @param {ctx} Koa Context
+     * 更新消息
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -71,8 +79,10 @@ class Message {
     }
 
     /**
-     * Delete a user
-     * @param {ctx} Koa Context
+     * 删除消息
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {

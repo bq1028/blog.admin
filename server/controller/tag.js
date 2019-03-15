@@ -7,16 +7,20 @@ const tagDao = require('../dao/tag')
 class Tag {
 
     /**
-     * Get all users
-     * @param {ctx} Koa Context
+     * 查询标签
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
-    async find (ctx, next) {
+    async query (ctx, next) {
         ctx.body = await User.find()
     }
 
     /**
-     * Find a user
-     * @param {ctx} Koa Context
+     * 根据id查询标签
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
@@ -34,8 +38,10 @@ class Tag {
     }
 
     /**
-     * Add a user
-     * @param {ctx} Koa Context
+     * 添加标签
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -50,8 +56,10 @@ class Tag {
     }
 
     /**
-     * Update a user
-     * @param {ctx} Koa Context
+     * 更新标签
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -71,8 +79,10 @@ class Tag {
     }
 
     /**
-     * Delete a user
-     * @param {ctx} Koa Context
+     * 删除标签
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {
@@ -95,4 +105,4 @@ class Tag {
     }
 }
 
-export default new Tag()
+module.exports = new Tag()

@@ -3,10 +3,10 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
-const role = sequelize.define('role', {
+const role = sequelize.define("role", {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -16,6 +16,14 @@ const role = sequelize.define('role', {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false        
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }
 }, {
     paranoid: false,

@@ -7,20 +7,24 @@ const roleDao = require('../dao/role')
 class Role {
 
     /**
-     * Get all users
-     * @param {ctx} Koa Context
+     * 查询角色
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
-    async find (ctx, next) {
-        ctx.body = await User.find()
+    async query (ctx, next) {
+        ctx.body = await roleDao.find()
     }
 
     /**
-     * Find a user
-     * @param {ctx} Koa Context
+     * 根据 id 查询角色
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
-            const user = await User.findById(ctx.params.id)
+            const user = await roleDao.findById(ctx.params.id)
             if (!user) {
                 ctx.throw(404)
             }
@@ -34,8 +38,10 @@ class Role {
     }
 
     /**
-     * Add a user
-     * @param {ctx} Koa Context
+     * 添加角色
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -50,8 +56,10 @@ class Role {
     }
 
     /**
-     * Update a user
-     * @param {ctx} Koa Context
+     * 更新角色
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -71,8 +79,10 @@ class Role {
     }
 
     /**
-     * Delete a user
-     * @param {ctx} Koa Context
+     * 删除角色
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {
@@ -95,4 +105,4 @@ class Role {
     }
 }
 
-export default new Role()
+module.exports = new Role()

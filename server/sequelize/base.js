@@ -3,8 +3,8 @@
  * @author Philip
  */
 
-const user = require('./schemas/user')
-const role = require('./schemas/role')
+const user = require('../dao/user')
+const role = require('../dao/role')
 
 module.exports.init = function() {
     let arr = [
@@ -14,7 +14,9 @@ module.exports.init = function() {
             },
             defaults: {
                 name: 'administrator',
-                description: '最高权限用户'
+                description: '最高权限用户',
+                createAt: new Date(),
+                updateAt: new Date()
             }
         }),
         user.findOrCreate({
@@ -31,13 +33,15 @@ module.exports.init = function() {
                 birth: new Date('1990-03-21 06:06:06'),
                 description: null,
                 tags: [],
-                roleId: '1'
+                roleId: '1',
+                createAt: new Date(),
+                updateAt: new Date()
             }
         })               
     ]
 
     Promise.all(arr).then(function () {
-        console.info('base date inited ======= >>>')
+        console.info('base date inited')
     },function() {
         console.error(arguments)
     })

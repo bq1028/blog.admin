@@ -45,13 +45,6 @@ module.exports = {
         delete: 'DELETE /api/message',
         update: 'PUT /api/message'
     },
-    roleAuthority: {
-        query: 'GET /api/role-authority',
-        findById: 'GET /api/role-authority/:id',
-        add: 'POST /api/role-authority',
-        delete: 'DELETE /api/role-authority',
-        update: 'PUT /api/role-authority'
-    },
     role: {
         query: 'GET /api/role',
         findById: 'GET /api/role/:id',
@@ -71,14 +64,14 @@ module.exports = {
         findById: 'GET /api/user/:id',
         add: 'POST /api/user',
         delete: 'DELETE /api/user',
-        update: 'PUT/api/user'
+        update: 'PUT /api/user'
     },
     scan: {
-        results: 'GET /api/scan',
+        query: 'GET /api/scan',
         scan: 'POST /api/scan',
     },
     spider: {
-        results: 'GET /api/spider',
+        query: 'GET /api/spider',
         spider: 'POST /api/spider',
     },
 }

@@ -7,7 +7,7 @@ const cache = require("./redis-store")
 
 /**
  * 权限需登录
- * @returns none
+ * @return {none}
  */
 exports.secured = async function (next) {
     if (this.isAuthenticated()) {
@@ -19,7 +19,7 @@ exports.secured = async function (next) {
 
 /**
  * 权限无需登录
- * @returns none
+ * @return {none}
  */
 exports.unsecured = async function (next) {
     if (!this.isAuthenticated()) {

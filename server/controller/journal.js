@@ -6,16 +6,20 @@ const journalDao = require('../dao/journal')
 
 class Journal {
     /**
-     * Get all users
-     * @param {ctx} Koa Context
+     * 查询日志
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
-    async find (ctx, next) {
+    async query (ctx, next) {
         ctx.body = await User.find()
     }
 
     /**
-     * Find a user
-     * @param {ctx} Koa Context
+     * 根据 id 查询日志
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
@@ -33,8 +37,10 @@ class Journal {
     }
 
     /**
-     * Add a user
-     * @param {ctx} Koa Context
+     * 添加日志
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -49,8 +55,10 @@ class Journal {
     }
 
     /**
-     * Update a user
-     * @param {ctx} Koa Context
+     * 更新日志
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -70,8 +78,10 @@ class Journal {
     }
 
     /**
-     * Delete a user
-     * @param {ctx} Koa Context
+     * 删除日志
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {
@@ -94,4 +104,4 @@ class Journal {
     }
 }
 
-export default new Journal()
+module.exports = new Journal()

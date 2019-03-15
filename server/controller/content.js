@@ -6,16 +6,20 @@ const contentDao = require('../dao/content')
 
 class Content {
     /**
-     * Get all users
-     * @param {ctx} Koa Context
+     * 查询内容
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
-    async find (ctx, next) {
+    async query (ctx, next) {
         ctx.body = await User.find()
     }
 
     /**
-     * Find a user
-     * @param {ctx} Koa Context
+     * 根据id查询内容
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async findById (ctx, next) {
         try {
@@ -33,8 +37,10 @@ class Content {
     }
 
     /**
-     * Add a user
-     * @param {ctx} Koa Context
+     * 添加内容
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async add (ctx, next) {
         try {
@@ -49,8 +55,10 @@ class Content {
     }
 
     /**
-     * Update a user
-     * @param {ctx} Koa Context
+     * 更新内容
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async update (ctx, next) {
         try {
@@ -70,8 +78,10 @@ class Content {
     }
 
     /**
-     * Delete a user
-     * @param {ctx} Koa Context
+     * 删除内容
+     * @param {context} koa context
+     * @param {function} next
+     * @handler
      */
     async delete (ctx, next) {
         try {

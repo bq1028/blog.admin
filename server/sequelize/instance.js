@@ -4,20 +4,9 @@
  */
 
 const Sequelize = require('sequelize')
+const { database, username, password, options } = require('../config/mysql')
 
-let sequelize = new Sequelize('blog', 'root', 'Wowcxy2008', {
-  host: '127.0.0.1',
-  port: '3306',
-  dialect: 'mysql',
-  dialectOptions: {
-    charset: 'utf8mb4',
-  },
-  pool: {
-    max: 25,
-    min: 0,
-    idle: 10000,
-  }
-})
+let sequelize = new Sequelize(database, username, password, options)
 
 sequelize
   .authenticate()

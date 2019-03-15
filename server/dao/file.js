@@ -3,40 +3,43 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
 // models
-const user = require('./user')
+const user = require("./user")
 
-const file = sequelize.define('file', {
+const file = sequelize.define("file", {
     name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     type: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     ext: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     url: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
+        allowNull: false
     },
     userId: {
         type: Sequelize.INTEGER,
-
         references: {
             model: user,
-            key: 'id'
+            key: "id"
         }   
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }    
 }, {
     paranoid: false,

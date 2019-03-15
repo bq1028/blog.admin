@@ -3,35 +3,39 @@
  * @author Philip
  */
 
-const Sequelize = require('sequelize')
-const sequelize = require('../sequelize/instance')
+const Sequelize = require("sequelize")
+const sequelize = require("../sequelize/instance")
 
 // models
-const user = require('./user')
+const user = require("./user")
 
-const journal = sequelize.define('journal', {
+const journal = sequelize.define("journal", {
     target: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false          
+        allowNull: false   
     },
     action: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false           
+        allowNull: false       
     },
     response: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false       
+        allowNull: false  
     },
     userId: {
         type: Sequelize.INTEGER,
-
         references: {
             model: user,
-            key: 'id'
+            key: "id"
         }        
+    },
+    createAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updateAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }    
 }, {
     paranoid: false,
