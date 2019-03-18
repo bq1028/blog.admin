@@ -8,3 +8,4 @@ const fileDto = require('../dto/file')
 class File extends Controller {}
 
 module.exports = new File(fileDto)
+

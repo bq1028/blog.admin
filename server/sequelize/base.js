@@ -6,7 +6,7 @@
 const user = require('../dao/user')
 const role = require('../dao/role')
 
-module.exports.init = function() {
+module.exports.init = () => {
     let arr = [
         role.findOrCreate({
             where: {

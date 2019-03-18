@@ -1,5 +1,5 @@
 /**
- * 标签
+ * 标签 控制器
  * @author Philip
  */
 const Controller = require("./controller")

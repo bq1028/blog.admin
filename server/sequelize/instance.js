@@ -1,12 +1,11 @@
 /**
- * 初始化orm
+ * 初始化 orm
  * @author Philip
  */
 
 const Sequelize = require('sequelize')
 const { database, username, password, options } = require('../config/mysql')
-
-let sequelize = new Sequelize(database, username, password, options)
+const sequelize = new Sequelize(database, username, password, options)
 
 sequelize
   .authenticate()

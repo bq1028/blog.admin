@@ -1,41 +1,52 @@
 /**
- * 应用
+ * app 入口
  * @author Philip
  */
 
-"use strict"
-// koa
-const Koa = require("koa")
-const session = require("koa-session2")
+const path = require("path")
 
-// 配置项
-const appConfig = require("./config/app")
-
-// 中间件
-const middleware = require("./middleware/common")
-
-// session store
-const RedisStore = require("./service/redis-store");
-
-// 路由
-const apis = require("./apis")
+const express = require("express")
+const session = require("express-session")
+const cookieParser = require("cookie-parser")
+const bodyParser = require("body-parser")
+const ejs = require("ejs")
 const routes = require("./routes")
+const apis = require("./apis")
+const middlewareAuth = require("./middleware/auth")
+const RedisStore = require("connect-redis")(session);
+const { host, port, password } = require("./config/redis")
 
-const app = new Koa()
+const app = express()
 
-// 中间件
-middleware(app, appConfig)
-
-// session
 app.use(session({
-    store: new RedisStore()
+    store: new RedisStore({
+        host,
+        port,
+        password,
+        db: "blog_login_session"
+    }),
+	cookie: {
+		maxAge: 1000 * 60 * 30
+	}
 }))
 
-// Routes
-routes(app)
-apis(app)
+// 使用路由
+app.engine("html", ejs.renderFile)
+app.set("view engine", "html")
+app.set("views", path.join(__dirname, "../../web/dist"))
 
-// 数据库初始化
-require("./sequelize/db")()
+// 模板设置
+app.use("/", routes)
+app.use("/", apis)
 
-app.listen(appConfig.port)
+// 请求 body 解析
+app.use(bodyParser.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// 登录中间件
+app.use(middlewareAuth)
+
+// 请求 cookie 解析
+app.use(cookieParser())
+app.listen(process.env.NODE_ENV === "dev" ? 8080 : 8082)

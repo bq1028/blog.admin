@@ -1,5 +1,5 @@
 /**
- * 文件 控制器
+ * 日志 控制器
  * @author Philip
  */
 const Controller = require("./controller")

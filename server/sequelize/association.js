@@ -22,7 +22,7 @@ const roleAuth = require('../dao/role-authority')
  * 初始化
  * @return none
  */
-module.exports.init = function () {
+module.exports.init = () => {
   authority.belongsToMany(role, { 
     through: roleAuth, 
     foreignKey: 'roleId', 

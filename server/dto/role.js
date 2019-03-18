@@ -8,6 +8,3 @@ const roleDao = require('../dao/role')
 class RoleDto extends Dto {}
 
 module.exports = new RoleDto(roleDao)
-
-
-

@@ -1,5 +1,5 @@
 /**
- * redis store
+ * redis 存储
  * @author Philip
  */
 const redis = require("redis")
@@ -22,6 +22,7 @@ class RedisStore extends Store {
      */
     constructor () {
         super()
+        
         this.redis = redis.createClient(port, host, {
             password
         })

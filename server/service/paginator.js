@@ -5,7 +5,7 @@
 
 class Paginator {
     /**
-     * 构造函数
+     * @constructor
      */
     constructor (total, list) {
         this.total = total

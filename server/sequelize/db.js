@@ -9,6 +9,10 @@ const path = require("path")
 const sequelize = require('./instance')
 const normalizedPath = path.join(__dirname, "../dao")
 
+/**
+ * 数据库
+ * @return {none}
+ */
 module.exports = () => {
     let arr = []
 

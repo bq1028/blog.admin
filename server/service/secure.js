@@ -1,19 +1,27 @@
 /**
- * 切片模型
- * @author Philip
+ * 权限需登录
+ * @return {none}
  */
-"use strict"
-const cache = require("./redis-store")
+exports.secured = async function (ctx, next) {
+    if (ctx.user) {
+        await next()
+    } else {
+        ctx.status = 401
+        ctx.body = {
+            msg: '用户未登录'
+        }
+    }
+}
 
 /**
  * 权限需登录
  * @return {none}
  */
-exports.secured = async function (next) {
-    if (this.isAuthenticated()) {
+exports.securedRoute = async function (ctx, next) {
+    if (!ctx.user) {
         await next()
     } else {
-        this.status = 403
+        ctx.redirect('http://raddeana.tech')
     }
 }
 
@@ -21,13 +29,13 @@ exports.secured = async function (next) {
  * 权限无需登录
  * @return {none}
  */
-exports.unsecured = async function (next) {
-    if (!this.isAuthenticated()) {
+exports.unsecured = async function (ctx, next) {
+    if (!ctx.user) {
         await next()
     } else {
-        this.status = 403
+        ctx.status = 403
         
-        this.body = {
+        ctx.body = {
             msg: '当前用户已授权'
         }
     }

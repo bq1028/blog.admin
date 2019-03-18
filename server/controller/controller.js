@@ -6,10 +6,10 @@
 class Controller {
     /**
      * 构造函数
-     * @param {sequelize} model 
+     * @param {Dto} dto 
      */
-    constructor (model) {
-        this.model = model
+    constructor (dto) {
+        this.dto = dto
     }
 
     /**
@@ -19,7 +19,7 @@ class Controller {
      * @handler
      */
     async query (ctx, next) {
-        ctx.body = await User.find()
+        ctx.body = await User.query()
     }
 
     /**
