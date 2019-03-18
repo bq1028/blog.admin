@@ -26,8 +26,8 @@
         ".eslintrc"
     ],
     "scripts": {
-        "start": "cross-env node server/index.js --harmony NODE_ENV=prod",
-        "dev": "cross-env nodemon -e js --ignore ./assets/ server/index.js --harmony NODE_ENV=dev",
+        "start": "cross-env node server/app.js --harmony NODE_ENV=prod",
+        "dev": "cross-env nodemon -e js --ignore ./assets/ server/app.js --harmony NODE_ENV=dev",
         "lint": "eslint",
         "test": "mocha"
     },
