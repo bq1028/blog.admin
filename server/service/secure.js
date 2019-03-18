@@ -2,12 +2,12 @@
  * 权限需登录
  * @return {none}
  */
-exports.secured = async function (ctx, next) {
-    if (ctx.user) {
+exports.secured = async function (req, res) {
+    if (req.session.user) {
         await next()
     } else {
-        ctx.status = 401
-        ctx.body = {
+        req.status = 401
+        req.body = {
             msg: '用户未登录'
         }
     }
@@ -17,8 +17,8 @@ exports.secured = async function (ctx, next) {
  * 权限需登录
  * @return {none}
  */
-exports.securedRoute = async function (ctx, next) {
-    if (!ctx.user) {
+exports.securedRoute = async function (req, res) {
+    if (req.session.user) {
         await next()
     } else {
         ctx.redirect('http://raddeana.tech')
@@ -30,12 +30,12 @@ exports.securedRoute = async function (ctx, next) {
  * @return {none}
  */
 exports.unsecured = async function (ctx, next) {
-    if (!ctx.user) {
+    if (!req.session.user) {
         await next()
     } else {
-        ctx.status = 403
+        req.status = 403
         
-        ctx.body = {
+        req.body = {
             msg: '当前用户已授权'
         }
     }
