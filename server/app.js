@@ -14,7 +14,8 @@ const routes = require("./routes")
 const apis = require("./apis")
 const middlewareAuth = require("./middleware/auth")
 const RedisStore = require("connect-redis")(session);
-const { host, port, password } = require("./config/redis")
+const { host, port, pass, secret } = require("./config/redis")
+const { key } = require("./config/app")
 
 const app = express()
 
@@ -22,9 +23,11 @@ app.use(session({
     store: new RedisStore({
         host,
         port,
-        password,
-        db: "blog_login_session"
+        pass,
+        db: 1,
+        logErrors: true
     }),
+    secret: key[0],
 	cookie: {
 		maxAge: 1000 * 60 * 30
 	}

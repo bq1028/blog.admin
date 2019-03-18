@@ -3,13 +3,11 @@
  * @return {none}
  */
 exports.secured = async function (req, res) {
-    if (req.session.user) {
-        await next()
-    } else {
-        req.status = 401
-        req.body = {
+    if (!req.session.user) {
+        res.sendStatus(401)
+        res.json({
             msg: '用户未登录'
-        }
+        })
     }
 }
 
@@ -18,10 +16,8 @@ exports.secured = async function (req, res) {
  * @return {none}
  */
 exports.securedRoute = async function (req, res) {
-    if (req.session.user) {
-        await next()
-    } else {
-        ctx.redirect('http://raddeana.tech')
+    if (!req.session.user) {
+        res.redirect('http://raddeana.tech')
     }
 }
 
@@ -29,14 +25,11 @@ exports.securedRoute = async function (req, res) {
  * 权限无需登录
  * @return {none}
  */
-exports.unsecured = async function (ctx, next) {
-    if (!req.session.user) {
-        await next()
-    } else {
-        req.status = 403
-        
-        req.body = {
+exports.unsecured = async function (req, res) {
+    if (req.session.user) {
+        res.sendStatus(403)
+        res.json({
             msg: '当前用户已授权'
-        }
+        })
     }
 }
