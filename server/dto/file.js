@@ -5,12 +5,6 @@
 const Dto = require('./dto')
 const fileDao = require('../dao/file')
 
-class FileDto extends Dto {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    constructor () {
-        super(fileDao)
-    }
-}
+class FileDto extends Dto {}
+
+module.exports = new FileDto(fileDao)

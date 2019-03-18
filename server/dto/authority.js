@@ -5,12 +5,6 @@
 const Dto = require('./dto')
 const authorityDao = require('../dao/authority')
 
-class AuthorityDto extends Dto {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    constructor () {
-        super(authorityDao)
-    }
-}
+class AuthorityDto extends Dto {}
+
+module.exports = new AuthorityDto(authorityDao)

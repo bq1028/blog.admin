@@ -5,12 +5,6 @@
 const Dto = require('./dto')
 const spiderDao = require('../dao/spider')
 
-class SpiderDto extends Dto {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    constructor () {
-        super(spiderDao)
-    }
-}
+class SpiderDto extends Dto {}
+
+module.exports = new SpiderDto(spiderDao)

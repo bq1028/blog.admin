@@ -2,10 +2,9 @@
  * 权限 控制器
  * @author Philip
  */
-const authorityDao = require('../dao/authority')
+const Controller = require("./controller")
+const authorityDto = require('../dto/authority')
 
-class Authority {
-  
-}
+class Authority extends Controller {}
 
-module.exports = new Authority()
+module.exports = new Authority(authorityDto)

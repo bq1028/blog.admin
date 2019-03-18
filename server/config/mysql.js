@@ -12,12 +12,12 @@ module.exports = {
         port: '3306',
         dialect: 'mysql',
         dialectOptions: {
-          charset: 'utf8mb4',
+            charset: 'utf8mb4'
         },
         pool: {
-          max: 25,
-          min: 0,
-          idle: 10000,
+            max: 25,
+            min: 0,
+            idle: 10000
         }
     }
 }

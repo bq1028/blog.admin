@@ -5,13 +5,6 @@
 const Dto = require('./dto')
 const userDao = require('../dao/user')
 
-class UserDto extends Dto {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    constructor () {
-        super(userDao)
-    }
-}
+class UserDto extends Dto {}
 
+module.exports = new UserDto(userDao)

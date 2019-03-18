@@ -2,21 +2,9 @@
  * 爬虫
  * @author Philip
  */
+const Controller = require("./controller")
 const spiderDto = require('../dto/spider')
 
-class Spider {
-    /**
-     * @constructor
-     */
-    constructor (spiderDto) {
-        this.spiderDto
-    }
+class Spider extends Controller {}
 
-    query () {
-
-    }
-
-    spider () {
-
-    }
-}
+module.exports = new Spider(spiderDto)

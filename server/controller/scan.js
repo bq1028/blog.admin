@@ -2,21 +2,9 @@
  * 扫描
  * @author Philip
  */
+const Controller = require("./controller")
 const scanDto = require('../dto/scan')
 
-class Scan {
-    /**
-     * @constructor
-     */
-    constructor () {
+class Scan extends Controller {}
 
-    }
-
-    query () {
-
-    }
-
-    spider () {
-        
-    }
-}
+module.exports = new Scan(scanDto)

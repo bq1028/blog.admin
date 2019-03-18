@@ -5,12 +5,6 @@
 const Dto = require('./dto')
 const messageDao = require('../dao/message')
 
-class MessageDto extends Dto {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    constructor () {
-        super(messageDao)
-    }
-}
+class MessageDto extends Dto {}
+
+module.exports = new MessageDto(messageDao)
