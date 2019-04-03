@@ -2,7 +2,7 @@
  * 
  * @author Philip
  */
-const Paginator = require('../service/paginator')
+const Paginator = require('../services/paginator')
 
 class Dto {
     /**

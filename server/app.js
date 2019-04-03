@@ -12,8 +12,9 @@ const bodyParser = require("body-parser")
 const ejs = require("ejs")
 const routes = require("./routes")
 const apis = require("./apis")
-const middlewareAuth = require("./middleware/auth")
-const RedisStore = require("connect-redis")(session);
+const authorize = require("./middlewares/auth")
+const RedisStore = require("connect-redis")(session)
+
 const { host, port, pass, secret } = require("./config/redis")
 const { key } = require("./config/app")
 
@@ -48,7 +49,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // 登录中间件
-app.use(middlewareAuth)
+app.use(authorize)
 
 // 请求 cookie 解析
 app.use(cookieParser())

@@ -2,7 +2,7 @@
  * 权限 控制器
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const authorityDto = require('../dto/authority')
 
 class Authority extends Controller {}

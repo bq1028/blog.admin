@@ -6,7 +6,7 @@
 "use strict"
 const express = require("express")
 const apis = require("./config/apis")
-const { secured } = require("./service/secure")
+const { secured } = require("./services/secure")
 const api = express.Router()
 
 api.use(async function (ctx, next) {
@@ -15,7 +15,7 @@ api.use(async function (ctx, next) {
 })
 
 Object.keys(apis).forEach((moduleName) => {
-    let controller = require(`./controller/${moduleName}`)
+    let controller = require(`./controllers/${moduleName}`)
     let module = apis[moduleName]
 
     Object.keys(module).forEach((handler) => {

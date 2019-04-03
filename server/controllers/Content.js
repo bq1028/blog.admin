@@ -2,7 +2,7 @@
  * 内容 控制器
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const contentDto = require('../dto/content')
 
 class Content extends Controller {}
