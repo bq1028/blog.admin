@@ -1,10 +1,10 @@
 /**
- * 用户 控制器
+ * 用户
  * @author Philip
  */
 const Controller = require("./controller")
-const userDto = require('../dto/user')
+const userDto = require('../dtos/User')
 
-class User extends Controller {}
+class UserController extends Controller {}
 
-module.exports = new User(userDto)
+module.exports = new UserController(userDto)

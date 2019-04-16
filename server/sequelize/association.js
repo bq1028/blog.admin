@@ -7,16 +7,15 @@
 const sequelize = require('../sequelize/instance')
 
 // 模型
-const authority = require('../dao/authority')
-const role = require('../dao/role')
-const user = require('../dao/user')
-const file = require('../dao/file')
-const tag = require('../dao/tag')
-const content = require('../dao/content')
-const message = require('../dao/message')
-const journal = require('../dao/journal')
-const attachment = require('../dao/attachment')
-const roleAuth = require('../dao/role-authority')
+const RoleDao = require('../daos/Role')
+const User = require('../daos/User')
+const File = require('../daos/File')
+const Tag = require('../daos/Tag')
+const Content = require('../daos/Content')
+const Message = require('../daos/Message')
+const Permission = require('../daos/Permission')
+const Diary = require('../daos/Diary')
+const Attach = require('../daos/Attach')
 
 /**
  * 初始化

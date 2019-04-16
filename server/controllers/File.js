@@ -1,11 +1,11 @@
 /**
- * 文件 控制器
+ * 文件
  * @author Philip
  */
 const Controller = require("./controller")
-const fileDto = require('../dto/file')
+const fileDto = require('../dtos/File')
 
-class File extends Controller {}
+class FileController extends Controller {}
 
-module.exports = new File(fileDto)
+module.exports = new FileController(fileDto)
 

@@ -1,10 +1,10 @@
 /**
- * 标签 控制器
+ * 标签
  * @author Philip
  */
 const Controller = require("./controller")
-const tagDto = require('../dto/tag')
+const tagDto = require('../dtos/Tag')
 
-class Tag extends Controller {}
+class TagController extends Controller {}
 
-module.exports = new Tag(tagDto)
+module.exports = new TagController(tagDto)

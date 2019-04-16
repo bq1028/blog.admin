@@ -1,10 +1,10 @@
 /**
- * 内容 控制器
+ * 内容
  * @author Philip
  */
 const Controller = require("./Controller")
-const contentDto = require('../dto/content')
+const contentDto = require('../dtos/Content')
 
-class Content extends Controller {}
+class ContentController extends Controller {}
 
-module.exports = new Content(contentDto)
+module.exports = new ContentController(contentDto)

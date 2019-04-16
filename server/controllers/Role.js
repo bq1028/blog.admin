@@ -1,10 +1,10 @@
 /**
- * 角色 控制器
+ * 角色
  * @author Philip
  */
 const Controller = require("./controller")
-const RoleDto = require('../dto/role')
+const roleDto = require('../dtos/Role')
 
-class Role extends Controller {}
+class RoleController extends Controller {}
 
-module.exports = new Role(RoleDto)
+module.exports = new RoleController(RoleDto)

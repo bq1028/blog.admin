@@ -1,10 +1,10 @@
 /**
- * 消息 控制器
+ * 消息
  * @author Philip
  */
 const Controller = require("./controller")
-const messageDto = require('../dto/message')
+const messageDto = require('../dtos/Message')
 
-class Message extends Controller {}
+class MessageController extends Controller {}
 
-module.exports = new Message(messageDto)
+module.exports = new MessageController(messageDto)
