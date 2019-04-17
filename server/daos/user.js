@@ -7,69 +7,38 @@
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
+module.exports = sequelize.define("user", {
     name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(32),
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    nickname: {
+        type: Sequelize.STRING(32),
         allowNull: true
     },    
-    type: {
-        type: Sequelize.STRING,
+    avatar: {
+        type: Sequelize.STRING(128),
+        allowNull: true
+    },
+    email: {
+        type: Sequelize.STRING(128),
         allowNull: false
     },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
+    phone: {
+        type: Sequelize.STRING(128),
+        allowNull: false
     },
-    fileId: {
+    roleId: {
         type: Sequelize.INTEGER,
-
         references: {
-            model: file,
+            model: require("./role"),
             key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    }    
+        },
+        unique: false
+    }
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })

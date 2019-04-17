@@ -1,75 +1,23 @@
 /**
- * 附件
+ * 扫描
  * @author Philip
  */
-"use strict"
 
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
-    name: {
+module.exports = sequelize.define("scanner", {
+    ip: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    ports: {
+        type: Sequelize.JSON,
         allowNull: true
-    },    
-    type: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
     }
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })

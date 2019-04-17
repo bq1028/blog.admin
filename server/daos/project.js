@@ -1,75 +1,32 @@
 /**
- * 附件
+ * 项目
  * @author Philip
  */
-"use strict"
-
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
+module.exports = sequelize.define("project", {
+    author: {
+        
+    },
+    tags: {
 
-module.exports = sequelize.define("attachment", {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },    
-    type: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    authorityId: {
-        type: Sequelize.INTEGER,
+    description: {
 
-        references: {
-            model: authority,
-            key: "id"
-        }  
     },
-    fileId: {
-        type: Sequelize.INTEGER,
+    title: {
 
-        references: {
-            model: file,
-            key: "id"
-        }    
     },
-    contentId: {
-        type: Sequelize.INTEGER,
+    start: {
 
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
+    },
+    end: {
 
-        references: {
-            model: user,
-            key: "id"
-        }    
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
     }
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })

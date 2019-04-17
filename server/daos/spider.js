@@ -1,71 +1,34 @@
 /**
- * 附件
+ * 爬虫
  * @author Philip
  */
-"use strict"
-
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
-    name: {
-        type: Sequelize.STRING,
+module.exports = sequelize.define("spider", {
+    domain: {
+        type: Sequelize.STRING(128),
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    ip: {
+        type: Sequelize.STRING(15),
+        allowNull: false
+    },
+    domainLinks: {
+        type: Sequelize.JSON,
         allowNull: true
-    },    
-    type: {
-        type: Sequelize.STRING,
-        allowNull: false
     },
-    authorityId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: authority,
-            key: "id"
-        }  
+    images: {
+        type: Sequelize.JSON,
+        allowNull: true
     },
-    fileId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: content,
-            key: "id"
-        }
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: user,
-            key: "id"
-        }    
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+    richMedias: {
+        type: Sequelize.JSON,
+        allowNull: true
     }
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })

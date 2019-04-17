@@ -9,20 +9,10 @@ module.exports = sequelize.define("fileType", {
     type: {
         type: Sequelize.STRING(32),
         allowNull: false
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    }  
+    } 
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })

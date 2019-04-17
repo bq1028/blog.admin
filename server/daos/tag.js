@@ -7,69 +7,22 @@
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
+module.exports = sequelize.define("tag", {
     name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(32),
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    color: {
+        type: Sequelize.STRING(32),
         allowNull: true
     },    
-    type: {
-        type: Sequelize.STRING,
+    description: {
+        type: Sequelize.STRING(80),
         allowNull: false
-    },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    } 
+    }
 }, {
     paranoid: false,
     timestamps: true,
-    underscored: true,
+    underscored: false,
     freezeTableName: true
 })
