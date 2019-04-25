@@ -25,10 +25,10 @@ module.exports = sequelize.define("user", {
         allowNull: false
     },
     phone: {
-        type: Sequelize.STRING(128),
+        type: Sequelize.STRING(32),
         allowNull: false
     },
-    roleId: {
+    role: {
         type: Sequelize.INTEGER,
         references: {
             model: require("./role"),

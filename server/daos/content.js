@@ -7,48 +7,25 @@ const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
 module.exports = sequelize.define("content", {
-    name: {
-        type: Sequelize.STRING,
+    title: {
+        type: Sequelize.STRING(32),
         allowNull: false
     },
     keywords: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(64),
         allowNull: true
     },    
-    type: {
-        type: Sequelize.STRING,
+    content: {
+        type: Sequelize.STRING(8192),
         allowNull: false
     },
-    authorityId: {
+    author: {
         type: Sequelize.INTEGER,
         references: {
-            model: authority,
+            model: require("./user"),
             key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
+        },
+        allowNull: false
     }
 }, {
     paranoid: false,

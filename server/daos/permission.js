@@ -1,61 +1,19 @@
 /**
- * 附件
+ * 权限
  * @author Philip
  */
-"use strict"
-
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
-    name: {
-        type: Sequelize.STRING,
+// 权限以增删改查, curd, 1-1-1-1
+module.exports = sequelize.define("permission", {
+    object: {
+        type: Sequelize.STRING(32),
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    permission: {
+        type: Sequelize.INTEGER,
         allowNull: true
-    },    
-    type: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
     }
 }, {
     paranoid: false,

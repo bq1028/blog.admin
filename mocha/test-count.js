@@ -1,4 +1,8 @@
-"use strict";
+/**
+ * 
+ * @Author chenxiangyu
+ */
+
 var mongoose = require("mongoose");
 var should = require("should");
 var app = require("../server");

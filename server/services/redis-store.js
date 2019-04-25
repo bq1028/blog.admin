@@ -22,21 +22,21 @@ class RedisStore extends Store {
      */
     constructor () {
         super()
-        
+
         this.redis = redis.createClient(port, host, {
             password
         })
     }
-    
+
     /**
      * 根据 session id 获取 session
      * @param {string} sid
-     * @return {string} session 
+     * @return {string} session
      */
     async get (sid) {
         return await this.redis.get(`SESSION:${sid}`)
     }
-    
+
     /**
      * 设置 session
      * @param {string} session
@@ -75,14 +75,13 @@ class RedisStore extends Store {
         let maxPos = chars.length
         let pwd = ''
 
-    　　for (i = 0; i < len; i++) {
-    　　　　pwd += chars.charAt(Math.floor(Math.random() * maxPos))
-    　　}
+        for (i = 0; i < len; i++) {
+            pwd += chars.charAt(Math.floor(Math.random() * maxPos))
+        }
 
-    　　return pwd
+        return pwd
     }
 }
- 
-module.exports = RedisStore
 
+module.exports = RedisStore
 

@@ -1,4 +1,8 @@
-"use strict";
+/**
+ * 
+ * @Author chenxiangyu
+ */
+
 var bcrypt = require("../lib/bcrypt-thunk");
 var should = require("should");
 

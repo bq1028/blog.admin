@@ -1,5 +1,5 @@
 /**
- * 附件
+ * 留言
  * @author Philip
  */
 "use strict"
@@ -7,55 +7,22 @@
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-const file = require("./file")
-const authority = require("./authority")
-const user = require("./user")
-const content = require("./content")
-
-module.exports = sequelize.define("attachment", {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
+module.exports = sequelize.define("message", {
+    author: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: require("./user"),
+            key: "id"
+        },
+        unique: false
     },
-    keywords: {
-        type: Sequelize.STRING,
+    title: {
+        type: Sequelize.STRING(32),
         allowNull: true
     },    
-    type: {
-        type: Sequelize.STRING,
+    content: {
+        type: Sequelize.STRING(384),
         allowNull: false
-    },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
     }
 }, {
     paranoid: false,

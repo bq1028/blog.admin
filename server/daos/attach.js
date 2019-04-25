@@ -6,13 +6,6 @@
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
-// 外键 dao
-const file = require("./file")
-const diaryDao = require("./diary")
-const eventDao = require("./event")
-const projectDao = require("./project")
-const contentDao = require("./content")
-
 module.exports = sequelize.define("attach", {
     title: {
         type: Sequelize.STRING(32),

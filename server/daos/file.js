@@ -1,56 +1,27 @@
 /**
- * 附件
+ * 文件
  * @author Philip
  */
-"use strict"
 
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
 module.exports = sequelize.define("file", {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    keywords: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },    
     type: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        references: {
+            model: require("./fileType"),
+            key: "id"
+        },
         allowNull: false
     },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
-    },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
-    },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
+    name: {
+        type: Sequelize.STRING(32),
+        allowNull: false
+    },    
+    path: {
+        type: Sequelize.STRING(256),
+        allowNull: false
     }
 }, {
     paranoid: false,

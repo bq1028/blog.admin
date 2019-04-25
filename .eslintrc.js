@@ -1,32 +1,105 @@
 /**
- * Eslint 配置
- * @author Philip
+ * nodejs eslint 配置
+ * @Author chenxiangyu
  */
 
 module.exports = {
-  root: true,
-  
-  parserOptions: {
-    sourceType: 'module'
-  },
-  
-  env: {
-    browser: true,
-  },
-  
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  
-  // 全局变量
-  globals: {
-    $: true,
-    window: true,
-  },
-  
-  // add your custom rules here
-  rules: {
-    "indent": ["error", 4],
-    "generator-star-spacing": "off",
-    "no-debugger": process.env.NODE_ENV === ' production' ? 'error' : 'off'
-  }
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "script"
+    },
+    "rules": {
+        "no-console": 0,
+        "no-unused-vars": "error",
+        "no-use-before-define": "error",
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "curly": ["error", "all"],
+        "default-case": "error",
+        "no-else-return": "error",
+        "no-empty-function": "error",
+        "no-implicit-coercion": "error",
+        "no-invalid-this": "error",
+        "no-loop-func": "error",
+        "no-multi-spaces": "error",
+        "no-new-func": "error",
+        "no-useless-return": "error",
+        "global-require": "error",
+        "no-path-concat": "error",
+        "no-sync": "error",
+        "array-bracket-spacing": [
+            "error",
+            "never" 
+        ],
+        "block-spacing": [
+            "error",
+            "always"
+        ],
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+        "camelcase": "error",
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "comma-spacing": [
+            "error",
+            { "before": false, "after": true }
+        ],
+        "comma-style": [
+            "error",
+            "last"
+        ],
+        "key-spacing": [
+            "error", 
+            { "beforeColon": false, "afterColon": true }
+        ],
+        "lines-around-comment": [
+            "error",
+            { "beforeBlockComment": true }
+        ],
+        "newline-after-var": [
+            "error",
+            "always"
+        ],
+        "newline-before-return": "error",
+        "no-multi-assign": "error",
+        "max-params": [1, 3],
+        "new-cap": [
+            "error",
+            {
+                "newIsCap": true,
+                "capIsNew": false
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2
+            }
+        ],
+        "no-shadow-restricted-names": "error",
+        "no-undef-init": "error",
+        "keyword-spacing": "error",
+        "space-before-blocks": [
+            "error",
+            "always"
+        ]
+    }
 }

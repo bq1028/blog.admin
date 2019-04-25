@@ -2,55 +2,39 @@
  * 附件
  * @author Philip
  */
-"use strict"
-
 const Sequelize = require("sequelize")
 const sequelize = require("../sequelize/instance")
 
 module.exports = sequelize.define("event", {
-    name: {
-        type: Sequelize.STRING,
+    author: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: require("./user"),
+            key: "id"
+        },
         allowNull: false
     },
-    keywords: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },    
-    type: {
-        type: Sequelize.STRING,
+    title: {
+        type: Sequelize.STRING(32),
         allowNull: false
     },
-    authorityId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: authority,
-            key: "id"
-        }  
+    description: {
+        type: Sequelize.STRING(80),
+        allowNull: false
     },
-    fileId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: file,
-            key: "id"
-        }    
+    content: {
+        type: Sequelize.STRING(384),
+        allowNull: false
     },
-    contentId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: content,
-            key: "id"
-        }    
-    },  
-    userId: {
-        type: Sequelize.INTEGER,
-
-        references: {
-            model: user,
-            key: "id"
-        }    
+    start: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+    },
+    end: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     }
 }, {
     paranoid: false,

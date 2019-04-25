@@ -40,17 +40,17 @@ module.exports.init = () => {
     as: 'role'
   })
 
-  journal.belongsTo(user, {
-    foreignKey: 'roleId',
-    constraints: false,
-    as: 'role'
-  })
+    journal.belongsTo(user, {
+        foreignKey: 'roleId',
+        constraints: false,
+        as: 'role'
+    })
 
-  content.hasMany(attachment, {
-    foreignKey: 'contentId',
-    constraints: false,
-    as: 'attachments'
-  })
+    content.hasMany(attachment, {
+        foreignKey: 'contentId',
+        constraints: false,
+        as: 'attachments'
+    })
 
   content.hasMany(message, {
     foreignKey: 'contentId',
