@@ -14,7 +14,7 @@ module.exports = sequelize.define("attach", {
     fileId: {
         type: Sequelize.INTEGER,
         references: {
-            model: fileDao,
+            model: require("./file"),
             key: "id"
         },
         allowNull: false
@@ -22,7 +22,7 @@ module.exports = sequelize.define("attach", {
     diaryId: {
         type: Sequelize.INTEGER,
         references: {
-            model: diaryDao,
+            model: require("./diary"),
             key: "id"
         },
         allowNull: true
@@ -30,7 +30,7 @@ module.exports = sequelize.define("attach", {
     eventId: {
         type: Sequelize.INTEGER,
         references: {
-            model: eventDao,
+            model: require("./event"),
             key: "id"
         },
         allowNull: true
@@ -38,7 +38,7 @@ module.exports = sequelize.define("attach", {
     projectId: {
         type: Sequelize.INTEGER,
         references: {
-            model: projectDao,
+            model: require("./project"),
             key: "id"
         },
         allowNull: true 
@@ -46,7 +46,7 @@ module.exports = sequelize.define("attach", {
     contentId: {
         type: Sequelize.INTEGER,
         references: {
-            model: contentDao,
+            model: require("./content"),
             key: "id"
         },
         allowNull: true

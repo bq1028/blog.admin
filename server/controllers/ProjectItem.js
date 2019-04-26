@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const projectItemDto = require('../dtos/Permission')
+const projectItemDto = require('../dtos/projectItem')
 
-class ProjectItemController extends Controller {}
+class ProjectItemController extends Controller {
+    constructor (projectItemDto) {
+        super(projectItemDto)
+    }
+}
 
 module.exports = new ProjectItemController(projectItemDto)

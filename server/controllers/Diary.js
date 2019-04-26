@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./controller")
-const diaryDto = require('../dtos/Diary')
+const diaryDto = require('../dtos/diary')
 
-class DiaryController extends Controller {}
+class DiaryController extends Controller {
+    constructor (diaryDto) {
+        super(diaryDto)
+    }
+}
 
 module.exports = new DiaryController(diaryDto)

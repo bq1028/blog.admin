@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const attachDto = require("../dtos/Attach")
+const attachDto = require("../dtos/attach")
 
-class AttachController extends Controller {}
+class AttachController extends Controller {
+    constructor (attachDto) {
+        super(attachDto)
+    }
+}
 
 module.exports = new AttachController(attachDto)

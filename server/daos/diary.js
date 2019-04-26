@@ -36,4 +36,3 @@ module.exports = sequelize.define("diary", {
     freezeTableName: true
 })
 
-module.exports = attachment

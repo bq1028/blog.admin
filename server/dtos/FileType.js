@@ -5,6 +5,10 @@
 const Dto = require('./Dto')
 const fileTypeDao = require('../daos/fileType')
 
-class FileTypeDto extends Dto {}
+class FileTypeDto extends Dto {
+    constructor (fileTypeDao) {
+        super(fileTypeDao)
+    }
+}
 
 module.exports = new FileTypeDto(fileTypeDao)

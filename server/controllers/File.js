@@ -3,9 +3,13 @@
  * @author Philip
  */
 const Controller = require("./controller")
-const fileDto = require('../dtos/File')
+const fileDto = require('../dtos/file')
 
-class FileController extends Controller {}
+class FileController extends Controller {
+    constructor (fileDto) {
+        super(fileDto)
+    }
+}
 
 module.exports = new FileController(fileDto)
 

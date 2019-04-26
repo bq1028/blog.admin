@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const contentDto = require('../dtos/Content')
+const contentDto = require('../dtos/content')
 
-class ContentController extends Controller {}
+class ContentController extends Controller {
+    constructor (contentDto) {
+        super(contentDto)
+    }
+}
 
 module.exports = new ContentController(contentDto)

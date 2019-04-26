@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./controller")
-const roleDto = require('../dtos/Role')
+const roleDto = require('../dtos/role')
 
-class RoleController extends Controller {}
+class RoleController extends Controller {
+    constructor (roleDto) {
+        super(roleDto)
+    }
+}
 
-module.exports = new RoleController(RoleDto)
+module.exports = new RoleController(roleDto)

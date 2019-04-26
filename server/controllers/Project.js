@@ -3,8 +3,12 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const projectDto = require('../dtos/Project')
+const projectDto = require('../dtos/project')
 
-class ProjectController extends Controller {}
+class ProjectController extends Controller {
+    constructor (projectDto) {
+        super(projectDto)
+    }
+}
 
 module.exports = new ProjectController(projectDto)

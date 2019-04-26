@@ -6,67 +6,119 @@
 
 const sequelize = require('../sequelize/instance')
 
-// 模型
-const RoleDao = require('../daos/Role')
-const User = require('../daos/User')
-const File = require('../daos/File')
-const Tag = require('../daos/Tag')
-const Content = require('../daos/Content')
-const Message = require('../daos/Message')
-const Permission = require('../daos/Permission')
-const Diary = require('../daos/Diary')
-const Attach = require('../daos/Attach')
+// DAOs
+const attachDao = require('../daos/attach')
+const contentDao = require('../daos/content')
+const diaryDao = require('../daos/diary')
+const eventDao = require('../daos/event')
+const fileDao = require('../daos/file')
+const fileTypeDao = require('../daos/fileType')
+const messageDao = require('../daos/message')
+const permissionDao = require('../daos/permission')
+const projectDao = require('../daos/project')
+const projectItemDao = require('../daos/projectItem')
+const roleDao = require('../daos/role')
+const scannerDao = require('../daos/scanner')
+const spiderDao = require('../daos/spider')
+const tagDao = require('../daos/tag')
+const userDao = require('../daos/user')
 
 /**
- * 初始化
+ * 初始化表关联
  * @return none
  */
 module.exports.init = () => {
-  authority.belongsToMany(role, { 
-    through: roleAuth, 
-    foreignKey: 'roleId', 
-    as: 'roles'
-  })
-
-  role.belongsToMany(authority, { 
-    through: roleAuth, 
-    foreignKey: 'authId', 
-    as: 'auths'
-  })
-
-  user.belongsTo(role, {
-    foreignKey: 'roleId',
-    constraints: false,
-    as: 'role'
-  })
-
-    journal.belongsTo(user, {
-        foreignKey: 'roleId',
-        constraints: false,
-        as: 'role'
+    // 附件
+    attachDao.hasOne(fileDao, { 
+        foreignKey: "fileId",
+        as: "file" 
     })
 
-    content.hasMany(attachment, {
-        foreignKey: 'contentId',
-        constraints: false,
-        as: 'attachments'
+    // 内容
+    contentDao.hasMany(tagDao, {
+        foreignKey: "tagId",
+        as: "tags"   
     })
 
-  content.hasMany(message, {
-    foreignKey: 'contentId',
-    constraints: false,
-    as: 'messages'
-  })
+    contentDao.hasMany(attachDao, {
+        foreignKey: "attachId",
+        as: "attachs"   
+    })
 
-  attachment.hasOne(file, {
-    foreignKey: 'fileId',
-    constraints: false,
-    as: 'file'
-  })
+    contentDao.hasOne(userDao, {
+        foreignKey: "userId",
+        as: "user"   
+    })
 
-  attachment.belongsTo(user, {
-    foreignKey: 'userId',
-    constraints: false,
-    as: 'owner'
-  })
+
+    // 日志
+    diaryDao.hasMany(tagDao, {
+        foreignKey: "tagId",
+        as: "tags"   
+    })
+
+    diaryDao.hasMany(attachDao, {
+        foreignKey: "attachId",
+        as: "attachs"   
+    })
+
+    diaryDao.hasOne(userDao, {
+        foreignKey: "userId",
+        as: "user"   
+    })
+
+    // 事件
+    eventDao.hasMany(tagDao, {
+        foreignKey: "tagId",
+        as: "tags"   
+    })
+
+    eventDao.hasMany(attachDao, {
+        foreignKey: "attachId",
+        as: "attachs"   
+    })
+
+    eventDao.hasOne(userDao, {
+        foreignKey: "userId",
+        as: "user"   
+    })
+
+    // 项目
+    projectDao.hasMany(tagDao, {
+        foreignKey: "tagId",
+        as: "tags"   
+    })
+
+    projectDao.hasMany(projectItemDao, {
+        foreignKey: "projectItemId",
+        as: "projectItems"   
+    })
+
+    projectDao.hasMany(attachDao, {
+        foreignKey: "attachId",
+        as: "attachs"   
+    })
+
+    projectDao.hasOne(userDao, {
+        foreignKey: "userId",
+        as: "user"   
+    })
+
+    // 文件
+    fileDao.hasOne(fileTypeDao, { 
+        foreignKey: "fileTypeId",
+        as: "file" 
+    })  
+
+    // 角色  
+    roleDao.hasMany(permissionDao, {
+        foreignKey: "permissionId",
+        as: "permissions"   
+    })
+
+    // 用户
+    userDao.hasOne(roleDao, {
+        foreignKey: "roleId",
+        as: "role"  
+    })
 }

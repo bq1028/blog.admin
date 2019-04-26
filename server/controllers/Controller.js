@@ -6,7 +6,8 @@
 class Controller {
     /**
      * 构造函数
-     * @param {Dto} dto 
+     * @param {Dto} dto
+     * @constructor 
      */
     constructor (dto) {
         this.dto = dto

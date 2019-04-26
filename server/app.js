@@ -12,7 +12,7 @@ const bodyParser = require("body-parser")
 const ejs = require("ejs")
 const routes = require("./routes")
 const apis = require("./apis")
-const authorize = require("./middlewares/auth")
+const authorize = require("./middlewares/authorize")
 const RedisStore = require("connect-redis")(session)
 
 const { host, port, pass, secret } = require("./config/redis")
