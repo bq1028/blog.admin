@@ -3,7 +3,7 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const spiderDto = require('../dtos/Spider')
+const spiderDto = require('../dtos/spider')
 
 class SpiderController extends Controller {
     constructor (spiderDto) {

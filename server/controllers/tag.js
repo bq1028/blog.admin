@@ -3,7 +3,7 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const tagDto = require('../dtos/Tag')
+const tagDto = require('../dtos/tag')
 
 class TagController extends Controller {
     constructor (tagDto) {

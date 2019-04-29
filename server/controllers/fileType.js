@@ -3,7 +3,7 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const fileTypeDto = require('../dtos/FileType')
+const fileTypeDto = require('../dtos/fileType')
 
 class FileTypeController extends Controller {
     constructor (fileTypeDto) {

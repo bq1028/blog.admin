@@ -3,7 +3,7 @@
  * @author Philip
  */
 const Controller = require("./Controller")
-const userDto = require('../dtos/User')
+const userDto = require('../dtos/user')
 
 class UserController extends Controller {
     constructor (userDto) {
