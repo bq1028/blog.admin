@@ -2,7 +2,7 @@
  * 标签
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const tagDto = require('../dtos/Tag')
 
 class TagController extends Controller {

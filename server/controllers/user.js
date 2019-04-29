@@ -2,7 +2,7 @@
  * 用户
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const userDto = require('../dtos/User')
 
 class UserController extends Controller {

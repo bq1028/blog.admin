@@ -2,7 +2,7 @@
  * 文件类型
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const fileTypeDto = require('../dtos/FileType')
 
 class FileTypeController extends Controller {

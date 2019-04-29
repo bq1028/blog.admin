@@ -2,7 +2,7 @@
  * 文件
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const fileDto = require('../dtos/file')
 
 class FileController extends Controller {

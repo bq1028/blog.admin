@@ -2,7 +2,7 @@
  * 角色
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const roleDto = require('../dtos/role')
 
 class RoleController extends Controller {

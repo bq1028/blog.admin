@@ -2,7 +2,7 @@
  * 消息
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const messageDto = require('../dtos/Message')
 
 class MessageController extends Controller {

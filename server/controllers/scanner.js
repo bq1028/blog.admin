@@ -2,7 +2,7 @@
  * 扫描
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const scannerDto = require('../dtos/scanner')
 
 class ScannerController extends Controller {

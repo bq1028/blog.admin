@@ -2,7 +2,7 @@
  * 事件
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const eventDto = require('../dtos/event')
 
 class EventController extends Controller {

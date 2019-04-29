@@ -2,7 +2,7 @@
  * 爬虫
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const spiderDto = require('../dtos/Spider')
 
 class SpiderController extends Controller {

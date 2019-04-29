@@ -2,7 +2,7 @@
  * 日志
  * @author Philip
  */
-const Controller = require("./controller")
+const Controller = require("./Controller")
 const diaryDto = require('../dtos/diary')
 
 class DiaryController extends Controller {
