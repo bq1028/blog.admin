@@ -1,6 +1,6 @@
 /**
  * apis
- * @authro Philip
+ * @author Philip
  */
 
 "use strict"
@@ -15,7 +15,7 @@ api.use(async function (ctx, next) {
 })
 
 Object.keys(apis).forEach((moduleName) => {
-    let controller = require(`./controllers/${moduleName}`)
+    let controller = require(`./controller/${moduleName}`)
     let module = apis[moduleName]
 
     Object.keys(module).forEach((handler) => {
